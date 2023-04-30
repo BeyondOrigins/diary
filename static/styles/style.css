@@ -57,6 +57,11 @@ body {
    transform: translateY(-5px);
 }
 
+.form-title {
+    font-size: 22px;
+    font-family: "Arial", sans-serif;
+}
+
 /* IDs */
 #error {
     color: rgb(236, 65, 65);
