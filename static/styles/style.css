@@ -1,0 +1,67 @@
+:root {
+    --white: #fffefe;
+    --purple: #893be2;
+    --btn-shadow-color: rgba(24, 24, 24, 0.321);
+    --black: #302e2e;
+    --green: #077a07;
+    --body-background: #389fdb;
+    --light-purple: #ac7fdf;
+}
+
+/* ELEMENTS */
+
+body {
+    background-color: var(--body-background);
+}
+
+/* CLASSES */
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-container {
+    border-radius: 10px;
+    width: 350px;
+    background-color: var(--white);
+    text-align: center;
+    margin: 45% auto;
+    padding: 10px;
+}
+
+.form__element {
+    margin: 15px;
+}
+
+.form-submit {
+    font-size: 16px;
+    background-color: var(--purple);
+    border-radius: 5px;
+    color: var(--white);
+    transition: 0.5s;
+    animation-delay: 0.5s;
+    height: 30px;
+    width: 200px;
+    border: 0px;
+    font-family: "Arial";
+    cursor: pointer;
+}
+
+.form-submit:hover {
+    background-color: var(--light-purple);
+    box-shadow: 7px 5px 20px var(--btn-shadow-color),
+    0px 5px 20px var(--btn-shadow-color),
+   -7px 5px 20px var(--btn-shadow-color);
+   transform: translateY(-5px);
+}
+
+/* IDs */
+#error {
+    color: rgb(236, 65, 65);
+    font-size: 14px;
+    font-family: "Arial";
+    font-weight: bold;
+    transition: 0.6s;
+}

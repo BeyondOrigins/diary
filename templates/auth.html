@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container">
+        <div class="form-container">
+            <form method="POST" onsubmit="return onAuth(this)">
+                <div class="form__element">
+                    <input type="text" class="form__input" placeholder="Ваш логин" name="login">
+                </div>
+                <div class="form__element">
+                    <input type="text" class="form__input" placeholder="Ваш пароль" name="password">
+                </div>
+                <div class="form__element">
+                    <input type="submit" class="form-submit" value="Войти">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

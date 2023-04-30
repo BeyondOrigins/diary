@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container__register">
+        <div style="height: 15px;"></div>
+        <form method="post" onsubmit="return onRegistrationSubmit(this)">
+            <h1 class="h3 mb-3 fw-normal margin">Регистрация</h1>
+            
+            <div class="form-floating">
+                <input type="text" class="form-control margin" id="floatingInput" placeholder="name@example.com" name="user_name">
+                <label for="floatingInput">Имя пользователя</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control margin" id="userPassword" placeholder="Password" name="user_password">
+                <label for="userPassword">Пароль</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control margin" id="userPasswordRepeat" placeholder="Password" name="user_password_repeat">
+                <label for="userPasswordRepeat">Повторите пароль</label>
+            </div>
+            <div class="form-floating">
+                <input type="email" class="form-control margin" id="user_mail" placeholder="mail@example.com" name="user_mail">
+                <label for="user_mail">mail@example.com</label>
+            </div>
+            <p class="move-to-page-label margin" onclick="backToSignInPage()">К странице входа</p>
+            <button class="w-100 btn btn-lg btn-primary margin" type="submit">Войти</button>
+            <div id="error" class="margin">{{error}}</div>
+            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+        </form>
+    </div>
+{% endblock %}
