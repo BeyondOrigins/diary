@@ -4,8 +4,9 @@
     --btn-shadow-color: rgba(24, 24, 24, 0.321);
     --black: #302e2e;
     --green: #077a07;
-    --body-background: #0c8add;
+    --body-background: #ffffff;
     --light-purple: #ac7fdf;
+    --form-color: #ffffff;
 }
 
 /* ELEMENTS */
@@ -23,7 +24,7 @@ body {
 }
 
 .form-container {
-    border-radius: 10px;
+    border-radius: 20px;
     width: 350px;
     background-color: var(--white);
     text-align: center;
@@ -38,12 +39,12 @@ body {
 .form-submit {
     font-size: 16px;
     background-color: var(--purple);
-    border-radius: 5px;
+    border-radius: 10px;
     color: var(--white);
     transition: 0.5s;
     animation-delay: 0.5s;
     height: 30px;
-    width: 200px;
+    width: 206px;
     border: 0px;
     font-family: "Arial";
     cursor: pointer;
@@ -54,12 +55,19 @@ body {
     box-shadow: 7px 5px 20px var(--btn-shadow-color),
     0px 5px 20px var(--btn-shadow-color),
    -7px 5px 20px var(--btn-shadow-color);
-   transform: translateY(-5px);
+   transform: translateY(-3px);
 }
 
 .form-title {
     font-size: 22px;
     font-family: "Arial", sans-serif;
+}
+
+.form__input {
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid;
+    height: 25px;
 }
 
 /* IDs */
