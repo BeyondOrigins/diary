@@ -1,9 +1,26 @@
+@font-face {
+    font-family: "Raleway";
+    src: url("fonts/Raleway-Thin.ttf");
+    font-style: thin;
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("fonts/Raleway-ExtraLight.ttf");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "FiraSans";
+    src: url("fonts/FiraSans-ExtraLight.ttf");
+}
+
 :root {
     --white: #fffefe;
     --purple: #893be2;
     --btn-shadow-color: rgba(24, 24, 24, 0.321);
-    --black: #302e2e;
-    --green: #077a07;
+    --black: #4d4b4b;
+    --dark-green: #2f912f;
     --body-background: #ffffff;
     --light-purple: #ac7fdf;
     --form-color: #ffffff;
@@ -24,12 +41,13 @@ body {
 }
 
 .form-container {
-    border-radius: 20px;
+    border-radius: 8px;
     width: 350px;
     background-color: var(--white);
     text-align: center;
     margin: 45% auto;
     padding: 10px;
+    border: 1px solid #c7c7c7;
 }
 
 .form__element {
@@ -38,36 +56,42 @@ body {
 
 .form-submit {
     font-size: 16px;
-    background-color: var(--purple);
-    border-radius: 10px;
+    background-color: var(--dark-green);
+    border-radius: 0px;
     color: var(--white);
     transition: 0.5s;
     animation-delay: 0.5s;
     height: 30px;
     width: 206px;
     border: 0px;
-    font-family: "Arial";
+    font-family: "Raleway";
+    font-style: normal;
     cursor: pointer;
 }
 
 .form-submit:hover {
-    background-color: var(--light-purple);
-    box-shadow: 7px 5px 20px var(--btn-shadow-color),
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    color: var(--black);
+    /* box-shadow: 7px 5px 20px var(--btn-shadow-color),
     0px 5px 20px var(--btn-shadow-color),
-   -7px 5px 20px var(--btn-shadow-color);
-   transform: translateY(-3px);
+    -7px 5px 20px var(--btn-shadow-color);
+    transform: translateY(-3px); */
 }
 
 .form-title {
-    font-size: 22px;
-    font-family: "Arial", sans-serif;
+    font-size: 25px;
+    font-family: "Raleway", sans-serif;
 }
 
 .form__input {
     width: 200px;
     border-radius: 5px;
-    border: 1px solid;
+    border: 0px solid;
     height: 25px;
+    font-family: "FiraSans";
+    font-size: 15px;
+    padding: 10px;
 }
 
 /* IDs */
