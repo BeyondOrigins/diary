@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
 </head>
 <body>
+    <header class="header">
+        <div class="header-elements-container">
+            <a href="/" class="header__element">
+                <div>На главную</div>
+            </a>
+            {% block header %}
+            {% endblock %}
+        </div>
+    </header>
     {% block body %}
     {% endblock %}
     <script src="{{url_for('static', filename='js/script.js')}}"></script>

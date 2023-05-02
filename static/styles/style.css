@@ -23,7 +23,7 @@
 :root {
     --white: #fffefe;
     --purple: #893be2;
-    --btn-shadow-color: rgba(24, 24, 24, 0.321);
+    --shadow-color: rgba(24, 24, 24, 0.219);
     --black: #4d4b4b;
     --dark-green: #2f912f;
     --body-background: #ffffff;
@@ -31,12 +31,18 @@
     --form-color: #fcfafa;
     --link-color: #2baeeb;
     --input-focus-color: rgba(85, 215, 247, 0.205);
+    --header-element-color: #706d6d;
 }
 
 /* ELEMENTS */
 
+html, body {
+    margin: 0;
+}
+
 body {
     background-color: var(--body-background);
+    height: 100%;
 }
 
 /* CLASSES */
@@ -48,14 +54,16 @@ body {
 }
 
 .form-container {
-    border-radius: 8px;
+    border-radius: 0px;
     width: 300px;
     background-color: var(--form-color);
     text-align: center;
-    margin: 30% auto;
+    margin: 20% auto;
     padding: 30px;
     padding-top: 60px;
     border: 1px solid #c7c7c7;
+    box-shadow: 4px 4px 20px var(--shadow-color),
+    -4px 4px 20px var(--shadow-color);
 }
 
 .form__element {
@@ -81,9 +89,9 @@ body {
     background-color: var(--white);
     border: 1px solid var(--black);
     color: var(--black);
-    /* box-shadow: 7px 5px 20px var(--btn-shadow-color),
-    0px 5px 20px var(--btn-shadow-color),
-    -7px 5px 20px var(--btn-shadow-color);
+    /* box-shadow: 7px 5px 20px var(--shadow-color),
+    0px 5px 20px var(--shadow-color),
+    -7px 5px 20px var(--shadow-color);
     transform: translateY(-3px); */
 }
 
@@ -120,6 +128,33 @@ body {
 .to-registr:hover {
     color: var(--link-color);
     transform: translateY(-2px);
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    padding: 15px;
+}
+
+.header-elements-container {
+    margin-right: 10%;
+    display: flex;
+}
+
+.header__element {
+    color: var(--header-element-color);
+    font-family: "Roboto";
+    font-size: 19px;
+    cursor: pointer;
+    transition: 0.5s;
+    margin: 10px;
+    padding: 3px;
+    text-decoration: none;
+}
+
+.header__element:hover {
+    color: var(--link-color);
 }
 
 /* IDs */
