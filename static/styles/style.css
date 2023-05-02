@@ -127,7 +127,7 @@ body {
     color: var(--gray);
 }
 
-.to-registr:hover {
+.to-registr:hover .header__element:hover{
     color: var(--link-color);
 }
 
@@ -152,10 +152,6 @@ body {
     margin: 10px;
     padding: 3px;
     text-decoration: none;
-}
-
-.header__element:hover {
-    color: var(--link-color);
 }
 
 /* IDs */
