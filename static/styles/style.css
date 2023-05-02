@@ -127,7 +127,7 @@ body {
     color: var(--gray);
 }
 
-.to-registr:hover .header__element:hover{
+.to-registr:hover, .header__element:hover{
     color: var(--link-color);
 }
 
