@@ -17,7 +17,3 @@ function onAuth(form) {
         return false;
     }
 }
-
-function toRegistrationPage() {
-    location.href = "/register";
-}

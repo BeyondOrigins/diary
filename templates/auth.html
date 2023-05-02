@@ -3,7 +3,7 @@
     <div class="container">
         <div class="form-container">
             <div class="form-title">Вход или регистрация</div>
-            <form method="POST" onsubmit="return onAuth(this)">
+            <form method="POST" onsubmit="return onRegistration(this)">
                 <div class="form__element">
                     <input type="text" class="form__input" placeholder="Ваш логин" name="login">
                 </div>
@@ -14,8 +14,11 @@
                     <input type="submit" class="form-submit" value="Войти">
                 </div>
             </form>
-            <div class="to-registr">Нет учётной записи? Создайте!</div>
-            <div id="error"></div>
+            <a href="/registration" class="to-registr">
+                <div>Нет учётной записи? Создайте!</div>
+            </a>
+            <div id="error">{{error}}</div>
         </div>
     </div>
+    <script src="{{url_for('static', filename='js/auth.js')}}"></script>
 {% endblock %}

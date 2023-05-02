@@ -24,7 +24,7 @@
     --white: #fffefe;
     --purple: #893be2;
     --shadow-color: rgba(24, 24, 24, 0.219);
-    --black: #4d4b4b;
+    --gray: #4d4b4b;
     --dark-green: #2f912f;
     --body-background: #ffffff;
     --light-purple: #ac7fdf;
@@ -77,18 +77,18 @@ body {
     color: var(--white);
     transition: 0.5s;
     animation-delay: 0.8s;
-    height: 30px;
     width: 206px;
+    height: 40px;
     border: 0px;
-    font-family: "Raleway";
+    font-family: "Roboto";
     font-style: normal;
     cursor: pointer;
 }
 
 .form-submit:hover {
     background-color: var(--white);
-    border: 1px solid var(--black);
-    color: var(--black);
+    border: 1px solid var(--gray);
+    color: var(--gray);
     /* box-shadow: 7px 5px 20px var(--shadow-color),
     0px 5px 20px var(--shadow-color),
     -7px 5px 20px var(--shadow-color);
@@ -103,7 +103,7 @@ body {
 
 .form__input {
     width: 200px;
-    border-radius: 0px;
+    border-radius: 5px;
     border: 0px solid;
     height: 25px;
     font-family: "FiraSans";
@@ -123,11 +123,12 @@ body {
     cursor: pointer;
     transition: 0.5s;
     animation-delay: 0.3s;
+    text-decoration: none;
+    color: var(--gray);
 }
 
 .to-registr:hover {
     color: var(--link-color);
-    transform: translateY(-2px);
 }
 
 .header {

@@ -18,7 +18,7 @@ login_manager = LoginManager(app)
 def load_user(user_id):
     return UserLogin().from_db(user_id, db)
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/registration", methods=["GET", "POST"])
 def authenticate():
     if request.method == "POST":
         login = request.form["login"]
