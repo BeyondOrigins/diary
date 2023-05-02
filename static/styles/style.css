@@ -15,6 +15,11 @@
     src: url("fonts/FiraSans-ExtraLight.ttf");
 }
 
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Light.ttf");
+}
+
 :root {
     --white: #fffefe;
     --purple: #893be2;
@@ -23,7 +28,9 @@
     --dark-green: #2f912f;
     --body-background: #ffffff;
     --light-purple: #ac7fdf;
-    --form-color: #ffffff;
+    --form-color: #fcfafa;
+    --link-color: #2baeeb;
+    --input-focus-color: rgba(85, 215, 247, 0.205);
 }
 
 /* ELEMENTS */
@@ -42,11 +49,12 @@ body {
 
 .form-container {
     border-radius: 8px;
-    width: 350px;
-    background-color: var(--white);
+    width: 300px;
+    background-color: var(--form-color);
     text-align: center;
-    margin: 45% auto;
-    padding: 10px;
+    margin: 30% auto;
+    padding: 30px;
+    padding-top: 60px;
     border: 1px solid #c7c7c7;
 }
 
@@ -60,7 +68,7 @@ body {
     border-radius: 0px;
     color: var(--white);
     transition: 0.5s;
-    animation-delay: 0.5s;
+    animation-delay: 0.8s;
     height: 30px;
     width: 206px;
     border: 0px;
@@ -82,23 +90,42 @@ body {
 .form-title {
     font-size: 25px;
     font-family: "Raleway", sans-serif;
+    font-weight: bold;
 }
 
 .form__input {
     width: 200px;
-    border-radius: 5px;
+    border-radius: 0px;
     border: 0px solid;
     height: 25px;
     font-family: "FiraSans";
     font-size: 15px;
     padding: 10px;
+    background-color: var(--form-color);
+    transition: 0.5s;
+}
+
+.form__input:focus {
+    background-color: var(--input-focus-color);
+}
+
+.to-registr {
+    font-family: "Roboto";
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.5s;
+    animation-delay: 0.3s;
+}
+
+.to-registr:hover {
+    color: var(--link-color);
+    transform: translateY(-2px);
 }
 
 /* IDs */
 #error {
-    color: rgb(236, 65, 65);
+    color: rgb(241, 76, 76);
     font-size: 14px;
-    font-family: "Arial";
-    font-weight: bold;
-    transition: 0.6s;
+    font-family: "Roboto";
+    margin-bottom: 100px;
 }
