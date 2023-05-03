@@ -11,13 +11,14 @@ from models import Users, Marks, Img
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
-db_init(app)
-
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
+app.config["SECRET_KEY"] = "gityihkgoerp"
+
+db_init(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return UserLogin().from_db(user_id, db)
+    return UserLogin().fromDB(user_id, Users)
 
 @app.route("/")
 def main_page():
@@ -31,19 +32,20 @@ def authenticate():
         first_name = request.form["first_name"]
         middle_name = request.form["middle_name"]
         last_name = request.form["last_name"]
-        if db.get_user_by_mail(mail) is not None:
+        if len(Users.query.filter_by(mail=mail).all()) != 0:
             return render_template("register.html", error="Эта почта уже используется")
         try:
             user_type = request.form["user_type"]
         except:
             user_type = "pupil"
         user = Users(
-            mail,
-            first_name,
-            middle_name,
-            last_name,
-            generate_password_hash(password),
-            user_type
+            mail=mail,
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
+            password=generate_password_hash(password),
+            user_type=user_type,
+            img_id=0
         )
         db.session.add(user)
         db.session.commit()
@@ -55,7 +57,7 @@ def auth():
     if request.method == "POST":
         login = request.form["login"]
         password = request.form["password"]
-        user = Users.query.filter_by(mail=login)
+        user = Users.query.filter_by(mail=login).first()
 
         if user is not None:
             if not check_password_hash(user.password, password):
