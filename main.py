@@ -7,13 +7,13 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from db import db_init, db
-from models import Users, Marks
+from models import Users, Marks, Img
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
+db_init(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
-
 
 @login_manager.user_loader
 def load_user(user_id):
