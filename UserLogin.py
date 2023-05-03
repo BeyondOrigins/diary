@@ -1,7 +1,6 @@
-from User import User
 class UserLogin():
     def fromDB(self, user_id, db):
-        self.__user = db.get_user(user_id)
+        self.__user = db.query.get(user_id)
         return self
     
     def create(self, user):
@@ -18,4 +17,4 @@ class UserLogin():
         return False
     
     def get_id(self):
-        return str(self.__user.id)
+        return str(self.__user.user_id)
