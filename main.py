@@ -21,14 +21,14 @@ def load_user(user_id):
 @app.route("/registration", methods=["GET", "POST"])
 def authenticate():
     if request.method == "POST":
-        login = request.form["login"]
+        mail = request.form["mail"]
         password = request.form["password"]
         first_name = request.form["first_name"]
         middle_name = request.form["middle_name"]
         last_name = request.form["last_name"]
         user_type = request.form["user_type"]
         user_info = (
-            login,
+            main,
             generate_password_hash(password),
             first_name,
             middle_name,
@@ -36,6 +36,7 @@ def authenticate():
             user_type
         )
         db.create_user(user_info)
+        return redirect("/self_profile")
     return render_template("register.html")
 
 @app.route("/auth", methods=["GET", "POST"])

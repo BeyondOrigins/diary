@@ -8,7 +8,7 @@ class DataBase:
         self.__cur = db.cursor()
         self.__cur.execute("""CREATE TABLE IF NOT EXISTS users(
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        login TEXT NOT NULL,
+        mail TEXT NOT NULL,
         password TEXT NOT NULL,
         first_name TEXT NOT NULL,
         middle_name TEXT NOT NULL,

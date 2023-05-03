@@ -1,7 +1,7 @@
 function checkPassword() {
-    var password = document.getElementsByName("pswrd")[0].value;
-    var password_repeat = document.getElementsByName("pswrd_repeat")[0].value;
-    var el = document.getElementsByName("pswrd_repeat")[0];
+    var password = document.getElementsByName("password")[0].value;
+    var password_repeat = document.getElementsByName("password_repeat")[0].value;
+    var el = document.getElementsByName("password_repeat")[0];
     if (password_repeat != password) {
         el.style = "background-color: rgba(247, 85, 85, 0.205)";
     }
@@ -11,4 +11,23 @@ function checkPassword() {
     if (password_repeat == password && password != "") {
         el.style = "background-color: rgba(90, 247, 85, 0.205)";
     }
+}
+
+function onRegistration(form) {
+    var inputs = document.getElementsByTagName("input");
+
+    var fail = "";
+
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value == "") {
+            fail = "Заполните все поля";
+        }
+    }
+
+    if (fail != "") {
+        document.getElementById("error").innerHTML = fail;
+        return false;
+    }
+
+    return true;
 }
