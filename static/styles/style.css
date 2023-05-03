@@ -29,11 +29,13 @@
     --dark-green: #2f912f;
     --blue: #1490f5;
     --body-background: #ffffff;
+    --header-background: #2f912f;
+    --submit-background: #2f912f;
     --light-purple: #ac7fdf;
     --form-color: #fcfafa;
     --link-color: #2baeeb;
     --input-focus-color: rgba(85, 215, 247, 0.205);
-    --header-element-color: #706d6d;
+    --header-element-color: #f3f3f3;
 }
 
 /* ELEMENTS */
@@ -79,7 +81,7 @@ label {
 
 .form-submit {
     font-size: 16px;
-    background-color: var(--blue);
+    background-color: var(--submit-background);
     border-radius: 0px;
     color: var(--white);
     transition: 0.5s;
@@ -142,9 +144,10 @@ label {
 
 .header {
     width: 100%;
-    height: 50px;
+    height: 40px;
     display: flex;
     padding: 15px;
+    background-color: var(--header-background);
 }
 
 .header-elements-container {
@@ -155,12 +158,16 @@ label {
 .header__element {
     color: var(--header-element-color);
     font-family: "Roboto";
-    font-size: 17px;
+    font-size: 18px;
     cursor: pointer;
     transition: 0.5s;
     margin: 10px;
-    padding: 1px;
+    padding: 0px;
     text-decoration: none;
+}
+
+.form__checkbox {
+    transition: 0.5s;
 }
 
 /* IDs */

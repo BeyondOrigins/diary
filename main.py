@@ -18,6 +18,10 @@ login_manager = LoginManager(app)
 def load_user(user_id):
     return UserLogin().from_db(user_id, db)
 
+@app.route("/")
+def main_page():
+    return render_template("main_page.html")
+
 @app.route("/registration", methods=["GET", "POST"])
 def authenticate():
     if request.method == "POST":
@@ -26,9 +30,12 @@ def authenticate():
         first_name = request.form["first_name"]
         middle_name = request.form["middle_name"]
         last_name = request.form["last_name"]
-        user_type = request.form["user_type"]
+        try:
+            user_type = request.form["user_type"]
+        except:
+            user_type = "pupil"
         user_info = (
-            main,
+            mail,
             generate_password_hash(password),
             first_name,
             middle_name,
@@ -36,7 +43,7 @@ def authenticate():
             user_type
         )
         db.create_user(user_info)
-        return redirect("/self_profile")
+        return redirect("/auth")
     return render_template("register.html")
 
 @app.route("/auth", methods=["GET", "POST"])
@@ -44,11 +51,11 @@ def auth():
     if request.method == "POST":
         login = request.form["login"]
         password = request.form["password"]
-        user_data = db.get_user_by_login(login)
-        if check_password_hash(user_data[2], password):
-            user = User(user_data)
+        user_data = db.get_user_by_mail(login)
 
-        if user is not None:
+        if user_data is not None:
+            if check_password_hash(user_data[2], password):
+                user = User(user_data)
             user_login = UserLogin().create(user)
             login_user(user_login)
             return redirect("/self_profile")

@@ -23,22 +23,25 @@ class DataBase:
         self.__db.commit()
     
     def get_user(self, user_id):
-        self.__cur.execute(f"SELECT * FROM users WHERE user_id={user_id}")
-        user_data = self.__cur.fetchone()
-        if user_data is not None:
+        try:
+            self.__cur.execute(f"SELECT * FROM users WHERE mail={user_id}")
+            user_data = self.__cur.fetchone()
             return User(user_data)
-        return None
+        except:
+            return None
     
-    def get_user_by_login(self, user_login):
-        self.__cur.execute(f"SELECT * FROM users WHERE user_login={user_login}")
-        user_data = self.__cur.fetchone()
-        if user_data is not None:
+    def get_user_by_mail(self, user_mail):
+        try:
+            self.__cur.execute(f"SELECT * FROM users WHERE mail={user_mail}")
+            user_data = self.__cur.fetchone()
             return User(user_data)
-        return None
+        except:
+            return None
     
     def create_user(self, user_data):
+        print(1)
         self.__cur.execute("""INSERT INTO users(
-        login, password, first_name, middle_name,
+        mail, password, first_name, middle_name,
         last_name, user_type
         ) VALUES (?, ?, ?, ?, ?, ?);
         """, user_data)
