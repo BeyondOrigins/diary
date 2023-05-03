@@ -116,7 +116,7 @@ label {
     border: 0px solid var(--gray);
     border-bottom: 2px solid var(--gray);
     height: 20px;
-    font-family: "FiraSans";
+    font-family: "Roboto";
     font-size: 15px;
     padding: 10px;
     background-color: var(--form-color);
@@ -170,10 +170,17 @@ label {
     transition: 0.5s;
 }
 
+.profile-container {
+    display: flex;
+    width: 70%;
+
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
     font-size: 14px;
     font-family: "Roboto";
-    margin-bottom: 60px;
+    height: 15px;
+    margin-bottom: 50px;
 }
