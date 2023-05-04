@@ -70,7 +70,7 @@ function onProfileChange(form) {
     var fail = "";
 
     if (first_name == "" || middle_name == "" || last_name == "" || mail == "") {
-        fail = "Заполните все поля";
+        fail = "Все поля должны быть полными";
     }
 
     if (fail != "") {

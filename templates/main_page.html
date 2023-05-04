@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container" style="margin: 10% auto;">
+        <div class="main-page-title">Добро пожаловать{{welcoming_text}}!</div>
+        <div class="blocks-container">
+            <div id="block"></div>
+            <div id="block"></div>
+            <div id="block"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block header %}
+    <a href="/auth" class="header__element">
+        <div>К странице входа</div>
+    </a>
+{% endblock %}

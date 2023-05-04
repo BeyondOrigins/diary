@@ -21,13 +21,24 @@ db_init(app)
 @login_manager.user_loader
 def load_user(user_id):
     return UserLogin().fromDB(user_id, Users)
-
+# главная страница
 @app.route("/")
 def main_page():
-    return render_template("main_page.html")
+    welcoming_text = ""
+    try:
+        user = Users.query.get(session['_user_id'])
+        welcoming_text = f", {user.first_name + ' ' + user.middle_name}"
+    except:
+        pass
+    return render_template("main_page.html", welcoming_text=welcoming_text)
 
+# регистрация
 @app.route("/registration", methods=["GET", "POST"])
 def authenticate():
+    try:
+        logout_user()
+    except:
+        pass
     if request.method == "POST":
         mail = request.form["mail"]
         password = request.form["password"]
@@ -54,8 +65,13 @@ def authenticate():
         return redirect("/auth")
     return render_template("register.html")
 
+# авторизация
 @app.route("/auth", methods=["GET", "POST"])
 def auth():
+    try:
+        logout_user()
+    except:
+        pass
     if request.method == "POST":
         login = request.form["login"]
         password = request.form["password"]
@@ -71,6 +87,7 @@ def auth():
             return render_template("auth.html", error="Не найдено пользователя с такой почтой")
     return render_template("auth.html")
 
+# страница собственного профиля
 @app.route("/self_profile", methods=["GET", "POST"])
 @login_required
 def self_profile():
