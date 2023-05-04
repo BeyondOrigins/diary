@@ -231,6 +231,7 @@ input[type="file"] {
     font-size: 14px;
     font-family: "Roboto";
     height: 15px;
+    margin: 15px;
     margin-bottom: 50px;
 }
 

@@ -86,7 +86,13 @@ def self_profile():
             if not filename or not mimetype:
                 return render_template("self_profile.html", user=user, path=path, error="Фотография не соответствует требованиям")
             
-            img = Img(img=pic.read(), name=filename, mimetype=mimetype)
+            img = Img(img=pic.read(), name=filename, mimetype=mimetype, user_id=user.user_id)
+            try:
+                old_img = Img.query.filter_by(user_id=user.user_id)[0]
+                db.session.delete(old_img)
+                db.session.commit()
+            except:
+                pass
             db.session.add(img)
             db.session.commit()
             user.img_id = Img.query.all()[-1].img_id

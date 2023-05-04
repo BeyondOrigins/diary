@@ -23,3 +23,4 @@ class Img(db.Model):
     img = db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
     mimetype = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
