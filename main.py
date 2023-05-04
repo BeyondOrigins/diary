@@ -89,7 +89,7 @@ def self_profile():
         db.session.add(img)
         db.session.commit()
 
-    if user.img_id == 0:
+    if not bool(user.img_id):
         path = DEFAULT_AVATAR_PATH
     return render_template("self_profile.html", user=user, path=path)
 

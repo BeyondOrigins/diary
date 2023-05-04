@@ -27,10 +27,12 @@
     --color-gray: #999898;
     --color-dark-gray: #747474;
     --color-dark-green: #2d8f2d;
+    --color-green: #389938;
     --color-blue: #1490f5;
     --color-body-background: #ffffff;
     --color-header-background: var(--color-dark-green);
-    --color-submit-background: var(--color-dark-green);
+    --color-button1-background: var(--color-dark-green);
+    --color-file-input-background: var(--color-green);
     --color-light-purple: #ac7fdf;
     --color-form-background: #fcfafa;
     --color-link-color: #2baeeb;
@@ -59,12 +61,21 @@ img {
     font-family: "Roboto";
 }
 
+input[type="file"] {
+    display: none;
+}
+
 /* CLASSES */
 
 .container {
     width: 50%;
     margin: 0 auto;
     text-align: center;
+}
+
+.container-default-settings {
+    margin: 30px;
+    padding: 10px;
 }
 
 .form-container {
@@ -82,11 +93,12 @@ img {
 
 .form__element {
     margin: 15px;
+    display: inline-grid;
 }
 
 .button1 {
     font-size: 16px;
-    background-color: var(--color-submit-background);
+    background-color: var(--color-button1-background);
     border-radius: 0px;
     color: var(--color-white);
     transition: 0.5s;
@@ -177,8 +189,11 @@ img {
 
 .profile-container {
     display: flex;
-    width: 70%;
-    margin: 10% auto;
+    width: 50%;
+    margin: 6% auto;
+    background-color: var(--color-form-background);
+    border: 1px solid #c7c7c7;
+    padding: 40px;
 }
 
 .avatar {
@@ -186,17 +201,29 @@ img {
     width: 300px;
 }
 
-.avatar-container {
+.file-input {
+    background-color: var(--color-file-input-background);
+    border-radius: 4px;
+    color: var(--color-white);
+    transition: 0.5s;
     width: 300px;
-    height: 300px;
-    text-align: center;
+    padding: 10px 20px;
 }
 
-.file-input {
-    margin: 10px;
-    font: "Roboto";
-    font-size: 16px;
+.file-input:hover {
     background-color: var(--color-form-background);
+    border: 1px solid var(--color-dark-gray);
+    color: var(--color-dark-gray);
+}
+
+.img-form-container {
+    background-color: var(--color-form-background);
+    border: 0px;
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: none;
 }
 
 /* IDs */
@@ -208,5 +235,19 @@ img {
     margin-bottom: 50px;
 }
 
+#avatar-container {
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    margin: 0 auto;
+}
 
+#avatar-part {
+    text-align: center;
+}
 
+#data-part {
+    text-align: left;
+    margin-left: 100px;
+    display: inline-grid;
+}

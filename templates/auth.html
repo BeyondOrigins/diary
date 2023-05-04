@@ -1,5 +1,11 @@
 {% extends "index.html" %}
 {% block body %}
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    </style>
     <div class="container">
         <div class="form-container">
             <div class="form-title">Вход или регистрация</div>
@@ -20,5 +26,4 @@
             <div id="error">{{error}}</div>
         </div>
     </div>
-    <script src="{{url_for('static', filename='js/auth.js')}}"></script>
 {% endblock %}

@@ -1,5 +1,11 @@
 {% extends "index.html" %}
 {% block body %}
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    </style>
     <div class="container">
         <div class="form-container">
             <div class="form-title">Регистрация</div>
@@ -33,7 +39,6 @@
             <div id="error">{{error}}</div>
         </div>
     </div>
-    <script src="{{url_for('static', filename='js/register.js')}}"></script>
 {% endblock %}
 {% block header %}
     <a href="/auth" class="header__element">
