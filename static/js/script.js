@@ -13,15 +13,55 @@ function checkPassword() {
     }
 }
 
-function onFormSubmit(this) {
-    var inputs = document.getElementsByTagName("input");
+function onProfileChanage(form) {
+    var first_name = form.first_name.value();
+    var middle_name = form.middle_name.value();
+    var last_name = form.last_name.value();
+    var mail = form.mail.value();
 
     var fail = "";
 
-    for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].value == "") {
-            fail = "Заполните все поля";
-        }
+    if (first_name == "" || middle_name == "" || last_name == "" || mail == "") {
+        fail = "Заполните все поля";
+    }
+
+    if (fail != "") {
+        document.getElementById("error").innerHTML = fail;
+        return false;
+    }
+
+    return true;
+}
+
+function onAuth(form) {
+    var password = form.password.value();
+    var mail = form.mail.value();
+    
+    var fail = "";
+    
+    if (password == "" || mail == "") {
+        fail = "Заполните все поля";
+    }
+    
+    if (fail != "") {
+        document.getElementById("error").innerHTML = fail;
+        return false;
+    }
+    
+    return true;
+}
+
+function onRegistration(form) {
+    var first_name = form.first_name.value();
+    var middle_name = form.middle_name.value();
+    var last_name = form.last_name.value();
+    var mail = form.mail.value();
+    var password = form.password.value();
+
+    var fail = "";
+
+    if (first_name == "" || middle_name == "" || last_name == "" || mail == "" || password == "") {
+        fail = "Заполните все поля";
     }
 
     if (fail != "") {

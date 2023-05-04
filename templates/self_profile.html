@@ -19,7 +19,7 @@
         }
     </style>
     
-    <form method="POST" onsubmit="return onFormSubmit()" enctype="multipart/form-data">
+    <form method="POST" onsubmit="return onProfileChange(this)" enctype="multipart/form-data">
         <div class="profile-container">
             <div id="avatar-part">
                 <div id="avatar-container">
@@ -53,6 +53,7 @@
                     <div class="form__element">
                         <input type="submit" class="button1" value="Сохранить изменения">
                     </div>
+                    <div id="error">{{error}}</div>
                 </div>
             </div>
         </div>
