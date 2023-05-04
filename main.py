@@ -76,21 +76,32 @@ def auth():
 def self_profile():
     user = Users.query.get(session["_user_id"])
     path = f"/get_img/{user.img_id}"
+    if user.img_id == 0:
+        path = DEFAULT_AVATAR_PATH
     if request.method == "POST":
         if request.files["pic"]:
             pic = request.files["pic"]
-
-        filename = secure_filename(pic.filename)
-        mimetype = pic.mimetype
-        if not filename or not mimetype:
-            return render_template("self_profile.html", user=user, path=path, error="Фотография не соответствует требованиям")
+            filename = secure_filename(pic.filename)
+            mimetype = pic.mimetype
+            if not filename or not mimetype:
+                return render_template("self_profile.html", user=user, path=path, error="Фотография не соответствует требованиям")
+            
+            img = Img(img=pic.read(), name=filename, mimetype=mimetype)
+            db.session.add(img)
+            db.session.commit()
+            user.img_id = Img.query.all()[-1].img_id
+            db.session.commit()
         
-        img = Img(img=pic.read(), name=filename, mimetype=mimetype)
-        db.session.add(img)
+        mail = request.form["mail"]
+        first_name = request.form["first_name"]
+        middle_name = request.form["middle_name"]
+        last_name = request.form["last_name"]
+        user.mail = mail
+        user.first_name = first_name
+        user.middle_name = middle_name
+        user.last_name = last_name
         db.session.commit()
-
-    if not bool(user.img_id):
-        path = DEFAULT_AVATAR_PATH
+        return render_template("self_profile.html", user=user, path=f"/get_img/{user.img_id}")
     return render_template("self_profile.html", user=user, path=path)
 
 @app.route("/get_img/<int:img_id>")

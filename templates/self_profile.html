@@ -13,38 +13,48 @@
             overflow-x: hidden;
             overflow-y: hidden;
         }
+
+        .form__element {
+            display: inline-grid;
+        }
     </style>
-    <div class="profile-container">
-        <div id="avatar-part">
-            <div id="avatar-container">
-                <img src="{{path}}" class="avatar" alt="Не удалось загрузить фото профиля">
+    
+    <form method="POST" onsubmit="return onFormSubmit()" enctype="multipart/form-data">
+        <div class="profile-container">
+            <div id="avatar-part">
+                <div id="avatar-container">
+                    <img src="{{path}}" class="avatar" alt="Не удалось загрузить фото профиля">
+                </div>
+                <div class="form-container img-form-container">
+                        <label class="button1 file-input">
+                            <input type="file" name="pic">
+                            Загрузить фото
+                        </label>
+                </div>
             </div>
-            <div class="form-container img-form-container">
-                <form enctype="multipart/form-data" method="POST" style="padding: 10px;">
-                    <label class="button1 file-input">
-                        <input type="file" name="pic">
-                        Загрузить фото
-                    </label>
-                </form>
+            <div id="data-part">
+                <div style="display: inline-grid">
+                    <div class="form__element">
+                        <label>Фамилия</label>
+                        <input type="text" class="form__input" value="{{user.last_name}}" name="last_name" placeholder="Фамилия">
+                    </div>
+                    <div class="form__element">
+                        <label>Имя</label>
+                        <input type="text" class="form__input" value="{{user.first_name}}" name="first_name" placeholder="Имя">
+                    </div>
+                    <div class="form__element">
+                        <label>Отчество</label>
+                        <input type="text" class="form__input" value="{{user.middle_name}}" name="middle_name" placeholder="Отчество">
+                    </div>
+                    <div class="form__element">
+                        <label>Логин (почта)</label>
+                        <input type="text" class="form__input" value="{{user.mail}}" name="mail" placeholder="mail@example.com">
+                    </div>
+                    <div class="form__element">
+                        <input type="submit" class="button1" value="Сохранить изменения">
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="data-part">
-            <div class="form__element">
-                <label>Фамилия</label>
-                <input type="text" class="form__input" value="{{user.last_name}}" name="last_name" placeholder="Фамилия">
-            </div>
-            <div class="form__element">
-                <label>Имя</label>
-                <input type="text" class="form__input" value="{{user.first_name}}" name="first_name" placeholder="Имя">
-            </div>
-            <div class="form__element">
-                <label>Отчество</label>
-                <input type="text" class="form__input" value="{{user.middle_name}}" name="middle_name" placeholder="Отчество">
-            </div>
-            <div class="form__element">
-                <label>Логин (почта)</label>
-                <input type="text" class="form__input" value="{{user.mail}}" name="mail" placeholder="mail@example.com">
-            </div>
-        </div>
-    </div>
+    </form>
 {% endblock %}

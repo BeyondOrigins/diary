@@ -93,13 +93,12 @@ input[type="file"] {
 
 .form__element {
     margin: 15px;
-    display: inline-grid;
 }
 
 .button1 {
     font-size: 16px;
     background-color: var(--color-button1-background);
-    border-radius: 0px;
+    border-radius: 4px;
     color: var(--color-white);
     transition: 0.5s;
     animation-delay: 0.8s;
