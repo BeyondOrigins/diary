@@ -9,6 +9,17 @@
 {% endblock %}
 {% block body %}
     <div class="profile-container">
-        
+        <div id="avatar-container">
+            <img src="{{path}}" class="avatar" alt="Не удалось загрузить фото профиля">
+            <div class="img-form-container">
+                <form enctype="multipart/form-data" method="POST">
+                    <input type="file" class="file-input" value="Загрузить фото">
+                    <input type="submit" class="button1" value="Сменить фото">
+                </form>
+            </div>
+        </div>
+        <div id="personal-data">
+
+        </div>
     </div>
 {% endblock %}

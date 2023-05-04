@@ -21,4 +21,5 @@ class Marks(db.Model):
 class Img(db.Model):
     img_id = db.Column(db.Integer, primary_key=True)
     img = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
     mimetype = db.Column(db.String, nullable=False)

@@ -1,13 +1,15 @@
 from flask import Flask, render_template, redirect
-from flask import session, request
+from flask import session, request, Response, url_for
 from flask_login import LoginManager, login_required
 from flask_login import logout_user, login_user
 from UserLogin import UserLogin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
 from db import db_init, db
 from models import Users, Marks, Img
+from config import *
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -69,10 +71,35 @@ def auth():
             return render_template("auth.html", error="Не найдено пользователя с такой почтой")
     return render_template("auth.html")
 
-@app.route("/self_profile")
+@app.route("/self_profile", methods=["GET", "POST"])
 @login_required
 def self_profile():
-    return render_template("self_profile.html", session=session)
+    user = Users.query.get(session["_user_id"])
+    path = f"/get_img/{user.img_id}"
+    if request.method == "POST":
+        if request.files["pic"]:
+            pic = request.files["pic"]
+
+        filename = secure_filename(pic.filename)
+        mimetype = pic.mimetype
+        if not filename or not mimetype:
+            return render_template("self_profile.html", user=user, path=path, error="Фотография не соответствует требованиям")
+        
+        img = Img(img=pic.read(), name=filename, mimetype=mimetype)
+        db.session.add(img)
+        db.session.commit()
+
+    if user.img_id == 0:
+        path = DEFAULT_AVATAR_PATH
+    return render_template("self_profile.html", user=user, path=path)
+
+@app.route("/get_img/<int:img_id>")
+def get_img(img_id):
+    try:
+        img = Img.query.get(img_id)
+    except:
+        return "Фото не найдено"
+    return Response(img.img, mimetype=img.mimetype)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):

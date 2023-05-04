@@ -21,37 +21,42 @@
 }
 
 :root {
-    --white: #fffefe;
-    --purple: #893be2;
-    --shadow-color: rgba(24, 24, 24, 0.219);
-    --gray: #999898;
-    --dark-gray: #747474;
-    --dark-green: #2f912f;
-    --blue: #1490f5;
-    --body-background: #ffffff;
-    --header-background: #2f912f;
-    --submit-background: #2f912f;
-    --light-purple: #ac7fdf;
-    --form-color: #fcfafa;
-    --link-color: #2baeeb;
-    --input-focus-color: rgba(85, 215, 247, 0.205);
-    --header-element-color: #f3f3f3;
+    --color-white: #fffefe;
+    --color-purple: #893be2;
+    --color-shadow: rgba(24, 24, 24, 0.219);
+    --color-gray: #999898;
+    --color-dark-gray: #747474;
+    --color-dark-green: #2d8f2d;
+    --color-blue: #1490f5;
+    --color-body-background: #ffffff;
+    --color-header-background: var(--color-dark-green);
+    --color-submit-background: var(--color-dark-green);
+    --color-light-purple: #ac7fdf;
+    --color-form-background: #fcfafa;
+    --color-link-color: #2baeeb;
+    --color-input-focus: rgba(85, 215, 247, 0.205);
+    --color-header-element: #f3f3f3;
 }
 
-/* ELEMENTS */
+/* TAGS */
 
 html, body {
     margin: 0;
 }
 
 body {
-    background-color: var(--body-background);
+    background-color: var(--color-body-background);
     height: 100%;
+    overflow-x: hidden;
 }
 
 label {
     font-family: "Roboto";
     font-size: 17px;
+}
+
+img {
+    font-family: "Roboto";
 }
 
 /* CLASSES */
@@ -65,25 +70,25 @@ label {
 .form-container {
     border-radius: 0px;
     width: 300px;
-    background-color: var(--form-color);
+    background-color: var(--color-form-background);
     text-align: center;
     margin: 15% auto;
     padding: 30px;
     padding-top: 60px;
     border: 1px solid #c7c7c7;
-    box-shadow: 4px 4px 15px var(--shadow-color),
-    -4px 4px 15px var(--shadow-color);
+    box-shadow: 4px 4px 15px var(--color-shadow),
+    -4px 4px 15px var(--color-shadow);
 }
 
 .form__element {
     margin: 15px;
 }
 
-.form-submit {
+.button1 {
     font-size: 16px;
-    background-color: var(--submit-background);
+    background-color: var(--color-submit-background);
     border-radius: 0px;
-    color: var(--white);
+    color: var(--color-white);
     transition: 0.5s;
     animation-delay: 0.8s;
     width: 206px;
@@ -94,13 +99,13 @@ label {
     cursor: pointer;
 }
 
-.form-submit:hover {
-    background-color: var(--form-color);
-    border: 1px solid var(--dark-gray);
-    color: var(--dark-gray);
-    /* box-shadow: 7px 5px 20px var(--shadow-color),
-    0px 5px 20px var(--shadow-color),
-    -7px 5px 20px var(--shadow-color);
+.button1:hover {
+    background-color: var(--color-form-background);
+    border: 1px solid var(--color-dark-gray);
+    color: var(--color-dark-gray);
+    /* box-shadow: 7px 5px 20px var(--color-shadow),
+    0px 5px 20px var(--color-shadow),
+    -7px 5px 20px var(--color-shadow);
     transform: translateY(-3px); */
 }
 
@@ -113,19 +118,19 @@ label {
 .form__input {
     width: 200px;
     border-radius: 0px;
-    border: 0px solid var(--gray);
-    border-bottom: 2px solid var(--gray);
+    border: 0px solid var(--color-gray);
+    border-bottom: 2px solid var(--color-gray);
     height: 20px;
     font-family: "Roboto";
     font-size: 15px;
     padding: 10px;
-    background-color: var(--form-color);
+    background-color: var(--color-form-background);
     transition: 0.5s;
 }
 
 .form__input:focus {
     outline: none;
-    border-bottom: 2px solid var(--blue);
+    border-bottom: 2px solid var(--color-blue);
 }
 
 .to-registr {
@@ -135,18 +140,18 @@ label {
     transition: 0.5s;
     animation-delay: 0.3s;
     text-decoration: none;
-    color: var(--gray);
+    color: var(--color-gray);
 }
 
 .to-registr:hover, .header__element:hover{
-    color: var(--link-color);
+    color: var(--color-link-color);
 }
 
 .header {
-    width: 100%;
+    width: 1920px;
     display: flex;
-    padding: 15px;
-    background-color: var(--header-background);
+    padding: 10px;
+    background-color: var(--color-header-background);
 }
 
 .header-elements-container {
@@ -155,11 +160,12 @@ label {
 }
 
 .header__element {
-    color: var(--header-element-color);
+    color: var(--color-header-element);
     font-family: "Raleway";
     text-align: center;
-    font-size: 18px;
+    font-size: 17px;
     padding: 5px;
+    margin: 5px;
     cursor: pointer;
     transition: 0.5s;
     text-decoration: none;
@@ -172,7 +178,25 @@ label {
 .profile-container {
     display: flex;
     width: 70%;
+    margin: 10% auto;
+}
 
+.avatar {
+    outline: 2px solid var(--color-gray);
+    width: 300px;
+}
+
+.avatar-container {
+    width: 300px;
+    height: 300px;
+    text-align: center;
+}
+
+.file-input {
+    margin: 10px;
+    font: "Roboto";
+    font-size: 16px;
+    background-color: var(--color-form-background);
 }
 
 /* IDs */
@@ -183,3 +207,6 @@ label {
     height: 15px;
     margin-bottom: 50px;
 }
+
+
+

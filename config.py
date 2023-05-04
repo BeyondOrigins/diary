@@ -1,0 +1,1 @@
+DEFAULT_AVATAR_PATH = "/static/styles/img/default_avatar.png"
