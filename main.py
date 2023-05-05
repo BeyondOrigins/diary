@@ -135,6 +135,22 @@ def get_img(img_id):
         return "Фото не найдено"
     return Response(img.img, mimetype=img.mimetype)
 
+@app.route("/my_marks")
+@login_required
+def my_marks():
+    user = Users.query.get(session["_user_id"])
+    marks_list = Marks.query.filter_by(user_id=user.user_id).all()
+    marks = {}
+    for mark in marks_list:
+        try:
+            marks[mark.subject].append(mark.mark)
+        except:
+            marks[mark.subject] = []
+            marks[mark.subject].append(mark.mark)
+    print(marks)
+
+    return render_template("my_marks.html", marks=marks)
+
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
     return redirect("/auth")

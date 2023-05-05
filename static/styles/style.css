@@ -30,9 +30,9 @@
     --color-green: #389938;
     --color-blue: #1490f5;
     --color-body-background: #ffffff;
-    --color-header-background: var(--color-dark-green);
-    --color-button1-background: var(--color-dark-green);
-    --color-file-input-background: var(--color-dark-green);
+    --color-header-background: var(--color-blue);
+    --color-button1-background: var(--color-blue);
+    --color-file-input-background: var(--color-blue);
     --color-light-purple: #ac7fdf;
     --color-form-background: #fcfafa;
     --color-link-color: #2baeeb;
@@ -68,7 +68,7 @@ input[type="file"] {
 /* CLASSES */
 
 .container {
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
 }
@@ -78,9 +78,11 @@ input[type="file"] {
     padding: 10px;
 }
 
-.main-page-title {
+.main-title {
     font-family: "Roboto";
     font-size: 50px;
+    text-align: center;
+    margin: 50px auto;
 }
 
 .form-container {
@@ -193,7 +195,7 @@ input[type="file"] {
 .profile-container {
     display: flex;
     width: 50%;
-    margin: 6% auto;
+    margin: 0 auto;
     border-radius: 10px;
     background-color: var(--color-form-background);
     border: 1px solid #c7c7c7;

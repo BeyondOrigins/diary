@@ -15,7 +15,7 @@ class Marks(db.Model):
     mark_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
     mark = db.Column(db.Integer, nullable=False)
-    time = db.Column(db.String, nullable=False)
+    subject = db.Column(db.String, nullable=False)
 
 
 class Img(db.Model):
@@ -24,3 +24,7 @@ class Img(db.Model):
     name = db.Column(db.String, nullable=False)
     mimetype = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
+
+# class Schedule(db.Model):
+#     day = db.Column(db.DATETIME)
+#     subjects = db.Column(db.ARRAY(db.String), nullable=False)

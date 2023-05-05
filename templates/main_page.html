@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block body %}
     <div class="container" style="margin: 10% auto;">
-        <div class="main-page-title">Добро пожаловать{{welcoming_text}}!</div>
+        <div class="main-title">Добро пожаловать{{welcoming_text}}!</div>
         <div class="blocks-container">
             <div id="block"></div>
             <div id="block"></div>
@@ -13,4 +13,9 @@
     <a href="/auth" class="header__element">
         <div>К странице входа</div>
     </a>
+    {% if welcoming_text != "" %}
+        <a href="/self_profile" class="header__element">
+            <div>Мой профиль</div>
+        </a>
+    {% endif %}
 {% endblock %}
