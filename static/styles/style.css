@@ -324,6 +324,15 @@ input[type="file"] {
     animation-delay: 0.3s;
 }
 
+.footer {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 0;
+    border-top: 1px solid var(--color-gray);
+    padding: 6px;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
