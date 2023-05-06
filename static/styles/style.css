@@ -136,7 +136,6 @@ input[type="file"] {
     margin: 2% auto;
     margin-bottom: 20px;
     padding: 20px;
-    display: block;
     opacity: 0;
 }
 
@@ -388,4 +387,4 @@ input[type="file"] {
     margin: 25% auto;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
-  }
+}
