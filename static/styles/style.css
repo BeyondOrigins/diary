@@ -58,7 +58,7 @@
 :root {
     --color-white: #fffefe;
     --color-purple: #893be2;
-    --color-bluerple: #7816e9;
+    --color-bluerple: #7527ce;
     --color-shadow: rgba(24, 24, 24, 0.219);
     --color-gray: #999898;
     --color-dark-gray: #5a5959;
@@ -66,7 +66,7 @@
     --color-green: #389938;
     --color-blue: #1490f5;
     --color-body-background: #fcfafa;
-    --color-header-background: var(--color-bluerple);
+    --color-header-background: var(--color-purple);
     --color-button1-background: var(--color-bluerple);
     --color-file-input-background: var(--color-bluerple);
     --color-light-purple: #ac7fdf;
