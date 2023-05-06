@@ -31,6 +31,7 @@ db_init(app)
 @login_manager.user_loader
 def load_user(user_id):
     return UserLogin().fromDB(user_id, Users)
+
 # главная страница
 @app.route("/")
 def main_page():

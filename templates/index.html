@@ -12,6 +12,11 @@
         <div class="header-elements-container">
             {% block header %}
             {% endblock %}
+            {% if session["_user_id"] %}
+                <a href="/auth" class="header__element">
+                    <div>Выйти</div>
+                </a>
+            {% endif %}
         </div>
     </header>
     {% block body %}
