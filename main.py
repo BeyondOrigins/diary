@@ -180,7 +180,7 @@ def not_found_error_handler(error):
 
 @app.errorhandler(500)
 def server_error_handler(error):
-    return render_template("error.html", error="Ой-ой! Кажется, у нас проблема на сервере, но скоро мы все исправим :)")
+    return render_template("error.html", error="Кажется, у нас проблема на сервере, но скоро мы все исправим")
 
 if __name__ == "__main__":
     app.run()
