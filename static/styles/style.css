@@ -125,6 +125,7 @@ input[type="file"] {
     border: 1px solid #c7c7c7;
     box-shadow: 4px 4px 15px var(--color-shadow),
     -4px 4px 15px var(--color-shadow);
+    opacity: 0;
 }
 
 .marks-container {
@@ -132,7 +133,7 @@ input[type="file"] {
     border: 2px solid var(--color-gray);
     border-radius: 20px;
     background-color: var(--color-form-background);
-    margin: 0 auto;
+    margin: 2% auto;
     margin-bottom: 20px;
     padding: 20px;
     display: block;
@@ -277,7 +278,7 @@ input[type="file"] {
 .profile-container {
     display: flex;
     width: 50%;
-    margin: 0 auto;
+    margin: 2% auto;
     border-radius: 10px;
     background-color: var(--color-form-background);
     border: 1px solid #c7c7c7;
