@@ -10,11 +10,21 @@ from werkzeug.utils import secure_filename
 from db import db_init, db
 from models import Users, Marks, Img
 from config import *
+from flask_mail import Message, Mail
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
+email = Mail(app)
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
 app.config["SECRET_KEY"] = "gityihkgoerp"
+app.config["MAIL_SERVER"] = "smtp.googlemail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = "dima.a.ivlev@gmail.com"
+app.config["MAIL_DEFAULT_SENDER"] = "dima.a.ivlev@gmail.com"
+app.config["MAIL_PASSWORD"] = "ldoncgpxtfdirahu"
 
 db_init(app)
 
@@ -62,6 +72,16 @@ def authenticate():
         )
         db.session.add(user)
         db.session.commit()
+        msg = Message("Регистрация прошла успешно",
+                      sender="dima.a.ivlev@gmail.com",
+                      recipients=[
+                      user.mail,
+                      ])
+        msg.body = f"""
+            Здравствуйте, {user.first_name} {user.middle_name}
+            Вы успешно создали аккаунт на нашем сайте.
+        """
+        email.send(msg)
         return redirect("/auth")
     return render_template("register.html")
 
@@ -150,17 +170,17 @@ def my_marks():
 
     return render_template("my_marks.html", marks=marks)
 
-@app.route("/not_found")
-def not_found():
-    return render_template("not_found.html")
-
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
     return redirect("/auth")
 
 @app.errorhandler(404)
 def not_found_error_handler(error):
-    return redirect("/not_found")
+    return render_template("error.html", error="Страница не найдена :(")
+
+@app.errorhandler(500)
+def server_error_handler(error):
+    return render_template("error.html", error="Ой-ой! Кажется, у нас проблема на сервере, но скоро мы все исправим :)")
 
 if __name__ == "__main__":
     app.run()
