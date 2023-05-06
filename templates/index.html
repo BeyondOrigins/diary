@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
 </head>
-<body>
+<body onload="onLoad()">
     <noscript>Включите JavaScript для работы приложения</noscript>
     <header class="header">
         <div class="header-elements-container">
@@ -17,13 +17,8 @@
     {% block body %}
     {% endblock %}
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
-    <script>
-        $(window).load(function() {
-          $('#loading').hide();
-        });
-    </script>
 </body>
 <div id="loading">
-    
+    <div id="loader"></div>
 </div>
 </html>

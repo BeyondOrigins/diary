@@ -80,3 +80,18 @@ function onProfileChange(form) {
 
     return true;
 }
+
+function onLoad() {
+    document.getElementById("loading").style.display = "none";
+}
+
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+        document.getElementsByClassName("header")[0].style.top = "0";
+    } else {
+        document.getElementsByClassName("header")[0].style.top = "-70px";
+    }
+    prevScrollpos = currentScrollPos;
+}
