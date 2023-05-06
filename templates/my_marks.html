@@ -1,18 +1,35 @@
 {% extends "index.html" %}
 {% block body %}
-    <div class="main-title">Мой профиль</div>
-    <div class="marks-container">
-        
+    <div class="container">
+        <div class="main-title">Мои оценки</div>
+        {% if marks|length == 0 %}
+            <div id="no-marks">У вас пока что нет оценок :(</div>
+        {% else %}
+            {% for subject, marks_list in marks.items() %}
+                <div class="marks-container">
+                    <div class="marks-container__title">{{subject}}</div>
+                    {% for i in range((marks_list|length//9) + 1) %}
+                    <div class="marks-row-container">
+                        {% for mark in marks_list[i+i*9:(i+i*9)+10] %}
+                            <div class="mark-container">
+                                <div class="mark">{{mark}}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
 {% block header %}
     <a href="/" class="header__element">
         <div>На главную</div>
     </a>
-    <a href="/self_profile" class="header__element">
-        <div>Мой профиль</div>
-    </a>
     <a href="/schedule" class="header__element">
         <div>Расписание</div>
+    </a>
+    <a href="/self_profile" class="header__element">
+        <div>Мой профиль</div>
     </a>
 {% endblock %}

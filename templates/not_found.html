@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="main-title" style="margin: 10% auto;">Страница не найдена :(</div>
+{% endblock %}
+{% block header %}
+    <a href="/" class="header__element">
+        <div>На главную</div>
+    </a>
+    {% if session %}
+        <a href="/self_profile" class="header__element">
+            <div>Мой профиль</div>
+        </a>
+    {% endif %}
+{% endblock %}

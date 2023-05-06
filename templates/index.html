@@ -17,5 +17,13 @@
     {% block body %}
     {% endblock %}
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script>
+        $(window).load(function() {
+          $('#loading').hide();
+        });
+    </script>
 </body>
+<div id="loading">
+    
+</div>
 </html>

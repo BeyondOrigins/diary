@@ -6,9 +6,15 @@
     <a href="/schedule" class="header__element">
         <div>Расписание</div>
     </a>
-    <a href="/my_marks" class="header__element">
-        <div>Мои оценки</div>
-    </a>
+    {% if user.user_type=="teacher" %}
+        <a href="/add_marks" class="header__element">
+            <div>Вставить оценки</div>
+        </a>
+    {% else %}
+        <a href="/my_marks" class="header__element">
+            <div>Мои оценки</div>
+        </a>
+    {% endif %}
 {% endblock %}
 {% block body %}
     <style>
@@ -24,18 +30,18 @@
         <div class="main-title">Мой профиль</div>
         <form method="POST" onsubmit="return onProfileChange(this)" enctype="multipart/form-data">
             <div class="profile-container">
-                <div id="avatar-part">
+                <div id="avatar-div">
                     <div id="avatar-container">
                         <img src="{{path}}" class="avatar" alt="Не удалось загрузить фото профиля">
                     </div>
                     <div class="form-container img-form-container">
-                            <label class="button1 file-input">
-                                <input type="file" name="pic">
-                                Загрузить фото
-                            </label>
+                        <label class="button1 file-input">
+                            <input type="file" name="pic">
+                            Загрузить фото
+                        </label>
                     </div>
                 </div>
-                <div id="data-part">
+                <div id="data-div">
                     <div style="display: inline-grid">
                         <div class="form__element">
                             <label>Фамилия</label>

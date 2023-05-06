@@ -151,9 +151,17 @@ def my_marks():
 
     return render_template("my_marks.html", marks=marks)
 
+@app.route("/not_found")
+def not_found():
+    return render_template("not_found.html")
+
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
     return redirect("/auth")
+
+@app.errorhandler(404)
+def not_found_error_handler(error):
+    return redirect("/not_found")
 
 if __name__ == "__main__":
     app.run()
