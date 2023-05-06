@@ -147,7 +147,6 @@ def my_marks():
         except:
             marks[mark.subject] = []
             marks[mark.subject].append(mark.mark)
-    print(marks)
 
     return render_template("my_marks.html", marks=marks)
 
