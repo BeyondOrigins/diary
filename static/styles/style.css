@@ -403,3 +403,12 @@ input[type="file"] {
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
 }
+
+#left {
+    width: 70%;
+}
+
+#right {
+    justify-content: flex-end;
+    width: 26.5%;
+}

@@ -9,15 +9,17 @@
 <body onload="onLoad()">
     <noscript>Включите JavaScript для работы приложения</noscript>
     <header class="header">
-        <div class="header-elements-container">
+        <div class="header-elements-container" id="left">
             {% block header %}
             {% endblock %}
-            {% if session["_user_id"] %}
+        </div>
+        {% if session["_user_id"] %}
+            <div class="header-elements-container" id="right">
                 <a href="/auth" class="header__element">
                     <div>Выйти</div>
                 </a>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </header>
     {% block body %}
     {% endblock %}
