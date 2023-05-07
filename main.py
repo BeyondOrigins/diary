@@ -180,6 +180,8 @@ def my_marks():
             marks[mark.subject] = []
             marks[mark.subject].append(mark.mark)
 
+    session["name"] = f"{user.first_name} {user.middle_name}"
+
     return render_template("my_marks.html", marks=marks)
 
 @app.errorhandler(401)
