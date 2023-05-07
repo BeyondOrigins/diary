@@ -76,7 +76,7 @@ def authenticate():
         msg = Message("Регистрация прошла успешно",
                       sender="dima.a.ivlev@gmail.com",
                       recipients=[
-                      user.mail,
+                      user.mail
                       ])
         msg.body = f"""
             Здравствуйте, {user.first_name} {user.middle_name}
@@ -108,10 +108,18 @@ def auth():
             return render_template("auth.html", error="Не найдено пользователя с такой почтой")
     return render_template("auth.html")
 
-# страница собственного профиля
-@app.route("/self_profile", methods=["GET", "POST"])
+@app.route("/profile")
+def profile():
+    user = Users.query.get(session["_user_id"])
+    path = f"/get_img/{user.img_id}"
+    if user.img_id == 0:
+        path = DEFAULT_AVATAR_PATH
+    return render_template("profile.html", user=user, path=path)
+
+# изменить параметры своего профиля
+@app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
-def self_profile():
+def edit_profile():
     user = Users.query.get(session["_user_id"])
     path = f"/get_img/{user.img_id}"
     if user.img_id == 0:
@@ -133,7 +141,7 @@ def self_profile():
                 pass
             db.session.add(img)
             db.session.commit()
-            user.img_id = Img.query.all()[-1].img_id
+            user.img_id = Img.query.filter_by(user_id=user.user_id).all()[0].img_id
             db.session.commit()
         
         mail = request.form["mail"]
@@ -145,8 +153,8 @@ def self_profile():
         user.middle_name = middle_name
         user.last_name = last_name
         db.session.commit()
-        return render_template("self_profile.html", user=user, path=f"/get_img/{user.img_id}")
-    return render_template("self_profile.html", user=user, path=path)
+        return redirect("/profile")
+    return render_template("edit_profile.html", user=user, path=path)
 
 @app.route("/get_img/<int:img_id>")
 def get_img(img_id):
@@ -181,7 +189,7 @@ def not_found_error_handler(error):
 
 @app.errorhandler(500)
 def server_error_handler(error):
-    return render_template("error.html", error="Кажется, у нас проблема на сервере, но скоро мы все исправим")
+    return render_template("error.html", error="Кажется, у нас проблемы на сервере")
 
 if __name__ == "__main__":
     app.run()
