@@ -3,21 +3,19 @@
     <div class="container">
         <div class="main-title animated">Мои оценки</div>
         {% if marks|length == 0 %}
-            <div id="no-marks animated">У вас пока что нет оценок :(</div>
+            <div id="no-marks" class="animated">У вас пока что нет оценок :(</div>
         {% else %}
             {% for subject, marks_list in marks.items() %}
-                <div class="marks-container animated">
+                <div class="marks-block animated">
                     <div class="marks-container__title">{{subject}}</div>
-                        {% for i in range((marks_list|length//9) + 1) %}
-                            <div class="marks-row-container">
-                                {% for mark in marks_list[i+i*9:(i+i*9)+10] %}
-                                    <div class="mark-container">
-                                        <div class="mark">{{mark}}</div>
-                                    </div>
-                                {% endfor %}
+                    <div class="marks-container">
+                        {% for mark in marks_list %}
+                            <div class="mark-container">
+                                <div class="mark">{{mark}}</div>
                             </div>
                         {% endfor %}
                     </div>
+                </div>
             {% endfor %}
         {% endif %}
     </div>
@@ -29,7 +27,7 @@
     <a href="/schedule" class="header__element">
         <div>Расписание</div>
     </a>
-    <a href="/self_profile" class="header__element">
+    <a href="/profile" class="header__element">
         <div>Мой профиль</div>
     </a>
 {% endblock %}

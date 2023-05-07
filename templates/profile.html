@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block header %}
+    <a href="/" class="header__element">
+        <div>На главную</div>
+    </a>
+    <a href="/schedule" class="header__element">
+        <div>Расписание</div>
+    </a>
+    {% if user.user_type=="teacher" %}
+        <a href="/add_marks" class="header__element">
+            <div>Вставить оценки</div>
+        </a>
+    {% else %}
+        <a href="/my_marks" class="header__element">
+            <div>Мои оценки</div>
+        </a>
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+
+        .form__element {
+            display: inline-grid;
+        }
+    </style>
+    <div class="container" style="width: 100%;">
+        <div class="main-title animated">Мой профиль</div>
+        <div class="profile-container animated">
+            <div id="avatar-div">
+                <div id="avatar-container">
+                    <img src="{{path}}" class="avatar" alt="Не удалось загрузить фото профиля">
+                </div>
+            </div>
+            <div id="data-div">
+                <div style="display: inline-grid">
+                    <div class="form__element">
+                        <label>Фамилия</label>
+                        <label class="label">{{user.last_name}}</label>
+                    </div>
+                    <div class="form__element">
+                        <label>Имя</label>
+                        <label class="label">{{user.first_name}}</label>
+                    </div>
+                    <div class="form__element">
+                        <label>Отчество</label>
+                        <label class="label">{{user.middle_name}}</label>
+                    </div>
+                    <div class="form__element">
+                        <label>Почта</label>
+                        <label class="label">{{user.mail}}</label>
+                    </div>
+                    <button id="edit-button" class="button1">Изменить данные</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

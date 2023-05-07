@@ -90,7 +90,8 @@ body {
 
 label {
     font-family: "Roboto";
-    font-size: 17px;
+    font-size: 16px;
+    color: var(--color-gray);
 }
 
 img {
@@ -128,7 +129,7 @@ input[type="file"] {
     opacity: 0;
 }
 
-.marks-container {
+.marks-block {
     width: 70%;
     border: 1px solid var(--color-gray);
     border-radius: 15px;
@@ -137,6 +138,11 @@ input[type="file"] {
     margin-bottom: 20px;
     padding: 20px;
     opacity: 0;
+}
+
+.marks-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .mark-container {
@@ -188,12 +194,14 @@ input[type="file"] {
     color: var(--color-white);
     transition: 0.5s;
     animation-delay: 0.8s;
+    text-align: center;
     width: 206px;
     height: 40px;
     border: 0px;
     font-family: "Roboto";
     font-style: normal;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .button1:hover {
@@ -332,6 +340,11 @@ input[type="file"] {
     padding: 6px;
 }
 
+.label {
+    color: var(--color-dark-gray);
+    font-size: 18px;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
@@ -363,6 +376,8 @@ input[type="file"] {
     font-size: 50px;
     color: var(--color-gray);
     font-family: "Roboto";
+    opacity: 0;
+    margin-top: 5%;
 }
 
 #loading {
