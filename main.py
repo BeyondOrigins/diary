@@ -103,12 +103,13 @@ def auth():
                 return render_template("auth.html", error="Неверный пароль")
             user_login = UserLogin().create(user)
             login_user(user_login)
-            return redirect("/self_profile")
+            return redirect("/profile")
         else:
             return render_template("auth.html", error="Не найдено пользователя с такой почтой")
     return render_template("auth.html")
 
 @app.route("/profile")
+@login_required
 def profile():
     user = Users.query.get(session["_user_id"])
     path = f"/get_img/{user.img_id}"

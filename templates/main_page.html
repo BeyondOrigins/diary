@@ -2,10 +2,11 @@
 {% block body %}
     <div class="container" style="margin: 1% auto;">
         <div class="main-title animated" style="margin-top: 15%;">Добро пожаловать{{welcoming_text}}!</div>
+        <div class="main-title animated" style="color: var(--color-dark-gray); margin-top: 5%;">На нашем сайте вы можете:</div>
         <div class="blocks-container">
-            <div id="block1"></div>
-            <div id="block2"></div>
-            <div id="block3"></div>
+            <div id="block1" class="block animated">Смотреть свои оценки</div>
+            <div id="block2" class="block animated">Смотреть расписание на неделю</div>
+            <div id="block3" class="block animated">Смотреть домашние задания</div>
         </div>
     </div>
 {% endblock %}

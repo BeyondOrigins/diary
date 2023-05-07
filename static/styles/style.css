@@ -177,7 +177,7 @@ input[type="file"] {
 }
 
 .marks-container__title {
-    font-size: 24px;
+    font-size: 21px;
     font-family: "Roboto";
     text-align: left;
     margin-bottom: 20px;
@@ -345,6 +345,21 @@ input[type="file"] {
     font-size: 18px;
 }
 
+.block {
+    font-family: "Roboto";
+    font-size: 33px;
+    color: var(--color-dark-gray);
+    overflow-wrap: break-word;
+    animation-name: appearence;
+    opacity: 0;
+    text-align: left;
+}
+
+.blocks-container {
+    display: flex;
+    margin: 3% auto;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
@@ -411,4 +426,16 @@ input[type="file"] {
 #right {
     justify-content: flex-end;
     width: 26.5%;
+}
+
+#block1 {
+    animation-delay: 0.6s;
+}
+
+#block2 {
+    animation-delay: 0.8s;
+}
+
+#block3 {
+    animation-delay: 1s;
 }
