@@ -3,11 +3,20 @@
     <div class="container" style="margin: 1% auto;">
         <div class="main-title animated" style="margin-top: 15%;">Добро пожаловать{{welcoming_text}}!</div>
         <div class="main-title animated" style="color: var(--color-dark-gray); margin-top: 5%;">На нашем сайте вы можете:</div>
-        <div class="blocks-container">
-            <div id="block1" class="block animated">Смотреть свои оценки</div>
-            <div id="block2" class="block animated">Смотреть расписание на неделю</div>
-            <div id="block3" class="block animated">Смотреть домашние задания</div>
-        </div>
+        {% if not session["_user_id"] or (session["_user_id"] and session["user_type"] == "pupil") %}
+            <div id="block-title" class="blocks-container">
+                <div id="block1" class="block animated">Смотреть свои оценки</div>
+                <div id="block2" class="block animated">Смотреть расписание на неделю</div>
+                <div id="block3" class="block animated">Смотреть домашние задания</div>
+            </div>
+        {% endif %}
+        {% if session["_user_id"] and session["user_type"] == "teacher"%}
+            <div id="block-title" class="blocks-container">
+                <div id="block1" class="block animated">Выставлять оценки</div>
+                <div id="block2" class="block animated">Изменять расписание на неделю</div>
+                <div id="block3" class="block animated">Давать домашние задания</div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block header %}
@@ -16,7 +25,7 @@
     </a>
     {% if welcoming_text != "" %}
         <a href="/profile" class="header__element">
-            <div>Мой профиль</div>
+            <div>{{ session["name"] }}</div>
         </a>
     {% endif %}
 {% endblock %}

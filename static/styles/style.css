@@ -428,14 +428,18 @@ input[type="file"] {
     width: 26.5%;
 }
 
+#block-title {
+    animation-delay: 0.9s;
+}
+
 #block1 {
-    animation-delay: 0.6s;
+    animation-delay: 1s;
 }
 
 #block2 {
-    animation-delay: 0.8s;
+    animation-delay: 1.2s;
 }
 
 #block3 {
-    animation-delay: 1s;
+    animation-delay: 1.4s;
 }

@@ -39,6 +39,8 @@ def main_page():
     try:
         user = Users.query.get(session['_user_id'])
         welcoming_text = f", {user.first_name + ' ' + user.middle_name}"
+        session["user_type"] = user.user_type
+        session["name"] = f"{user.first_name} {user.middle_name}"
     except:
         pass
     return render_template("main_page.html", welcoming_text=welcoming_text)
