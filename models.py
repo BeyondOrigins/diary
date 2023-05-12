@@ -25,6 +25,7 @@ class Img(db.Model):
     mimetype = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
 
-# class Schedule(db.Model):
-#     day = db.Column(db.DATETIME)
-#     subjects = db.Column(db.ARRAY(db.String), nullable=False)
+
+class Schedule(db.Model):
+    lesson_id = db.Column(db.Integer, primary_key=True)
+    weekday_index = db.Column(db.Integer, nullable=False)

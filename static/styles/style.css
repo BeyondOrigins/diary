@@ -70,8 +70,8 @@
     --color-button1-background: var(--color-bluerple);
     --color-file-input-background: var(--color-bluerple);
     --color-light-purple: #ac7fdf;
-    --color-form-background: #ffffff;
-    --color-link-color: #2baeeb;
+    --color-container-background: #ffffff;
+    --color-selected: #2686f5;
     --color-input-focus: rgba(85, 215, 247, 0.205);
     --color-header-element: #f3f3f3;
     --color-mark-container: #75c1ff;
@@ -106,7 +106,7 @@ input[type="file"] {
 /* CLASSES */
 
 .container {
-    width: 60%;
+    width: 100%;
     margin: 5% auto;
     text-align: center;
 }
@@ -119,7 +119,7 @@ input[type="file"] {
 .form-container {
     border-radius: 10px;
     width: 300px;
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     text-align: center;
     margin: 15% auto;
     padding: 30px;
@@ -127,17 +127,15 @@ input[type="file"] {
     border: 0px solid #c7c7c7;
     box-shadow: 4px 4px 15px var(--color-shadow),
     -4px 4px 15px var(--color-shadow);
-    opacity: 0;
 }
 
 .marks-block {
-    width: 70%;
+    width: 42.7%;
     border-radius: 15px;
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     margin: 2% auto;
     margin-bottom: 20px;
     padding: 20px;
-    opacity: 0;
 }
 
 .marks-container {
@@ -169,8 +167,68 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.marks-row-container {
+.blocks-container {
     display: flex;
+    margin: 3% auto;
+}
+
+.days-container {
+    width: 60%;
+    border-radius: 20px;
+    background-color: var(--color-container-background);
+    padding: 10px;
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+.day-container {
+    margin: 8px;
+    text-align: center;
+    font-family: "Roboto";
+    /* font-weight: bold; */
+    font-size: 20px;
+    width: 14%;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.day-container-selected {
+    border-radius: 20px;
+    box-shadow: 2px 2px 7px var(--color-shadow),
+    -2px 2px 7px var(--color-shadow);
+    color: var(--color-selected);
+}
+
+.subjects-container {
+    width: 60%;
+    text-align: center;
+    margin: 2% auto;
+}
+
+.subject-container {
+    border-radius: 20px;
+    background-color: var(--color-container-background);
+    text-align: left;
+    display: flex;
+    margin: 2% auto;
+}
+
+.subject-info {
+    margin: 3%;
+    font-family: "Roboto";
+    font-size: 20px;
+}
+
+.subject-container::before {
+    width: 8px;
+    height: 56px;
+    position: absolute;
+    content: "";
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    background-color: rgb(232, 232, 239);
+    margin-right: 3%;
+    margin-top: 1.5%;
 }
 
 .mark {
@@ -178,11 +236,10 @@ input[type="file"] {
 }
 
 .main-title {
-    font-family: "Roboto";
+    font-family: "Raleway";
     font-size: 50px;
     text-align: center;
-    margin: 2%;
-    opacity: 0;
+    margin: 1.5%;
 }
 
 .marks-container__title {
@@ -214,7 +271,7 @@ input[type="file"] {
 }
 
 .button1:hover {
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     border: 1px solid var(--color-dark-gray);
     color: var(--color-dark-gray);
     /* box-shadow: 7px 5px 20px var(--color-shadow),
@@ -238,7 +295,7 @@ input[type="file"] {
     font-family: "Roboto";
     font-size: 15px;
     padding: 10px;
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     transition: 0.5s;
 }
 
@@ -252,13 +309,12 @@ input[type="file"] {
     font-size: 15px;
     cursor: pointer;
     transition: 0.5s;
-    animation-delay: 0.3s;
     text-decoration: none;
     color: var(--color-gray);
 }
 
 .to-registr:hover, .header__element:hover{
-    color: var(--color-link-color);
+    color: var(--color-selected);
 }
 
 .header {
@@ -266,12 +322,11 @@ input[type="file"] {
     display: flex;
     padding: 10px;
     background-color: var(--color-header-background);
-    background: linear-gradient(-90deg, #cc309d, #7527ce);
+    background: var(--color-header-background);
     position: fixed;
     top: 0;
     transition: 0.5s;
     z-index: 98;
-    box-shadow: 0px 10px 20px var(--color-shadow);
 }
 
 .header-elements-container {
@@ -299,10 +354,9 @@ input[type="file"] {
     width: 50%;
     margin: 2% auto;
     border-radius: 10px;
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     border: 0px solid #c7c7c7;
     padding: 40px;
-    opacity: 0;
 }
 
 .avatar {
@@ -320,13 +374,13 @@ input[type="file"] {
 }
 
 .file-input:hover {
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     border: 1px solid var(--color-dark-gray);
     color: var(--color-dark-gray);
 }
 
 .img-form-container {
-    background-color: var(--color-form-background);
+    background-color: var(--color-container-background);
     border: 0px;
     width: 250px;
     margin: 10px;
@@ -340,13 +394,13 @@ input[type="file"] {
     transition-timing-function: linear;
     animation-fill-mode: forwards;
     animation-delay: 0.3s;
+    opacity: 0;
 }
 
 .footer {
     width: 50%;
     text-align: center;
     margin: 0 auto;
-    opacity: 0;
     border-top: 1px solid var(--color-gray);
     padding: 6px;
 }
@@ -362,13 +416,7 @@ input[type="file"] {
     color: var(--color-dark-gray);
     overflow-wrap: break-word;
     animation-name: appearence;
-    opacity: 0;
     text-align: left;
-}
-
-.blocks-container {
-    display: flex;
-    margin: 3% auto;
 }
 
 /* IDs */
@@ -402,7 +450,6 @@ input[type="file"] {
     font-size: 50px;
     color: var(--color-gray);
     font-family: "Roboto";
-    opacity: 0;
     margin-top: 5%;
 }
 

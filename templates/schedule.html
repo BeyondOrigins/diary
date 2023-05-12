@@ -1,7 +1,43 @@
 {% extends "index.html" %}
 {% block body %}
-	
+	<div class="container">
+        <div class="main-title animated">Расписание</div>
+        <div class="days-container animated">
+            <div class="day-container day-container-selected">Пн</div>
+            <div class="day-container">Вт</div>
+            <div class="day-container">Ср</div>
+            <div class="day-container">Чт</div>
+            <div class="day-container">Пт</div>
+            <div class="day-container">Сб</div>
+            <div class="day-container">Вс</div>
+        </div>
+        <div class="subjects-container animated">
+            <div class="subject-container animated">
+                <div class="subject-info">
+                    Физика
+                </div>
+            </div>
+            <div class="subject-container animated">
+                <div class="subject-info">
+                    Информатика
+                </div>
+            </div>
+            <div class="subject-container animated">
+                <div class="subject-info">
+                    Математика
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block header %}
-
+    <a href="/" class="header__element">
+        <div>На главную</div>
+    </a>
+    <a href="/schedule" class="header__element">
+        <div>Расписание</div>
+    </a>
+    <a href="/profile" class="header__element">
+        <div>{{ session["name"] }}</div>
+    </a>
 {% endblock %}

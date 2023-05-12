@@ -184,6 +184,11 @@ def my_marks():
 
     return render_template("my_marks.html", marks=marks)
 
+@app.route("/schedule")
+@login_required
+def schedule():
+    return render_template("schedule.html")
+
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
     return redirect("/auth")
