@@ -199,8 +199,6 @@ def schedule(week, day):
         grade=Users.query.get(session["_user_id"]).grade
     ).all()
 
-    print(lessons_query)
-
     lessons = [[] for i in range(len(lessons_query))]
 
     for lesson in lessons_query:
