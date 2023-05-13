@@ -4,17 +4,17 @@
         <div>На главную</div>
     </a>
     {% if user.user_type=="teacher" %}
-        <a href="/edit_schedule" class="header__element">
+        <a href="/schedule" class="header__element">
             <div>Изменить расписание</div>
         </a>
-        <a href="/edit_marks" class="header__element">
-            <div>Выставить оценки</div>
+        <a href="/pupils" class="header__element">
+            <div>Мои ученики</div>
         </a>
     {% else %}
         <a href="/schedule" class="header__element">
             <div>Расписание</div>
         </a>
-        <a href="/my_marks" class="header__element">
+        <a href="/marks" class="header__element">
             <div>Мои оценки</div>
         </a>
     {% endif %}

@@ -74,7 +74,8 @@
     --color-selected: #2686f5;
     --color-input-focus: rgba(85, 215, 247, 0.205);
     --color-header-element: #f3f3f3;
-    --color-mark-container: #75c1ff;
+    --color-mark-container-border: #75c1ff;
+    --color-pupil-container-border: #a8a3a3;
 }
 
 /* TAGS */
@@ -135,7 +136,7 @@ input[type="file"] {
 }
 
 .mark-container {
-    border: 1px solid var(--color-mark-container);
+    border: 1px solid var(--color-mark-container-border);
     background-color: var(--color-white);
     height: 61px;
     width: 61px;
@@ -231,6 +232,52 @@ input[type="file"] {
     text-align: center;
 }
 
+.pupils-container {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    background-color: var(--color-container-background);
+    border-radius: 10px;
+    margin: 2% auto;
+    overflow: auto;
+}
+
+.pupil-container {
+    margin: 10px;
+    overflow: auto;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-pupil-container-border);
+    display: inline-grid;
+}
+
+.profile-container {
+    display: flex;
+    width: 50%;
+    margin: 2% auto;
+    border-radius: 10px;
+    background-color: var(--color-container-background);
+    border: 0px solid #c7c7c7;
+    padding: 40px;
+    overflow: auto;
+}
+
+.header-elements-container {
+    display: flex;
+}
+
+.img-form-container {
+    background-color: var(--color-container-background);
+    border: 0px;
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: none;
+}
+
 .marks-block {
     width: 42.7%;
     border-radius: 15px;
@@ -269,6 +316,21 @@ input[type="file"] {
     font-size: 25px;
     font-family: "Raleway", sans-serif;
     font-weight: bold;
+}
+
+.pupil-name {
+    font-family: "Roboto";
+    font-size: 18px;
+    text-align: left;
+    margin: 6px;
+}
+
+.pupil-info {
+    font-family: "Roboto";
+    font-size: 16px;
+    color: var(--color-gray);
+    text-align: left;
+    margin: 6px;
 }
 
 .day-title {
@@ -354,10 +416,6 @@ input[type="file"] {
     z-index: 98;
 }
 
-.header-elements-container {
-    display: flex;
-}
-
 .header__element {
     color: var(--color-header-element);
     font-family: "Raleway";
@@ -373,17 +431,6 @@ input[type="file"] {
 .form__checkbox {
     border-radius: 10px;
     transition: .2s;
-}
-
-.profile-container {
-    display: flex;
-    width: 50%;
-    margin: 2% auto;
-    border-radius: 10px;
-    background-color: var(--color-container-background);
-    border: 0px solid #c7c7c7;
-    padding: 40px;
-    overflow: auto;
 }
 
 .avatar {
@@ -404,16 +451,6 @@ input[type="file"] {
     background-color: var(--color-container-background);
     border: 1px solid var(--color-dark-gray);
     color: var(--color-dark-gray);
-}
-
-.img-form-container {
-    background-color: var(--color-container-background);
-    border: 0px;
-    width: 250px;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: none;
 }
 
 .animated {
@@ -452,7 +489,7 @@ input[type="file"] {
     margin-top: 10px;
 }
 
-.grade-select {
+.select {
     padding: 5px;
     border-color: var(--color-gray);
     border-radius: 5px;

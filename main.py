@@ -11,6 +11,8 @@ from db import db_init, db
 from models import Users, Marks, Img, Lessons
 from config import *
 from flask_mail import Message, Mail
+from functools import wraps
+from statistics import mean
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -26,6 +28,21 @@ app.config["MAIL_USERNAME"] = "dima.a.ivlev@gmail.com"
 app.config["MAIL_DEFAULT_SENDER"] = "dima.a.ivlev@gmail.com"
 app.config["MAIL_PASSWORD"] = APP_PASSWORD
 
+def teacher_only(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = get_user()
+        if user.user_type != "teacher":
+            return render_template(
+                "error.html",
+                error="Эта страница доступна только учителям!"
+            )
+        return f(*args, **kwargs)
+    return decorated_function
+
+def get_user():
+    return Users.query.get(session["_user_id"])
+
 db_init(app)
 
 @login_manager.user_loader
@@ -37,10 +54,8 @@ def load_user(user_id):
 def main_page():
     welcoming_text = ""
     try:
-        user = Users.query.get(session['_user_id'])
+        user = get_user()
         welcoming_text = f", {user.first_name + ' ' + user.middle_name}"
-        session["user_type"] = user.user_type
-        session["name"] = f"{user.first_name} {user.middle_name}"
     except:
         pass
     return render_template("main_page.html", welcoming_text=welcoming_text)
@@ -63,8 +78,18 @@ def authenticate():
             return render_template("register.html", error="Эта почта уже используется")
         try:
             user_type = request.form["user_type"]
+            subject = request.form["subject"]
+            teachers = Users.query.filter_by(
+                user_type="teacher",
+                grade=grade
+            ).all()
+            if len(teachers) != 0:
+                return render_template(
+                    "register.html",
+                    error="У этого класса уже есть классный руководитель")
         except:
             user_type = "pupil"
+            subject = ""
         user = Users(
             mail=mail,
             first_name=first_name,
@@ -73,7 +98,8 @@ def authenticate():
             password=generate_password_hash(password),
             user_type=user_type,
             img_id=0,
-            grade=grade
+            grade=grade,
+            subject=subject
         )
         db.session.add(user)
         db.session.commit()
@@ -86,7 +112,7 @@ def authenticate():
             Здравствуйте, {user.first_name} {user.middle_name}
             Вы успешно создали аккаунт на нашем сайте.
         """
-        email.send(msg)
+        # email.send(msg)
         return redirect("/auth")
     return render_template("register.html")
 
@@ -107,6 +133,10 @@ def auth():
                 return render_template("auth.html", error="Неверный пароль")
             user_login = UserLogin().create(user)
             login_user(user_login)
+            session["name"] = f"{user.first_name} {user.middle_name}"
+            session["grade"] = user.grade
+            session["subject"] = user.subject
+            session["user_type"] = user.user_type
             return redirect("/profile")
         else:
             return render_template("auth.html", error="Не найдено пользователя с такой почтой")
@@ -115,7 +145,7 @@ def auth():
 @app.route("/profile")
 @login_required
 def profile():
-    user = Users.query.get(session["_user_id"])
+    user = get_user()
     path = f"/get_img/{user.img_id}"
     if user.img_id == 0:
         path = DEFAULT_AVATAR_PATH
@@ -125,7 +155,7 @@ def profile():
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
-    user = Users.query.get(session["_user_id"])
+    user = get_user()
     path = f"/get_img/{user.img_id}"
     if user.img_id == 0:
         path = DEFAULT_AVATAR_PATH
@@ -169,10 +199,12 @@ def get_img(img_id):
         return "Фото не найдено"
     return Response(img.img, mimetype=img.mimetype)
 
-@app.route("/my_marks")
+@app.route("/marks")
 @login_required
 def my_marks():
-    user = Users.query.get(session["_user_id"])
+    user = get_user()
+    if user.user_type == "teacher":
+        return redirect("/pupils")
     marks_list = Marks.query.filter_by(user_id=user.user_id).all()
     marks = {}
     for mark in marks_list:
@@ -182,9 +214,30 @@ def my_marks():
             marks[mark.subject] = []
             marks[mark.subject].append(mark.mark)
 
-    session["name"] = f"{user.first_name} {user.middle_name}"
+    return render_template("marks.html", marks=marks)
 
-    return render_template("my_marks.html", marks=marks)
+@app.route("/pupils")
+@login_required
+@teacher_only
+def pupils():
+    user = get_user()
+    pupils_list = Users.query.filter_by(
+            user_type="pupil"
+        )
+    pupils = {}
+    for pupil in pupils_list:
+        marks_list = Marks.query.filter_by(
+            user_id=pupil.user_id,
+            subject=user.subject).all()
+        marks = [mark.mark for mark in marks_list]
+        average = round(mean(marks), 2) if len(marks) != 0 else "Оценок нет"
+        try:
+            pupils[pupil.grade][pupil] = average
+        except:
+            pupils[pupil.grade] = {}
+            pupils[pupil.grade][pupil] = average
+
+    return render_template("pupils.html", pupils=pupils)
 
 @app.route("/schedule")
 @login_required
@@ -196,7 +249,7 @@ def redirect_to_schedule():
 def schedule(week, day):
     lessons_query = Lessons.query.filter_by(week_id=week,
         weekday=day,
-        grade=Users.query.get(session["_user_id"]).grade
+        grade=get_user().grade
     ).all()
 
     lessons = [[] for i in range(len(lessons_query))]
@@ -209,6 +262,40 @@ def schedule(week, day):
 
     return render_template("schedule.html", lessons=lessons,
     weekday=WEEKDAYS[day], week=week, day=day)
+
+@app.route("/my_class")
+@login_required
+@teacher_only
+def my_class():
+    user = get_user()
+    pupils_list = Users.query.filter_by(
+        grade=user.grade,
+        user_type="pupil"
+    )
+    pupils = {}
+    for pupil in pupils_list:
+        marks_list = Marks.query.filter_by(user_id=pupil.user_id).all()
+        marks = [mark.mark for mark in marks_list]
+        average = round(mean(marks), 2) if len(marks) != 0 else "Оценок нет"
+        pupils[pupil] = average
+
+    return render_template("my_class.html", pupils=pupils)
+
+@app.route("/marks/<int:user_id>")
+@login_required
+@teacher_only
+def marks(user_id):
+    marks_list = Marks.query.filter_by(user_id=user_id).all()
+    user = get_user()
+    marks = {}
+    for mark in marks_list:
+        try:
+            marks[mark.subject].append(mark.mark)
+        except:
+            marks[mark.subject] = []
+            marks[mark.subject].append(mark.mark)
+
+    return render_template("marks.html", marks=marks)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):

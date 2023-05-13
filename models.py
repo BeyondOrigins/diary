@@ -10,6 +10,7 @@ class Users(db.Model):
     user_type = db.Column(db.String, nullable=False)
     img_id = db.Column(db.Integer)
     grade = db.Column(db.String, nullable=False)
+    subject = db.Column(db.String)
 
 
 class Marks(db.Model):

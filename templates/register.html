@@ -37,7 +37,7 @@
                     <div class="grade-selection-container-list">
                         <div class="grade-selection-container">
                             <label for="grade-number">Номер класса</label>
-                            <select name="grade_number" id="grade-number" class="grade-select">
+                            <select name="grade_number" id="grade-number" class="select">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="grade-selection-container">
                             <label for="grade-letter">Буква класса</label>
-                            <select name="grade_letter" id="grade-select" class="grade-select">
+                            <select name="grade_letter" id="grade-select" class="select">
                                 <option value="А">А</option>
                                 <option value="Б">Б</option>
                                 <option value="В">В</option>
@@ -63,6 +63,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="form__element" id="subject-select" style="display: none;">
+                    <select name="subject" class="select">
+                        <option value="Алгебра">Алгебра</option>
+                        <option value="Английский язык">Английский язык</option>
+                        <option value="Биология">Биология</option>
+                        <option value="География">География</option>
+                        <option value="Геометрия">Геометрия</option>
+                        <option value="История">История</option>
+                        <option value="Литература">Литература</option>
+                        <option value="ОБЖ">ОБЖ</option>
+                        <option value="Обществознание">Обществознание</option>
+                        <option value="Русский язык">Русский язык</option>
+                        <option value="Теория Вероятностей и Статистика">Теория Вероятностей и Статистика</option>
+                        <option value="Физика">Физика</option>
+                        <option value="Физическая культура">Физическая культура</option>
+                        <option value="Химия">Химия</option>
+                    </select>
+                </div>
                 <div class="form__element">
                     <input type="submit" class="button1" value="Зарегестрироваться">
                 </div>
@@ -70,6 +88,17 @@
             <div id="error">{{error}}</div>
         </div>
     </div>
+    <script>
+        var checkbox = document.getElementsByName("user_type")[0];
+        checkbox.addEventListener("change", function() {
+            if (this.checked) {
+                document.getElementById("subject-select").style.display = "block";
+            }
+            else {
+                document.getElementById("subject-select").style.display = "none";
+            }
+        });
+    </script>
 {% endblock %}
 {% block header %}
     <a href="/" class="header__element">

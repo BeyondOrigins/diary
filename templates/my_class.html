@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container">
+        <div class="main-title animated">Мой класс "{{session["grade"]}}"</div>
+        {% if pupils|length == 0 %}
+            <div id="empty" class="animated">В вашем классе нет учеников!</div>
+        {% else %}
+            <div class="pupils-container animated">
+                {% for pupil, average in pupils.items() %}
+                    <div class="pupil-container">
+                        <div class="pupil-name">{{pupil.last_name}} {{pupil.first_name}}</div>
+                        <div class="pupil-info">Средний балл: {{average}}</div>
+                        <a href="/marks/{{pupil.user_id}}">
+                            <button class="button1">Просмотреть оценки</button>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block header %}
+    <a href="/" class="header__element">
+        <div>На главную</div>
+    </a>
+    <a href="/profile" class="header__element">
+        <div>{{ session["name"] }}</div>
+    </a>
+{% endblock %}

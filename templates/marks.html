@@ -24,9 +24,11 @@
     <a href="/" class="header__element">
         <div>На главную</div>
     </a>
-    <a href="/schedule" class="header__element">
-        <div>Расписание</div>
-    </a>
+    {% if session["user_type"] == "pupil" %}
+        <a href="/schedule" class="header__element">
+            <div>Расписание</div>
+        </a>
+    {% endif %}
     <a href="/profile" class="header__element">
         <div>{{ session["name"] }}</div>
     </a>
