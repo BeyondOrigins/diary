@@ -26,6 +26,11 @@ class Img(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
 
 
-class Schedule(db.Model):
+class Lessons(db.Model):
     lesson_id = db.Column(db.Integer, primary_key=True)
-    weekday_index = db.Column(db.Integer, nullable=False)
+    weekday = db.Column(db.String, nullable=False)
+    week_id = db.Column(db.Integer, nullable=False)
+    order_number = db.Column(db.Integer, nullable=False)
+    subject = db.Column(db.String, nullable=False)
+    grade = db.Column(db.String, nullable=False)
+    homework = db.Column(db.String)

@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 {% block body %}
-    <div class="container" style="margin: 1% auto;">
+    <div class="container" style="margin: 1% auto; width: 60%;">
         <div class="main-title animated" style="margin-top: 15%;">Добро пожаловать{{welcoming_text}}!</div>
         <div class="main-title animated" style="color: var(--color-dark-gray); margin-top: 5%;">На нашем сайте вы можете:</div>
         {% if not session["_user_id"] or (session["_user_id"] and session["user_type"] == "pupil") %}

@@ -107,7 +107,7 @@ input[type="file"] {
 
 .container {
     width: 100%;
-    margin: 5% auto;
+    margin: 100px auto;
     text-align: center;
 }
 
@@ -177,7 +177,8 @@ input[type="file"] {
     border-radius: 20px;
     background-color: var(--color-container-background);
     padding: 10px;
-    display: inline-flex;
+    display: flex;
+    overflow: auto;
     margin: 0 auto;
 }
 
@@ -211,10 +212,13 @@ input[type="file"] {
     text-align: left;
     display: flex;
     margin: 2% auto;
+    min-height: 100px;
+    overflow: auto;
 }
 
 .subject-info {
-    margin: 3%;
+    margin: 30px;
+    margin-left: 40px;
     font-family: "Roboto";
     font-size: 20px;
 }
@@ -227,8 +231,8 @@ input[type="file"] {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     background-color: rgb(232, 232, 239);
-    margin-right: 3%;
-    margin-top: 1.5%;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .mark {
@@ -239,7 +243,7 @@ input[type="file"] {
     font-family: "Raleway";
     font-size: 50px;
     text-align: center;
-    margin: 1.5%;
+    margin: 40px;
 }
 
 .marks-container__title {
@@ -247,6 +251,21 @@ input[type="file"] {
     font-family: "Roboto";
     text-align: left;
     margin-bottom: 20px;
+}
+
+.form-title {
+    font-size: 25px;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+}
+
+.day-title {
+    font-family: "Roboto";
+    color: #5a5959;
+    font-size: 24px;
+    text-align: left;
+    margin: 30px auto;
+    width: 57%;
 }
 
 .form__element {
@@ -278,12 +297,6 @@ input[type="file"] {
     0px 5px 20px var(--color-shadow),
     -7px 5px 20px var(--color-shadow);
     transform: translateY(-3px); */
-}
-
-.form-title {
-    font-size: 25px;
-    font-family: "Raleway", sans-serif;
-    font-weight: bold;
 }
 
 .form__input {
@@ -357,6 +370,7 @@ input[type="file"] {
     background-color: var(--color-container-background);
     border: 0px solid #c7c7c7;
     padding: 40px;
+    overflow: auto;
 }
 
 .avatar {
@@ -417,6 +431,12 @@ input[type="file"] {
     overflow-wrap: break-word;
     animation-name: appearence;
     text-align: left;
+}
+
+.lesson-homework {
+    font-size: 16px;
+    color: #c7c7c7;
+    margin-top: 10px;
 }
 
 /* IDs */
@@ -508,3 +528,12 @@ input[type="file"] {
     color: var(--color-dark-gray);
     margin-top: 7%;
 }
+
+#to-prev-day, #to-next-day {
+    font-family: "Raleway";
+    font-weight: bold;
+    font-size: 22px;
+    margin: auto 2%;
+    cursor: pointer;
+}
+

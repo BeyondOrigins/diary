@@ -96,6 +96,9 @@ window.onscroll = function() {
     prevScrollpos = currentScrollPos;
 }
 
-document.getElementById("edit-button").onclick = function() {
-    location.href = "/edit_profile";
+try {
+    document.getElementById("edit-button").onclick = function() {
+        location.href = "/edit_profile";
+    }
 }
+catch { }

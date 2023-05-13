@@ -3,39 +3,67 @@
 	<div class="container">
         <div class="main-title animated">Расписание</div>
         <div class="days-container animated">
-            <div class="day-container day-container-selected">Пн</div>
+            <div id="to-prev-day"> < </div>
+            <div class="day-container day-container-selected" onclick="changeDay(this)">Пн</div>
             <div class="day-container">Вт</div>
             <div class="day-container">Ср</div>
             <div class="day-container">Чт</div>
             <div class="day-container">Пт</div>
             <div class="day-container">Сб</div>
             <div class="day-container">Вс</div>
+            <div id="to-next-day"> > </div>
         </div>
+        <div class="day-title animated">Понедельник</div>
         <div class="subjects-container animated">
             <div class="subject-container animated">
                 <div class="subject-info">
-                    Физика
+                    <div>Физика</div>
+                    <div class="lesson-homework">Домашнего задания нет</div>
                 </div>
             </div>
             <div class="subject-container animated">
                 <div class="subject-info">
-                    Информатика
+                    <div>Информатика</div>
+                    <div class="lesson-homework">Домашнего задания нет</div>
                 </div>
             </div>
             <div class="subject-container animated">
                 <div class="subject-info">
-                    Математика
+                    <div>Математика</div>
+                    <div class="lesson-homework">Домашнего задания нет</div>
+                </div>
+            </div>
+            <div class="subject-container animated">
+                <div class="subject-info">
+                    <div>Русский язык</div>
+                    <div class="lesson-homework">Домашнего задания нет</div>
+                </div>
+            </div>
+            <div class="subject-container animated">
+                <div class="subject-info">
+                    <div>Английский язык</div>
+                    <div class="lesson-homework">Домашнего задания нет</div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById("to-prev-day").onclick = function() {
+            // location.href = "/schedule/{{week_index}}/{{day_index}}";
+            location.href = "/schedule";
+        }
+        document.getElementById("to-next-day").onclick = function() {
+            // location.href = "/schedule/{{week_index}}/{{day_index}}";
+            location.href = "/schedule";
+        }
+    </script>
 {% endblock %}
 {% block header %}
     <a href="/" class="header__element">
         <div>На главную</div>
     </a>
-    <a href="/schedule" class="header__element">
-        <div>Расписание</div>
+    <a href="/my_marks" class="header__element">
+        <div>Мои оценки</div>
     </a>
     <a href="/profile" class="header__element">
         <div>{{ session["name"] }}</div>

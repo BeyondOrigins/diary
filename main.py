@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 from db import db_init, db
-from models import Users, Marks, Img
+from models import Users, Marks, Img, Lessons
 from config import *
 from flask_mail import Message, Mail
 
@@ -24,7 +24,7 @@ app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 app.config["MAIL_USERNAME"] = "dima.a.ivlev@gmail.com"
 app.config["MAIL_DEFAULT_SENDER"] = "dima.a.ivlev@gmail.com"
-app.config["MAIL_PASSWORD"] = "ldoncgpxtfdirahu"
+app.config["MAIL_PASSWORD"] = APP_PASSWORD
 
 db_init(app)
 

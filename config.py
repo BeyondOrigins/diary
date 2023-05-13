@@ -15,3 +15,4 @@ SUBJECTS = [
     "Обществознание",
     "История"
 ]
+APP_PASSWORD = "qtlbrizlzynyxgll"
