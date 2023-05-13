@@ -3,59 +3,67 @@
 	<div class="container">
         <div class="main-title animated">Расписание</div>
         <div class="days-container animated">
-            <div id="to-prev-day"> < </div>
-            <div class="day-container day-container-selected" onclick="changeDay(this)">Пн</div>
+            {% if week == 0 and day == 0 %}
+                <div class="switch-day unavailable"> < </div>
+            {% else %}
+                <div id="to-prev-day" class="switch-day"> < </div>
+            {% endif %}
+            <div class="day-container">Пн</div>
             <div class="day-container">Вт</div>
             <div class="day-container">Ср</div>
             <div class="day-container">Чт</div>
             <div class="day-container">Пт</div>
             <div class="day-container">Сб</div>
             <div class="day-container">Вс</div>
-            <div id="to-next-day"> > </div>
+            <div class="switch-day" id="to-next-day"> > </div>
         </div>
-        <div class="day-title animated">Понедельник</div>
+        <div class="day-title animated">{{weekday}}</div>
         <div class="subjects-container animated">
-            <div class="subject-container animated">
-                <div class="subject-info">
-                    <div>Физика</div>
-                    <div class="lesson-homework">Домашнего задания нет</div>
-                </div>
-            </div>
-            <div class="subject-container animated">
-                <div class="subject-info">
-                    <div>Информатика</div>
-                    <div class="lesson-homework">Домашнего задания нет</div>
-                </div>
-            </div>
-            <div class="subject-container animated">
-                <div class="subject-info">
-                    <div>Математика</div>
-                    <div class="lesson-homework">Домашнего задания нет</div>
-                </div>
-            </div>
-            <div class="subject-container animated">
-                <div class="subject-info">
-                    <div>Русский язык</div>
-                    <div class="lesson-homework">Домашнего задания нет</div>
-                </div>
-            </div>
-            <div class="subject-container animated">
-                <div class="subject-info">
-                    <div>Английский язык</div>
-                    <div class="lesson-homework">Домашнего задания нет</div>
-                </div>
-            </div>
+            {% if lessons|length != 0 %}
+                {% for lesson in lessons %}
+                    <div class="subject-container animated">
+                        <div class="subject-info">
+                            <div>{{lesson["subject"]}}</div>
+                            {% if lesson["homework"] != "" %}
+                                <div class="lesson-homework">{{lesson["homework"]}}</div>
+                            {% else %}
+                                <div class="lesson-homework">Домашнего задания нет</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div id="empty" class="animated">Сегодня уроков нет!</div>
+            {% endif %}
         </div>
     </div>
     <script>
-        document.getElementById("to-prev-day").onclick = function() {
-            // location.href = "/schedule/{{week_index}}/{{day_index}}";
-            location.href = "/schedule";
-        }
-        document.getElementById("to-next-day").onclick = function() {
-            // location.href = "/schedule/{{week_index}}/{{day_index}}";
-            location.href = "/schedule";
-        }
+        var week = Number("{{week}}");
+        console.log(week);
+        var day = Number("{{day}}");
+        document.getElementsByClassName("day-container")[day].classList.add("day-container-selected");
+        try {
+            document.getElementById("to-prev-day").onclick = function() {
+                if (day == 0) {
+                    location.href = "/schedule/{{week - 1}}/6";
+                }
+                else {
+                    location.href = "/schedule/{{week}}/{{day - 1}}";
+                }
+            }
+        } catch {}
+        
+        try {
+            document.getElementById("to-next-day").onclick = function() {
+                if (day == 6) {
+                    location.href = "/schedule/{{week + 1}}/0";
+                }
+                else {
+                    location.href = "/schedule/{{week}}/{{day + 1}}";
+                }
+            }
+        } catch {}
+        
     </script>
 {% endblock %}
 {% block header %}

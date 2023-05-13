@@ -9,6 +9,7 @@ class Users(db.Model):
     password = db.Column(db.String, nullable=False)
     user_type = db.Column(db.String, nullable=False)
     img_id = db.Column(db.Integer)
+    grade = db.Column(db.String, nullable=False)
 
 
 class Marks(db.Model):
@@ -28,7 +29,8 @@ class Img(db.Model):
 
 class Lessons(db.Model):
     lesson_id = db.Column(db.Integer, primary_key=True)
-    weekday = db.Column(db.String, nullable=False)
+    # time = db.Column(db.Integer, nullable=False)
+    weekday = db.Column(db.Integer, nullable=False)
     week_id = db.Column(db.Integer, nullable=False)
     order_number = db.Column(db.Integer, nullable=False)
     subject = db.Column(db.String, nullable=False)

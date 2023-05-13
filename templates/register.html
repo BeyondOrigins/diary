@@ -6,7 +6,7 @@
         }
     </style>
     <div class="container">
-        <div class="form-container animated">
+        <div class="form-container animated" id="reg-form">
             <div class="form-title">Регистрация</div>
             <form method="POST" onsubmit="return onRegistration(this)">
                 <div class="form__element">
@@ -28,8 +28,40 @@
                     <input type="password" class="form__input" oninput="checkPassword()" placeholder="Введите пароль повторно" name="password_repeat">
                 </div>
                 <div class="form__element">
-                    <input type="checkbox" class="form__checkbox" value="teacher" id="checkbox" name="user_type">
-                    <label for="checkbox">Я учитель</label>
+                    <label>
+                        <input type="checkbox" class="form__checkbox" value="teacher" id="checkbox" name="user_type">
+                        <span>Я учитель</span>
+                    </label>
+                </div>
+                <div class="form__element">
+                    <div class="grade-selection-container-list">
+                        <div class="grade-selection-container">
+                            <label for="grade-number">Номер класса</label>
+                            <select name="grade_number" id="grade-number" class="grade-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select>
+                        </div>
+                        <div class="grade-selection-container">
+                            <label for="grade-letter">Буква класса</label>
+                            <select name="grade_letter" id="grade-select" class="grade-select">
+                                <option value="А">А</option>
+                                <option value="Б">Б</option>
+                                <option value="В">В</option>
+                                <option value="Л">Л</option>
+                                <option value="М">М</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="form__element">
                     <input type="submit" class="button1" value="Зарегестрироваться">

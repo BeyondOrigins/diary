@@ -58,6 +58,7 @@ def authenticate():
         first_name = request.form["first_name"]
         middle_name = request.form["middle_name"]
         last_name = request.form["last_name"]
+        grade = request.form["grade_number"] + request.form["grade_letter"]
         if len(Users.query.filter_by(mail=mail).all()) != 0:
             return render_template("register.html", error="Эта почта уже используется")
         try:
@@ -71,7 +72,8 @@ def authenticate():
             last_name=last_name,
             password=generate_password_hash(password),
             user_type=user_type,
-            img_id=0
+            img_id=0,
+            grade=grade
         )
         db.session.add(user)
         db.session.commit()
@@ -186,8 +188,29 @@ def my_marks():
 
 @app.route("/schedule")
 @login_required
-def schedule():
-    return render_template("schedule.html")
+def redirect_to_schedule():
+    return redirect("/schedule/0/0")
+
+@app.route("/schedule/<int:week>/<int:day>")
+@login_required
+def schedule(week, day):
+    lessons_query = Lessons.query.filter_by(week_id=week,
+        weekday=day,
+        grade=Users.query.get(session["_user_id"]).grade
+    ).all()
+
+    print(lessons_query)
+
+    lessons = [[] for i in range(len(lessons_query))]
+
+    for lesson in lessons_query:
+        lessons[lesson.order_number] = {
+            "subject" : lesson.subject,
+            "homework" : lesson.homework
+        }
+
+    return render_template("schedule.html", lessons=lessons,
+    weekday=WEEKDAYS[day], week=week, day=day)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):

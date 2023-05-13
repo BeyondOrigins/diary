@@ -41,16 +41,16 @@ function onRegistration(form) {
 
     var fail = "";
 
-    if (first_name == "" || middle_name == "" || last_name == "" || mail == "" || password == "") {
-        fail = "Заполните все поля";
-    }
-
     if (password.length > 30 || password.length < 8) {
         fail = "Пароль должен быть от 8 до 30 символов";
     }
 
     if (password != password_repeat) {
         fail = "Пароли должны совпадать";
+    }
+
+    if (first_name == "" || middle_name == "" || last_name == "" || mail == "" || password == "") {
+        fail = "Заполните все поля";
     }
 
     if (fail != "") {

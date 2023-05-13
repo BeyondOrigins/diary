@@ -121,21 +121,12 @@ input[type="file"] {
     width: 300px;
     background-color: var(--color-container-background);
     text-align: center;
-    margin: 15% auto;
+    margin: 210px auto;
     padding: 30px;
     padding-top: 60px;
     border: 0px solid #c7c7c7;
     box-shadow: 4px 4px 15px var(--color-shadow),
     -4px 4px 15px var(--color-shadow);
-}
-
-.marks-block {
-    width: 42.7%;
-    border-radius: 15px;
-    background-color: var(--color-container-background);
-    margin: 2% auto;
-    margin-bottom: 20px;
-    padding: 20px;
 }
 
 .marks-container {
@@ -186,10 +177,8 @@ input[type="file"] {
     margin: 8px;
     text-align: center;
     font-family: "Roboto";
-    /* font-weight: bold; */
     font-size: 20px;
     width: 14%;
-    cursor: pointer;
     padding: 10px;
 }
 
@@ -216,13 +205,6 @@ input[type="file"] {
     overflow: auto;
 }
 
-.subject-info {
-    margin: 30px;
-    margin-left: 40px;
-    font-family: "Roboto";
-    font-size: 20px;
-}
-
 .subject-container::before {
     width: 8px;
     height: 56px;
@@ -233,6 +215,36 @@ input[type="file"] {
     background-color: rgb(232, 232, 239);
     margin-right: 20px;
     margin-top: 20px;
+}
+
+.grade-selection-container-list {
+    width: 100%;
+    padding: 3px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.grade-selection-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    text-align: center;
+}
+
+.marks-block {
+    width: 42.7%;
+    border-radius: 15px;
+    background-color: var(--color-container-background);
+    margin: 2% auto;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.subject-info {
+    margin: 30px;
+    margin-left: 40px;
+    font-family: "Roboto";
+    font-size: 20px;
 }
 
 .mark {
@@ -359,7 +371,8 @@ input[type="file"] {
 }
 
 .form__checkbox {
-    transition: 0.5s;
+    border-radius: 10px;
+    transition: .2s;
 }
 
 .profile-container {
@@ -439,13 +452,33 @@ input[type="file"] {
     margin-top: 10px;
 }
 
+.grade-select {
+    padding: 5px;
+    border-color: var(--color-gray);
+    border-radius: 5px;
+    outline: none;
+    margin-left: 10px;
+}
+
+.unavailable {
+    opacity: 0.3;
+    cursor: auto;
+}
+
+.switch-day {
+    font-family: "Raleway";
+    font-weight: bold;
+    font-size: 22px;
+    margin: auto 2%;
+    cursor: pointer;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
     font-size: 14px;
     font-family: "Roboto";
     height: 15px;
-    margin: 15px;
     margin-bottom: 50px;
 }
 
@@ -466,7 +499,7 @@ input[type="file"] {
     display: inline-grid;
 }
 
-#no-marks {
+#empty {
     font-size: 50px;
     color: var(--color-gray);
     font-family: "Roboto";
@@ -529,11 +562,6 @@ input[type="file"] {
     margin-top: 7%;
 }
 
-#to-prev-day, #to-next-day {
-    font-family: "Raleway";
-    font-weight: bold;
-    font-size: 22px;
-    margin: auto 2%;
-    cursor: pointer;
+#reg-form {
+    margin-top: 150px;
 }
-
