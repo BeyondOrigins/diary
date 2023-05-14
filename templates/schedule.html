@@ -18,6 +18,13 @@
             <div class="switch-day" id="to-next-day"> > </div>
         </div>
         <div class="day-title animated">{{weekday}}</div>
+        {% if session["user_type"] == "teacher" %}
+            <div style="text-align: left; width: 57%; margin: auto;">
+                <a href="/edit_schedule/{{week}}/{{day}}">
+                    <button class="button1 animated">Изменить расписание</button>
+                </a>
+            </div>
+        {% endif %}
         <div class="subjects-container animated">
             {% if lessons|length != 0 %}
                 {% for lesson in lessons %}
@@ -70,9 +77,15 @@
     <a href="/" class="header__element">
         <div>На главную</div>
     </a>
-    <a href="/marks" class="header__element">
-        <div>Мои оценки</div>
-    </a>
+    {% if session["user_type"] == "pupil" %}
+        <a href="/marks" class="header__element">
+            <div>Мои оценки</div>
+        </a>
+    {% else %}
+        <a href="/my_class" class="header__element">
+            <div>Мой класс</div>
+        </a>
+    {% endif %}
     <a href="/profile" class="header__element">
         <div>{{ session["name"] }}</div>
     </a>

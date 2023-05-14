@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block body %}
     <div class="container">
-        <div class="main-title animated">Мои оценки</div>
+        <div class="main-title animated">{{title}}</div>
         {% if marks|length == 0 %}
             <div id="empty" class="animated">У вас пока что нет оценок :(</div>
         {% else %}

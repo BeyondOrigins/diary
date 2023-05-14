@@ -40,6 +40,18 @@ def teacher_only(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def pupil_only(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = get_user()
+        if user.user_type != "pupil":
+            return render_template(
+                "error.html",
+                error="Эта страница доступна только ученикам!"
+            )
+        return f(*args, **kwargs)
+    return decorated_function
+
 def get_user():
     return Users.query.get(session["_user_id"])
 
@@ -214,7 +226,8 @@ def my_marks():
             marks[mark.subject] = []
             marks[mark.subject].append(mark.mark)
 
-    return render_template("marks.html", marks=marks)
+    title = "Мои оценки"
+    return render_template("marks.html", marks=marks, title=title)
 
 @app.route("/pupils")
 @login_required
@@ -263,6 +276,28 @@ def schedule(week, day):
     return render_template("schedule.html", lessons=lessons,
     weekday=WEEKDAYS[day], week=week, day=day)
 
+@app.route("/edit_schedule/<int:week>/<int:day>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def edit_schedule(week, day):
+    if request.method == "POST":
+        pass
+
+    lessons_query = Lessons.query.filter_by(week_id=week,
+        weekday=day,
+        grade=get_user().grade
+    ).all()
+
+    lessons = [[] for i in range(len(lessons_query))]
+
+    for lesson in lessons_query:
+        lessons[lesson.order_number] = {
+            "subject" : lesson.subject,
+            "homework" : lesson.homework
+        }
+    
+    return render_template("edit_schedule.html", lessons=lessons)
+
 @app.route("/my_class")
 @login_required
 @teacher_only
@@ -286,7 +321,7 @@ def my_class():
 @teacher_only
 def marks(user_id):
     marks_list = Marks.query.filter_by(user_id=user_id).all()
-    user = get_user()
+    user = Users.query.get(user_id)
     marks = {}
     for mark in marks_list:
         try:
@@ -295,7 +330,8 @@ def marks(user_id):
             marks[mark.subject] = []
             marks[mark.subject].append(mark.mark)
 
-    return render_template("marks.html", marks=marks)
+    title = f"{user.last_name} {user.first_name} {user.middle_name}"
+    return render_template("marks.html", marks=marks, title=title)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):

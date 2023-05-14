@@ -55,6 +55,16 @@
                         <label>Почта</label>
                         <label class="label">{{user.mail}}</label>
                     </div>
+                    <div class="form__element">
+                        <label>Класс</label>
+                        <label class="label">{{user.grade}}</label>
+                    </div>
+                    {% if session["user_type"] == "teacher" %}
+                        <div class="form__element">
+                            <label>Предмет преподавания</label>
+                            <label class="label">{{user.subject}}</label>
+                        </div>
+                    {% endif %}
                     <button id="edit-button" class="button1">Изменить данные</button>
                 </div>
             </div>

@@ -218,17 +218,17 @@ input[type="file"] {
     margin-top: 20px;
 }
 
-.grade-selection-container-list {
+.selection-container-list {
     width: 100%;
     padding: 3px;
     margin: 0 auto;
     text-align: center;
 }
 
-.grade-selection-container {
+.selection-container {
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 10px;
+    padding: 5px;
     text-align: center;
 }
 
@@ -494,7 +494,8 @@ input[type="file"] {
     border-color: var(--color-gray);
     border-radius: 5px;
     outline: none;
-    margin-left: 10px;
+    margin: auto;
+    max-width: 200px;
 }
 
 .unavailable {
@@ -601,4 +602,12 @@ input[type="file"] {
 
 #reg-form {
     margin-top: 150px;
+}
+
+#grade-number, #grade-letter {
+    margin-left: 10px;
+}
+
+#subject-select {
+    margin-top: 10px;
 }

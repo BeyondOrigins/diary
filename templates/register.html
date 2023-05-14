@@ -34,8 +34,8 @@
                     </label>
                 </div>
                 <div class="form__element">
-                    <div class="grade-selection-container-list">
-                        <div class="grade-selection-container">
+                    <div class="selection-container-list">
+                        <div class="selection-container">
                             <label for="grade-number">Номер класса</label>
                             <select name="grade_number" id="grade-number" class="select">
                                 <option value="1">1</option>
@@ -51,9 +51,9 @@
                                 <option value="11">11</option>
                             </select>
                         </div>
-                        <div class="grade-selection-container">
+                        <div class="selection-container">
                             <label for="grade-letter">Буква класса</label>
-                            <select name="grade_letter" id="grade-select" class="select">
+                            <select name="grade_letter" id="grade-letter" class="select">
                                 <option value="А">А</option>
                                 <option value="Б">Б</option>
                                 <option value="В">В</option>
@@ -63,8 +63,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form__element" id="subject-select" style="display: none;">
-                    <select name="subject" class="select">
+                <div class="form__element" id="subject-select-container" style="display: none;">
+                    <label>Предмет преподавания</label>
+                    <select name="subject" class="select" id="subject-select">
                         <option value="Алгебра">Алгебра</option>
                         <option value="Английский язык">Английский язык</option>
                         <option value="Биология">Биология</option>
@@ -92,10 +93,10 @@
         var checkbox = document.getElementsByName("user_type")[0];
         checkbox.addEventListener("change", function() {
             if (this.checked) {
-                document.getElementById("subject-select").style.display = "block";
+                document.getElementById("subject-select-container").style.display = "block";
             }
             else {
-                document.getElementById("subject-select").style.display = "none";
+                document.getElementById("subject-select-container").style.display = "none";
             }
         });
     </script>
