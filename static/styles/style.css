@@ -53,7 +53,7 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+}
 
 :root {
     --color-white: #fffefe;
@@ -76,6 +76,8 @@
     --color-header-element: #f3f3f3;
     --color-mark-container-border: #75c1ff;
     --color-pupil-container-border: #a8a3a3;
+    --color-button2-background: #e24040;
+    --border-radius-basic-container: 15px;
 }
 
 /* TAGS */
@@ -104,6 +106,11 @@ input[type="file"] {
     display: none;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* CLASSES */
 
 .container {
@@ -118,7 +125,7 @@ input[type="file"] {
 }
 
 .form-container {
-    border-radius: 10px;
+    border-radius: var(--border-radius-basic-container);
     width: 300px;
     background-color: var(--color-container-background);
     text-align: center;
@@ -238,7 +245,7 @@ input[type="file"] {
     flex-wrap: wrap;
     padding: 15px;
     background-color: var(--color-container-background);
-    border-radius: 10px;
+    border-radius: var(--border-radius-basic-container);
     margin: 2% auto;
     overflow: auto;
 }
@@ -257,7 +264,7 @@ input[type="file"] {
     display: flex;
     width: 50%;
     margin: 2% auto;
-    border-radius: 10px;
+    border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
     border: 0px solid #c7c7c7;
     padding: 40px;
@@ -278,9 +285,37 @@ input[type="file"] {
     box-shadow: none;
 }
 
+.lesson-container {
+    background-color: var(--color-container-background);
+    border-radius: var(--border-radius-basic-container);
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: left;
+    width: 70%;
+    overflow: auto;
+    margin: 250px auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px;
+}
+
+.lesson-info-container {
+    display: inline-grid;
+    overflow: auto;
+    font-family: "Roboto";
+    font-size: 25px;
+    padding: 25px;
+}
+
+.homework-container {
+    text-align: left;
+    font-size: 20px;
+    overflow-wrap: break-word;
+}
+
 .marks-block {
     width: 42.7%;
-    border-radius: 15px;
+    border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
     margin: 2% auto;
     margin-bottom: 20px;
@@ -349,13 +384,13 @@ input[type="file"] {
 .button1 {
     font-size: 16px;
     background: var(--color-button1-background);
-    border-radius: 4px;
+    border-radius: 5px;
     color: var(--color-white);
     transition: 0.5s;
     animation-delay: 0.8s;
     text-align: center;
-    width: 206px;
-    height: 40px;
+    min-width: 206px;
+    min-height: 40px;
     border: 0px;
     font-family: "Roboto";
     font-style: normal;
@@ -371,6 +406,29 @@ input[type="file"] {
     0px 5px 20px var(--color-shadow),
     -7px 5px 20px var(--color-shadow);
     transform: translateY(-3px); */
+}
+
+.button2 {
+    font-size: 16px;
+    background: var(--color-button2-background);
+    border-radius: 5px;
+    color: var(--color-white);
+    transition: 0.5s;
+    animation-delay: 0.8s;
+    text-align: center;
+    min-width: 206px;
+    min-height: 40px;
+    border: 0px;
+    font-family: "Roboto";
+    font-style: normal;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button2:hover {
+    background-color: var(--color-container-background);
+    border: 1px solid var(--color-dark-gray);
+    color: var(--color-dark-gray);
 }
 
 .form__input {
@@ -483,7 +541,7 @@ input[type="file"] {
     text-align: left;
 }
 
-.lesson-homework {
+.additional-info {
     font-size: 16px;
     color: #c7c7c7;
     margin-top: 10px;
@@ -610,4 +668,32 @@ input[type="file"] {
 
 #subject-select {
     margin-top: 10px;
+}
+
+#prev {
+    height: 30px;
+    width: 30px;
+    margin: auto;
+}
+
+#prev-container {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    padding: 10px;
+    transition: .5s;
+    background-color: var(--color-body-background);
+}
+
+#prev-container:hover {
+    opacity: .6;
+}
+
+#teacher_name {
+    font-size: 18px;
+}
+
+#homework-container {
+    margin: 50px auto;
 }

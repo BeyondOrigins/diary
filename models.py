@@ -37,3 +37,4 @@ class Lessons(db.Model):
     subject = db.Column(db.String, nullable=False)
     grade = db.Column(db.String, nullable=False)
     homework = db.Column(db.String)
+    teacher_id = db.Column(db.Integer, nullable=False)

@@ -13,6 +13,7 @@ from config import *
 from flask_mail import Message, Mail
 from functools import wraps
 from statistics import mean
+from flask import abort
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -58,7 +59,7 @@ def get_user():
 db_init(app)
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id : int):
     return UserLogin().fromDB(user_id, Users)
 
 # главная страница
@@ -204,7 +205,7 @@ def edit_profile():
     return render_template("edit_profile.html", user=user, path=path)
 
 @app.route("/get_img/<int:img_id>")
-def get_img(img_id):
+def get_img(img_id : int):
     try:
         img = Img.query.get(img_id)
     except:
@@ -259,7 +260,7 @@ def redirect_to_schedule():
 
 @app.route("/schedule/<int:week>/<int:day>")
 @login_required
-def schedule(week, day):
+def schedule(week : int, day : int):
     lessons_query = Lessons.query.filter_by(week_id=week,
         weekday=day,
         grade=get_user().grade
@@ -269,6 +270,7 @@ def schedule(week, day):
 
     for lesson in lessons_query:
         lessons[lesson.order_number] = {
+            "id" : lesson.lesson_id,
             "subject" : lesson.subject,
             "homework" : lesson.homework
         }
@@ -276,10 +278,11 @@ def schedule(week, day):
     return render_template("schedule.html", lessons=lessons,
     weekday=WEEKDAYS[day], week=week, day=day)
 
-@app.route("/edit_schedule/<int:week>/<int:day>", methods=["GET", "POST"])
+# добавить урок
+@app.route("/add_lesson/<int:week>/<int:day>", methods=["GET", "POST"])
 @login_required
 @teacher_only
-def edit_schedule(week, day):
+def edit_schedule(week : int, day : int):
     if request.method == "POST":
         pass
 
@@ -289,15 +292,24 @@ def edit_schedule(week, day):
     ).all()
 
     lessons = [[] for i in range(len(lessons_query))]
-
-    for lesson in lessons_query:
-        lessons[lesson.order_number] = {
-            "subject" : lesson.subject,
-            "homework" : lesson.homework
-        }
     
-    return render_template("edit_schedule.html", lessons=lessons)
+    return render_template("add_lesson.html", lessons=lessons)
 
+# удалить урок
+@app.route("/delete_lesson/<int:lesson_id>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def delete_lesson(lesson_id):
+    if request.method == "POST":
+        lesson = Lessons.query.get(lesson_id)
+        lessons_query = Lessons.query.filter_by(
+            week_id=lesson.week_id,
+            weekday=lesson.weekday,
+            grade=get_user().grade
+        ).all()
+        # ДОДЕЛАТЬ
+
+# посмотреть свой класс
 @app.route("/my_class")
 @login_required
 @teacher_only
@@ -316,12 +328,16 @@ def my_class():
 
     return render_template("my_class.html", pupils=pupils)
 
+# посмотреть оценки ученика
 @app.route("/marks/<int:user_id>")
 @login_required
 @teacher_only
-def marks(user_id):
-    marks_list = Marks.query.filter_by(user_id=user_id).all()
+def marks(user_id : int):
     user = Users.query.get(user_id)
+    teacher = get_user()
+    if teacher.grade != user.grade:
+        abort(404)
+    marks_list = Marks.query.filter_by(user_id=user_id).all()
     marks = {}
     for mark in marks_list:
         try:
@@ -332,6 +348,16 @@ def marks(user_id):
 
     title = f"{user.last_name} {user.first_name} {user.middle_name}"
     return render_template("marks.html", marks=marks, title=title)
+
+@app.route("/lesson/<int:lesson_id>")
+@login_required
+def show_lesson(lesson_id : int):
+    lesson = Lessons.query.get(lesson_id)
+    if lesson is None:
+        abort(404)
+    teacher = Users.query.get(lesson.teacher_id)
+    teacher_name = f"{teacher.first_name} {teacher.middle_name}  {teacher.last_name}"
+    return render_template("lesson.html", lesson=lesson, teacher_name=teacher_name)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):

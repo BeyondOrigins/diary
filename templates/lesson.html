@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container">
+        <div class="lesson-container animated">
+            <div id="prev-container">
+                <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
+                alt="Назад" id="prev" onclick="window.history.go(-1); return false;">
+            </div>
+            <div class="lesson-info-container">
+                <div>{{lesson.subject}}</div>
+                <div class="additional-info" id="teacher_name">{{teacher_name}}</div>
+                <div class="container" id="homework-container">
+                    {% if lesson.homework == "" %}
+                        <img src="{{url_for('static', filename='styles/img/no_homework.png')}}" alt="">
+                    {% else %}
+                        <div class="homework-container">
+                            {{lesson.homework}}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block header %}
+    <a href="/" class="header__element">
+        <div>На главную</div>
+    </a>
+    {% if session["user_type"] == "pupil" %}
+        <a href="/marks" class="header__element">
+            <div>Мои оценки</div>
+        </a>
+    {% else %}
+        <a href="/my_class" class="header__element">
+            <div>Мой класс</div>
+        </a>
+    {% endif %}
+    <a href="/profile" class="header__element">
+        <div>{{ session["name"] }}</div>
+    </a>
+{% endblock %}
