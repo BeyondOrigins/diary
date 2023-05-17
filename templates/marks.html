@@ -3,7 +3,7 @@
     <div class="container">
         <div class="main-title animated">{{title}}</div>
         {% if marks|length == 0 %}
-            <div id="empty" class="animated">У вас пока что нет оценок :(</div>
+            <div id="empty" class="animated">Оценок пока что нет :(</div>
         {% else %}
             {% for subject, marks_list in marks.items() %}
                 <div class="marks-block animated">

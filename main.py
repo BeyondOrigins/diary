@@ -301,14 +301,22 @@ def edit_schedule(week : int, day : int):
 @teacher_only
 def delete_lesson(lesson_id):
     lesson = Lessons.query.get(lesson_id)
+    week = lesson.week_id
+    day = lesson.weekday
     if request.method == "POST":
+        db.session.delete(lesson)
+        db.session.commit()
         lessons_query = Lessons.query.filter_by(
             week_id=lesson.week_id,
             weekday=lesson.weekday,
             grade=get_user().grade
         ).all()
+        for lesson_ in lessons_query:
+            lesson_.order_number = lessons_query.index(lesson_)
+            db.session.commit()
         # ДОДЕЛАТЬ
-    day = WEEKDAYS[lesson.weekday]
+        return redirect(f"/schedule/{week}/{day}")
+    day = WEEKDAYS[day]
     return render_template("delete_lesson.html", lesson=lesson, 
                            day=day)
 
