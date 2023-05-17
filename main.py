@@ -300,14 +300,17 @@ def edit_schedule(week : int, day : int):
 @login_required
 @teacher_only
 def delete_lesson(lesson_id):
+    lesson = Lessons.query.get(lesson_id)
     if request.method == "POST":
-        lesson = Lessons.query.get(lesson_id)
         lessons_query = Lessons.query.filter_by(
             week_id=lesson.week_id,
             weekday=lesson.weekday,
             grade=get_user().grade
         ).all()
         # ДОДЕЛАТЬ
+    day = WEEKDAYS[lesson.weekday]
+    return render_template("delete_lesson.html", lesson=lesson, 
+                           day=day)
 
 # посмотреть свой класс
 @app.route("/my_class")

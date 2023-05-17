@@ -297,20 +297,29 @@ a {
     display: flex;
     flex-wrap: wrap;
     padding: 25px;
+    font-family: "Roboto";
+    font-size: 25px;
 }
 
 .lesson-info-container {
     display: inline-grid;
     overflow: auto;
-    font-family: "Roboto";
-    font-size: 25px;
     padding: 25px;
 }
 
 .homework-container {
     text-align: left;
-    font-size: 20px;
+    font-size: 22px;
     overflow-wrap: break-word;
+    padding-left: 75px;
+}
+
+.buttons-container  {
+    display: inline-flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .marks-block {
@@ -542,9 +551,10 @@ a {
 }
 
 .additional-info {
-    font-size: 16px;
+    font-size: 20px;
     color: #c7c7c7;
     margin-top: 10px;
+    font-family: "Roboto";
 }
 
 .select {
@@ -696,4 +706,9 @@ a {
 
 #homework-container {
     margin: 50px auto;
+    display: inline-grid;
+}
+
+#no-homework {
+    margin: auto;
 }
