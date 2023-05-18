@@ -21,8 +21,8 @@
                 <div id="homework-container">
                     {% if lesson.homework == "" %}
                         <img src="{{url_for('static', filename='styles/img/no_homework.png')}}"
-                        alt="Домашнего задания нет" id="no-homework">
-                        <span>Домашнего задания нет</span>
+                        alt="Домашнего задания нет" class="no-homework">
+                        <span class="no-homework">Домашнего задания нет</span>
                     {% else %}
                         <div class="homework-container">
                             {{lesson.homework}}

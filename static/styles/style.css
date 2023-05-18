@@ -609,6 +609,10 @@ a {
     cursor: pointer;
 }
 
+.no-homework {
+    margin: auto;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
@@ -738,8 +742,4 @@ a {
     margin: 50px auto;
     display: inline-grid;
     width: 100%;
-}
-
-#no-homework {
-    margin: auto;
 }

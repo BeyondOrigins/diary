@@ -333,7 +333,7 @@ def show_lesson(lesson_id : int):
 @app.route("/add_lesson/<int:week>/<int:day>", methods=["GET", "POST"])
 @login_required
 @teacher_only
-def edit_schedule(week : int, day : int):
+def add_lesson(week : int, day : int):
     lessons_query = Lessons.query.filter_by(
         week_id=week,
         weekday=day,
@@ -390,11 +390,39 @@ def delete_lesson(lesson_id):
         for lesson_ in lessons_query:
             lesson_.order_number = lessons_query.index(lesson_)
             db.session.commit()
-        # ДОДЕЛАТЬ
         return redirect(f"/schedule/{week}/{day}")
     day = WEEKDAYS[day]
     return render_template("delete_lesson.html", lesson=lesson, 
                            day=day)
+
+@app.route("/edit_lesson/<int:lesson_id>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def edit_lesson(lesson_id):
+    lesson = Lessons.query.get(lesson_id)
+    teachers_query = Users.query.filter_by(
+        user_type="teacher"
+    )
+    teachers = []
+    for teacher in teachers_query:
+        teachers.append({
+            "id" : teacher.user_id,
+            "name" : f"{teacher.first_name} {teacher.middle_name}  {teacher.last_name}",
+            "subject" : teacher.subject
+    })
+        
+    if request.method == "POST":
+        subject = request.form["subject"]
+        teacher_id = request.form["teacher"]
+        homework = request.form["homework"]
+        lesson.subject = subject
+        lesson.teacher_id = teacher_id
+        lesson.homework = homework
+        db.session.commit()
+        return redirect(f"/schedule/{lesson.week_id}/{lesson.weekday}")
+
+    return render_template("edit_lesson.html", teachers=teachers,
+        teacher_id=lesson.teacher_id, lesson=lesson)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):

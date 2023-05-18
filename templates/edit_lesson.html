@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container">
+        <div class="main-title animated">Изменить урок</div>
+        <div class="add-lesson-container animated">
+            <form method="POST">
+                <div class="form__element">
+                    <label>Предмет</label>
+                    <select name="subject" id="subject-select" class="select">
+                        <option value="Алгебра">Алгебра</option>
+                        <option value="Английский язык">Английский язык</option>
+                        <option value="Биология">Биология</option>
+                        <option value="География">География</option>
+                        <option value="Геометрия">Геометрия</option>
+                        <option value="История">История</option>
+                        <option value="Литература">Литература</option>
+                        <option value="ОБЖ">ОБЖ</option>
+                        <option value="Обществознание">Обществознание</option>
+                        <option value="Русский язык">Русский язык</option>
+                        <option value="Теория Вероятностей и Статистика">Теория Вероятностей и Статистика</option>
+                        <option value="Физика">Физика</option>
+                        <option value="Физическая культура">Физическая культура</option>
+                        <option value="Химия">Химия</option>
+                    </select>
+                </div>
+                <div class="form__element">
+                    <label>Учитель</label>
+                    <select name="teacher" id="teacher-select" class="select">
+                        {% for teacher in teachers %}
+                            <option value="{{teacher['id']}}">{{teacher["name"]}} ({{teacher["subject"]}})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form__element">
+                    <label>Домашнее задание</label>
+                    <textarea name="homework" cols="80" rows="10" class="homework-area">{{lesson.homework}}</textarea>
+                </div>
+                <div class="form__element">
+                    <input type="submit" class="button1" value="Сохранить изменения">
+                </div>
+            </form>
+            <div class="form__element">
+                <a href="/schedule/{{lesson.week_id}}/{{lesson.weekday}}">
+                    <button class="button2">Отмена</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        let subject = "{{lesson.subject}}";
+        document.getElementById("subject-select").value = subject;
+        let teacher_id = "{{teacher_id}}";
+        document.getElementById("teacher-select").value = teacher_id;
+    </script>
+{% endblock %}
