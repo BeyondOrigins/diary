@@ -156,6 +156,7 @@ def auth():
             return render_template("auth.html", error="Не найдено пользователя с такой почтой")
     return render_template("auth.html")
 
+# посмотреть свой профиль
 @app.route("/profile")
 @login_required
 def profile():
@@ -213,6 +214,7 @@ def get_img(img_id : int):
         return "Фото не найдено"
     return Response(img.img, mimetype=img.mimetype)
 
+# посмотреть оценки
 @app.route("/marks")
 @login_required
 def my_marks():
@@ -231,6 +233,7 @@ def my_marks():
     title = "Мои оценки"
     return render_template("marks.html", marks=marks, title=title)
 
+# посмотреть своих ученик
 @app.route("/pupils")
 @login_required
 @teacher_only
@@ -254,11 +257,13 @@ def pupils():
 
     return render_template("pupils.html", pupils=pupils)
 
+# перенаправить на расписание
 @app.route("/schedule")
 @login_required
 def redirect_to_schedule():
     return redirect("/schedule/0/0")
 
+# расписание
 @app.route("/schedule/<int:week>/<int:day>")
 @login_required
 def schedule(week : int, day : int):
@@ -273,7 +278,8 @@ def schedule(week : int, day : int):
         lessons[lesson.order_number] = {
             "id" : lesson.lesson_id,
             "subject" : lesson.subject,
-            "homework" : lesson.homework
+            "homework" : lesson.homework,
+            "is_replaced" : lesson.is_replaced
         }
 
     return render_template("schedule.html", lessons=lessons,
@@ -354,6 +360,7 @@ def add_lesson(week : int, day : int):
         teacher = request.form["teacher"]
         subject = request.form["subject"]
         homework = request.form["homework"]
+        is_replaced = not Users.query.get(teacher).subject == subject
         
         lesson = Lessons(
             week_id=week,
@@ -362,7 +369,8 @@ def add_lesson(week : int, day : int):
             grade=get_user().grade,
             homework=homework,
             teacher_id=get_user().user_id,
-            order_number=len(lessons_query)
+            order_number=len(lessons_query),
+            is_replaced=is_replaced
         )
         db.session.add(lesson)
         db.session.commit()

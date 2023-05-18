@@ -38,3 +38,4 @@ class Lessons(db.Model):
     grade = db.Column(db.String, nullable=False)
     homework = db.Column(db.String)
     teacher_id = db.Column(db.Integer, nullable=False)
+    is_replaced = db.Column(db.Boolean, nullable=False, default=False)

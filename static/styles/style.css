@@ -613,6 +613,13 @@ a {
     margin: auto;
 }
 
+.is_replaced {
+    color: #e68434;
+    font-family: "Roboto";
+    font-size: 16px;
+    margin-top: 10px;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);

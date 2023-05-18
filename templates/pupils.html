@@ -3,7 +3,7 @@
 <div class="container">
     <div class="main-title animated">Мои ученики</div>
     {% if pupils|length == 0 %}
-        <div id="empty" class="animated">В вашем классе нет учеников!</div>
+        <div id="empty" class="animated">У вас пока что нет учеников!</div>
     {% else %}
         {% for grade, pupils_list in pupils.items() %}
             <div class="main-title animated">{{grade}}</div>

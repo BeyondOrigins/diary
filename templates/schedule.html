@@ -37,6 +37,9 @@
                                 {% else %}
                                     <div class="homework">Домашнего задания нет</div>
                                 {% endif %}
+                                {% if lesson["is_replaced"] %}
+                                    <div class="is_replaced">Замена</div>
+                                {% endif %}
                                 {% if session["user_type"] == "teacher" %}
                                     <div style="margin-top: 20px;">
                                         <a href="/delete_lesson/{{lesson['id']}}">
