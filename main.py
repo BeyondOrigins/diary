@@ -357,10 +357,10 @@ def add_lesson(week : int, day : int):
     })
 
     if request.method == "POST":
-        teacher = request.form["teacher"]
+        teacher_id = request.form["teacher"]
         subject = request.form["subject"]
         homework = request.form["homework"]
-        is_replaced = not Users.query.get(teacher).subject == subject
+        is_replaced = not Users.query.get(teacher_id).subject == subject
         
         lesson = Lessons(
             week_id=week,
@@ -368,7 +368,7 @@ def add_lesson(week : int, day : int):
             subject=subject,
             grade=get_user().grade,
             homework=homework,
-            teacher_id=get_user().user_id,
+            teacher_id=teacher_id,
             order_number=len(lessons_query),
             is_replaced=is_replaced
         )
@@ -423,9 +423,12 @@ def edit_lesson(lesson_id):
         subject = request.form["subject"]
         teacher_id = request.form["teacher"]
         homework = request.form["homework"]
+        is_replaced = not Users.query.get(teacher_id).subject == subject
+        
         lesson.subject = subject
         lesson.teacher_id = teacher_id
         lesson.homework = homework
+        lesson.is_replaced = is_replaced
         db.session.commit()
         return redirect(f"/schedule/{lesson.week_id}/{lesson.weekday}")
 

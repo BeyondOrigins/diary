@@ -4,7 +4,7 @@
         <div class="main-title animated">Расписание</div>
         <div class="days-container animated">
             {% if week == 0 and day == 0 %}
-                <div class="switch-day unavailable"> < </div>
+                <div class="switch-day-unavailbale"> < </div>
             {% else %}
                 <div id="to-prev-day" class="switch-day"> < </div>
             {% endif %}
@@ -35,7 +35,7 @@
                                 {% if lesson["homework"] != "" %}
                                     <div class="homework">{{lesson["homework"]}}</div>
                                 {% else %}
-                                    <div class="homework">Домашнего задания нет</div>
+                                    <div class="homework">Не задано</div>
                                 {% endif %}
                                 {% if lesson["is_replaced"] %}
                                     <div class="is_replaced">Замена</div>
