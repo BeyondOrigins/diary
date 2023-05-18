@@ -158,11 +158,7 @@ a {
 }
 
 .mark-container:hover {
-    box-shadow: 7px 5px 20px var(--color-shadow),
-    0px 5px 20px var(--color-shadow),
-    -7px 5px 20px var(--color-shadow);
-    transform: translateZ(-5px);
-    opacity: 0.7;
+    opacity: 0.4;
     cursor: pointer;
 }
 
@@ -173,6 +169,7 @@ a {
 
 .days-container {
     width: 70%;
+    min-width: 500px;
     border-radius: 20px;
     background-color: var(--color-container-background);
     padding: 10px;
@@ -210,7 +207,7 @@ a {
     display: flex;
     margin: 2% auto;
     min-height: 100px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .subject-container::before {
@@ -247,7 +244,7 @@ a {
     padding: 15px;
     background-color: var(--color-container-background);
     border-radius: var(--border-radius-basic-container);
-    margin: 2% auto;
+    margin: 30px auto;
     overflow: auto;
 }
 
@@ -325,7 +322,7 @@ a {
     text-align: center;
 }
 
-.add-lesson-container {
+.add-lesson-container, .mark-info-container {
     border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
     width: 50%;
@@ -334,15 +331,23 @@ a {
     padding: 30px;
     display: inline-grid;
     text-align: left;
+    font-family: "Roboto";
 }
 
 .marks-block {
-    width: 42.7%;
+    width: 50%;
     border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
     margin: 2% auto;
     margin-bottom: 20px;
     padding: 20px;
+    min-width: 600px;
+}
+
+.mark-info {
+    margin: 20px;
+    font-size: 20px;
+    overflow: hidden;
 }
 
 .homework {
@@ -367,6 +372,7 @@ a {
     font-family: "Raleway";
     font-size: 50px;
     text-align: center;
+    min-width: 500px;
     margin: 40px;
 }
 
@@ -669,7 +675,7 @@ a {
     text-align: center;
     opacity: 0.7;
     background-color: #ffffff;
-    z-index: 99;
+    z-index: 1000;
 }
 
 #loader {
@@ -679,7 +685,6 @@ a {
     width: 120px;
     height: 120px;
     margin: 25% auto;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
 }
 

@@ -18,6 +18,9 @@ class Marks(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     mark = db.Column(db.Integer, nullable=False)
     subject = db.Column(db.String, nullable=False)
+    topic = db.Column(db.String, nullable=False)
+    task_type = db.Column(db.String, nullable=False)
+    author_id = db.Column(db.Integer, nullable=False)
 
 
 class Img(db.Model):
@@ -30,7 +33,6 @@ class Img(db.Model):
 
 class Lessons(db.Model):
     lesson_id = db.Column(db.Integer, primary_key=True)
-    # time = db.Column(db.Integer, nullable=False)
     weekday = db.Column(db.Integer, nullable=False)
     week_id = db.Column(db.Integer, nullable=False)
     order_number = db.Column(db.Integer, nullable=False)

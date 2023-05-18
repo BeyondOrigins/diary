@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container">
+        <div class="mark-info-container animated">
+            <a onclick="window.history.go(-1); return false;">
+                <div id="prev-container">
+                    <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
+                    alt="Назад" id="prev">
+                </div>
+            </a>
+            <div class="marks-container__title">{{mark.subject}}</div>
+            <div class="mark-container">
+                <div class="mark">{{mark.mark}}</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap;">
+                <div class="mark-info">
+                    <span>Тема</span>
+                    <div class="additional-info" style="font-size: 17px;">{{mark.topic}}</div>
+                    <div class="additional-info" style="font-size: 17px;">{{author_name}}</div>
+                </div>
+                <div class="mark-info">
+                    <span>{{mark.task_type}}</span>
+                </div>
+            </div>
+            {% if is_managable %}
+                <div style="margin-top: 20px;">
+                    <a href="/delete_mark/{{mark.mark_id}}">
+                        <button class="button2">Удалить оценку</button>
+                    </a>
+                    <a href="/edit_mark/{{mark.mark_id}}">
+                        <button class="button1">Изменить</button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block body %}
+    <div class="container">
+        <div class="main-title animated">{{name}}, {{subject}}</div>
+        {% if marks|length == 0 %}
+            <div id="empty" class="animated">Оценок пока что нет :(</div>
+        {% else %}
+            <div class="marks-block animated">
+                <div class="marks-container">
+                    {% for mark in marks %}
+                        <a href="/mark/{{mark.mark_id}}">
+                            <div class="mark-container">
+                                <div class="mark">{{mark.mark}}</div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+                <div style="text-align: left; margin: 10px;">
+                    <a href="/add_mark/{{pupil_id}}">
+                        <button class="button1">Поставить оценку</button>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block header %}
+    <a href="/" class="header__element">
+        <div>На главную</div>
+    </a>
+    <a href="/pupils" class="header__element">
+        <div>Мои ученики</div>
+    </a>
+    <a href="/profile" class="header__element">
+        <div>{{ session["name"] }}</div>
+    </a>
+{% endblock %}

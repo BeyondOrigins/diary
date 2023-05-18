@@ -10,9 +10,11 @@
                     <div class="marks-container__title">{{subject}}</div>
                     <div class="marks-container">
                         {% for mark in marks_list %}
-                            <div class="mark-container">
-                                <div class="mark">{{mark}}</div>
-                            </div>
+                            <a href="/mark/{{mark.mark_id}}">
+                                <div class="mark-container">
+                                    <div class="mark">{{mark.mark}}</div>
+                                </div>
+                            </a>
                         {% endfor %}
                     </div>
                 </div>

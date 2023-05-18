@@ -225,10 +225,10 @@ def my_marks():
     marks = {}
     for mark in marks_list:
         try:
-            marks[mark.subject].append(mark.mark)
+            marks[mark.subject].append(mark)
         except:
             marks[mark.subject] = []
-            marks[mark.subject].append(mark.mark)
+            marks[mark.subject].append(mark)
 
     title = "Мои оценки"
     return render_template("marks.html", marks=marks, title=title)
@@ -317,10 +317,10 @@ def marks(user_id : int):
     marks = {}
     for mark in marks_list:
         try:
-            marks[mark.subject].append(mark.mark)
+            marks[mark.subject].append(mark)
         except:
             marks[mark.subject] = []
-            marks[mark.subject].append(mark.mark)
+            marks[mark.subject].append(mark)
 
     title = f"{user.last_name} {user.first_name} {user.middle_name}"
     return render_template("marks.html", marks=marks, title=title)
@@ -383,7 +383,7 @@ def add_lesson(week : int, day : int):
 @app.route("/delete_lesson/<int:lesson_id>", methods=["GET", "POST"])
 @login_required
 @teacher_only
-def delete_lesson(lesson_id):
+def delete_lesson(lesson_id : int):
     lesson = Lessons.query.get(lesson_id)
     week = lesson.week_id
     day = lesson.weekday
@@ -403,10 +403,11 @@ def delete_lesson(lesson_id):
     return render_template("delete_lesson.html", lesson=lesson, 
                            day=day)
 
+# изменить данные урока
 @app.route("/edit_lesson/<int:lesson_id>", methods=["GET", "POST"])
 @login_required
 @teacher_only
-def edit_lesson(lesson_id):
+def edit_lesson(lesson_id : int):
     lesson = Lessons.query.get(lesson_id)
     teachers_query = Users.query.filter_by(
         user_type="teacher"
@@ -434,6 +435,85 @@ def edit_lesson(lesson_id):
 
     return render_template("edit_lesson.html", teachers=teachers,
         teacher_id=lesson.teacher_id, lesson=lesson)
+
+# поставить оценки
+@app.route("/pupils/marks/<int:pupil_id>")
+@login_required
+@teacher_only
+def subject_marks(pupil_id : int):
+    pupil = Users.query.get(pupil_id)
+    user = get_user()
+    marks = Marks.query.filter_by(
+        user_id=pupil.user_id,
+        subject=user.subject
+    ).all()
+    name = f"{pupil.last_name} {pupil.first_name} {pupil.middle_name}"
+    return render_template("subject_marks.html", 
+        marks=marks, subject=user.subject, name=name,
+        pupil_id=pupil.user_id)
+
+# посмотреть оценку
+@app.route("/mark/<int:mark_id>")
+@login_required
+def mark(mark_id : int):
+    mark = Marks.query.get(mark_id)
+    user = get_user()
+    pupil = Users.query.get(mark.user_id)
+    if user.user_type == "pupil":
+        if mark.user_id != user.user_id:
+            abort(404)
+        return render_template("mark.html", mark=mark, is_managable=False)
+    else:
+        if pupil.grade != user.grade and mark.subject != user.subject:
+            abort(404)
+        if mark.subject == user.subject:
+            is_managable=True
+        else:
+            is_managable=False
+        author = Users.query.get(mark.author_id)
+        author_name = f"{author.last_name} {author.first_name} {author.middle_name}"
+        return render_template("mark.html", mark=mark, is_managable=is_managable,
+        author_name=author_name)
+
+# удалить оценку
+@app.route("/delete_mark/<int:mark_id>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def delete_mark(mark_id : int):
+    mark = Marks.query.get(mark_id)
+    pupil = Users.query.get(mark.user_id)
+    if pupil.grade != get_user().grade or mark.subject != get_user().subject:
+        abort(404)
+    if request.method == "POST":
+        db.session.delete(mark)
+        db.session.commit()
+        return redirect(f"/pupils/marks/{pupil.user_id}")
+    return render_template("delete_mark.html", mark=mark)
+
+# добавить оценку
+@app.route("/add_mark/<int:pupil_id>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def add_mark(pupil_id):
+    pupil = Users.query.get(pupil_id)
+    if request.method == "POST":
+        mark = request.form["mark"]
+        subject = get_user().subject
+        topic = request.form["topic"]
+        task_type = request.form["task_type"]
+        author_id = get_user().user_id
+        mark = Marks(
+            user_id=pupil_id,
+            subject=subject,
+            mark=mark,
+            topic=topic,
+            task_type=task_type,
+            author_id=author_id
+        )
+        db.session.add(mark)
+        db.session.commit()
+        return redirect(f"/pupils/marks/{pupil.user_id}")
+    return render_template("add_mark.html", pupil=pupil)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
