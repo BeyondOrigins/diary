@@ -19,7 +19,7 @@
         </div>
         <div class="day-title animated">{{weekday}}</div>
         {% if session["user_type"] == "teacher" %}
-            <div style="text-align: left; width: 57%; margin: auto;">
+            <div style="text-align: left; width: 68%; margin: auto;">
                 <a href="/add_lesson/{{week}}/{{day}}">
                     <button class="button1 animated">Добавить урок</button>
                 </a>
@@ -33,9 +33,9 @@
                             <div class="subject-info">
                                 <div>{{lesson["subject"]}}</div>
                                 {% if lesson["homework"] != "" %}
-                                    <div class="additional-info">{{lesson["homework"]}}</div>
+                                    <div class="homework">{{lesson["homework"]}}</div>
                                 {% else %}
-                                    <div class="additional-info">Домашнего задания нет</div>
+                                    <div class="homework">Домашнего задания нет</div>
                                 {% endif %}
                                 {% if session["user_type"] == "teacher" %}
                                     <div style="margin-top: 20px;">

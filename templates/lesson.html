@@ -7,26 +7,28 @@
     </style>
     <div class="container">
         <div class="lesson-container animated">
-            <a href="/schedule/{{lesson.week_id}}/{{lesson.weekday}}">
-                <div id="prev-container">
-                    <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
-                    alt="Назад" id="prev">
-                </div>
-            </a>
+            <div>
+                <a href="/schedule/{{lesson.week_id}}/{{lesson.weekday}}">
+                    <div id="prev-container">
+                        <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
+                        alt="Назад" id="prev">
+                    </div>
+                </a>
+            </div>
             <div class="lesson-info-container">
                 <div>{{lesson.subject}}</div>
                 <div class="additional-info" id="teacher_name">{{teacher_name}}</div>
-            </div>
-            <div class="container" id="homework-container">
-                {% if lesson.homework == "" %}
-                    <img src="{{url_for('static', filename='styles/img/no_homework.png')}}"
-                    alt="Домашнего задания нет" id="no-homework">
-                    <span>Домашнего задания нет</span>
-                {% else %}
-                    <div class="homework-container">
-                        {{lesson.homework}}
-                    </div>
-                {% endif %}
+                <div id="homework-container">
+                    {% if lesson.homework == "" %}
+                        <img src="{{url_for('static', filename='styles/img/no_homework.png')}}"
+                        alt="Домашнего задания нет" id="no-homework">
+                        <span>Домашнего задания нет</span>
+                    {% else %}
+                        <div class="homework-container">
+                            {{lesson.homework}}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

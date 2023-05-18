@@ -82,7 +82,7 @@
 
 /* TAGS */
 
-html, body {
+html, body, form {
     margin: 0;
 }
 
@@ -114,7 +114,7 @@ a {
 /* CLASSES */
 
 .container {
-    width: 100%;
+    width: 70%;
     margin: 100px auto;
     text-align: center;
 }
@@ -172,7 +172,7 @@ a {
 }
 
 .days-container {
-    width: 60%;
+    width: 70%;
     border-radius: 20px;
     background-color: var(--color-container-background);
     padding: 10px;
@@ -198,9 +198,9 @@ a {
 }
 
 .subjects-container {
-    width: 60%;
+    width: 70%;
     text-align: center;
-    margin: 2% auto;
+    margin: 50px auto;
 }
 
 .subject-container {
@@ -240,7 +240,8 @@ a {
 }
 
 .pupils-container {
-    width: 50%;
+    width: 70%;
+    min-width: 600px;
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
@@ -262,7 +263,8 @@ a {
 
 .profile-container {
     display: flex;
-    width: 50%;
+    width: 70%;
+    min-width: 600px;
     margin: 2% auto;
     border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
@@ -305,13 +307,14 @@ a {
     display: inline-grid;
     overflow: auto;
     padding: 25px;
+    width: 100%;
 }
 
 .homework-container {
     text-align: left;
     font-size: 22px;
     overflow-wrap: break-word;
-    padding-left: 75px;
+    padding-left: 0px;
 }
 
 .buttons-container  {
@@ -322,6 +325,17 @@ a {
     text-align: center;
 }
 
+.add-lesson-container {
+    border-radius: var(--border-radius-basic-container);
+    background-color: var(--color-container-background);
+    width: 50%;
+    min-width: 650px;
+    overflow: auto;
+    padding: 30px;
+    display: inline-grid;
+    text-align: left;
+}
+
 .marks-block {
     width: 42.7%;
     border-radius: var(--border-radius-basic-container);
@@ -329,6 +343,13 @@ a {
     margin: 2% auto;
     margin-bottom: 20px;
     padding: 20px;
+}
+
+.homework {
+    font-size: 16px;
+    color: #c7c7c7;
+    margin-top: 10px;
+    font-family: "Roboto";
 }
 
 .subject-info {
@@ -357,9 +378,8 @@ a {
 }
 
 .form-title {
-    font-size: 25px;
+    font-size: 27px;
     font-family: "Raleway", sans-serif;
-    font-weight: bold;
 }
 
 .pupil-name {
@@ -383,7 +403,17 @@ a {
     font-size: 24px;
     text-align: left;
     margin: 30px auto;
-    width: 57%;
+    width: 68%;
+}
+
+.homework-area {
+    font-family: "Roboto";
+    outline: none;
+    border-radius: 8px;
+    resize: none;
+    margin-top: 10px;
+    font-size: 15px;
+    border: 1px solid var(--color-gray);
 }
 
 .form__element {
@@ -697,7 +727,7 @@ a {
 }
 
 #prev-container:hover {
-    opacity: .6;
+    opacity: .3;
 }
 
 #teacher_name {
@@ -707,6 +737,7 @@ a {
 #homework-container {
     margin: 50px auto;
     display: inline-grid;
+    width: 100%;
 }
 
 #no-homework {

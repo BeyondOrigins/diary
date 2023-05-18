@@ -14,6 +14,7 @@ from flask_mail import Message, Mail
 from functools import wraps
 from statistics import mean
 from flask import abort
+import json
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -278,48 +279,6 @@ def schedule(week : int, day : int):
     return render_template("schedule.html", lessons=lessons,
     weekday=WEEKDAYS[day], week=week, day=day)
 
-# добавить урок
-@app.route("/add_lesson/<int:week>/<int:day>", methods=["GET", "POST"])
-@login_required
-@teacher_only
-def edit_schedule(week : int, day : int):
-    if request.method == "POST":
-        pass
-
-    lessons_query = Lessons.query.filter_by(week_id=week,
-        weekday=day,
-        grade=get_user().grade
-    ).all()
-
-    lessons = [[] for i in range(len(lessons_query))]
-    
-    return render_template("add_lesson.html", lessons=lessons)
-
-# удалить урок
-@app.route("/delete_lesson/<int:lesson_id>", methods=["GET", "POST"])
-@login_required
-@teacher_only
-def delete_lesson(lesson_id):
-    lesson = Lessons.query.get(lesson_id)
-    week = lesson.week_id
-    day = lesson.weekday
-    if request.method == "POST":
-        db.session.delete(lesson)
-        db.session.commit()
-        lessons_query = Lessons.query.filter_by(
-            week_id=lesson.week_id,
-            weekday=lesson.weekday,
-            grade=get_user().grade
-        ).all()
-        for lesson_ in lessons_query:
-            lesson_.order_number = lessons_query.index(lesson_)
-            db.session.commit()
-        # ДОДЕЛАТЬ
-        return redirect(f"/schedule/{week}/{day}")
-    day = WEEKDAYS[day]
-    return render_template("delete_lesson.html", lesson=lesson, 
-                           day=day)
-
 # посмотреть свой класс
 @app.route("/my_class")
 @login_required
@@ -369,6 +328,73 @@ def show_lesson(lesson_id : int):
     teacher = Users.query.get(lesson.teacher_id)
     teacher_name = f"{teacher.first_name} {teacher.middle_name}  {teacher.last_name}"
     return render_template("lesson.html", lesson=lesson, teacher_name=teacher_name)
+
+# добавить урок
+@app.route("/add_lesson/<int:week>/<int:day>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def edit_schedule(week : int, day : int):
+    lessons_query = Lessons.query.filter_by(
+        week_id=week,
+        weekday=day,
+        grade=get_user().grade
+    ).all()
+    teachers_query = Users.query.filter_by(
+            user_type="teacher"
+        )
+    teachers = []
+    for teacher in teachers_query:
+        teachers.append({
+            "id" : teacher.user_id,
+            "name" : f"{teacher.first_name} {teacher.middle_name}  {teacher.last_name}",
+            "subject" : teacher.subject
+    })
+
+    if request.method == "POST":
+        teacher = request.form["teacher"]
+        subject = request.form["subject"]
+        homework = request.form["homework"]
+        
+        lesson = Lessons(
+            week_id=week,
+            weekday=day,
+            subject=subject,
+            grade=get_user().grade,
+            homework=homework,
+            teacher_id=get_user().user_id,
+            order_number=len(lessons_query)
+        )
+        db.session.add(lesson)
+        db.session.commit()
+        return redirect(f"/schedule/{week}/{day}")
+    
+    return render_template("add_lesson.html", teachers=teachers,
+    week=week, day=day)
+
+# удалить урок
+@app.route("/delete_lesson/<int:lesson_id>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def delete_lesson(lesson_id):
+    lesson = Lessons.query.get(lesson_id)
+    week = lesson.week_id
+    day = lesson.weekday
+    if request.method == "POST":
+        db.session.delete(lesson)
+        db.session.commit()
+        lessons_query = Lessons.query.filter_by(
+            week_id=lesson.week_id,
+            weekday=lesson.weekday,
+            grade=get_user().grade
+        ).all()
+        for lesson_ in lessons_query:
+            lesson_.order_number = lessons_query.index(lesson_)
+            db.session.commit()
+        # ДОДЕЛАТЬ
+        return redirect(f"/schedule/{week}/{day}")
+    day = WEEKDAYS[day]
+    return render_template("delete_lesson.html", lesson=lesson, 
+                           day=day)
 
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
