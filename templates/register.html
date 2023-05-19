@@ -28,9 +28,10 @@
                     <input type="password" class="form__input" oninput="checkPassword()" placeholder="Введите пароль повторно" name="password_repeat">
                 </div>
                 <div class="form__element">
-                    <label>
-                        <input type="checkbox" class="form__checkbox" value="teacher" id="checkbox" name="user_type">
-                        <span>Я учитель</span>
+                    <label>Я учитель</label>
+                    <label class="switch">
+                        <input type="checkbox" name="user_type" value="teacher">
+                        <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="form__element">

@@ -65,19 +65,19 @@
     --color-dark-green: #0a770a;
     --color-green: #389938;
     --color-blue: #1490f5;
-    --color-body-background: #f3f3f3;
     --color-header-background: var(--color-purple);
     --color-button1-background: var(--color-bluerple);
     --color-file-input-background: var(--color-bluerple);
     --color-light-purple: #ac7fdf;
-    --color-container-background: #ffffff;
     --color-selected: #2686f5;
     --color-input-focus: rgba(85, 215, 247, 0.205);
     --color-header-element: #f3f3f3;
     --color-mark-container-border: #75c1ff;
-    --color-pupil-container-border: #a8a3a3;
+    --color-container-border: #a8a3a3;
     --color-button2-background: #e24040;
     --border-radius-basic-container: 15px;
+    --color-container-background: #ffffff;
+    --color-body-background: #f3f3f3;
 }
 
 /* TAGS */
@@ -113,6 +113,73 @@ a {
 
 /* CLASSES */
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
 .container {
     width: 70%;
     margin: 100px auto;
@@ -144,7 +211,7 @@ a {
 
 .mark-container {
     border: 1px solid var(--color-mark-container-border);
-    background-color: var(--color-white);
+    background-color: var(--color-container-background);
     height: 61px;
     width: 61px;
     border-radius: 10px;
@@ -255,8 +322,8 @@ a {
     overflow: auto;
     border-radius: 10px;
     padding: 15px;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-pupil-container-border);
+    background-color: var(--color-container-background);
+    border: 1px solid var(--color-container-border);
     display: inline-grid;
 }
 
@@ -447,7 +514,7 @@ a {
     font-size: 16px;
     background: var(--color-button1-background);
     border-radius: 5px;
-    color: var(--color-white);
+    color: var(--color-container-background);
     transition: 0.5s;
     animation-delay: 0.8s;
     text-align: center;
@@ -474,7 +541,7 @@ a {
     font-size: 16px;
     background: var(--color-button2-background);
     border-radius: 5px;
-    color: var(--color-white);
+    color: var(--color-container-background);
     transition: 0.5s;
     animation-delay: 0.8s;
     text-align: center;
@@ -561,7 +628,7 @@ a {
 .file-input {
     background-color: var(--color-file-input-background);
     border-radius: 4px;
-    color: var(--color-white);
+    color: var(--color-container-background);
     transition: 0.5s;
     width: 300px;
     padding: 10px 20px;
