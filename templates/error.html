@@ -6,7 +6,7 @@
     <a href="/" class="header__element">
         <div>На главную</div>
     </a>
-    {% if session %}
+    {% if session["_user_id"] %}
         <a href="/profile" class="header__element">
             <div>Мой профиль</div>
         </a>
