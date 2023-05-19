@@ -9,4 +9,4 @@ WEEKDAYS = {
     6 : "Воскресенье",
 }
 
-APP_PASSWORD = "qtlbrizlzynyxgll"
+APP_PASSWORD = "fluvqcvnrxvgcdpb"

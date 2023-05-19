@@ -4,6 +4,9 @@
         <div class="main-title animated">{{name}}, {{subject}}</div>
         {% if marks|length == 0 %}
             <div id="empty" class="animated">Оценок пока что нет :(</div>
+            <a href="/add_mark/{{pupil_id}}">
+                <button class="button1 animated">Поставить оценку</button>
+            </a>
         {% else %}
             <div class="marks-block animated">
                 <div class="marks-container">

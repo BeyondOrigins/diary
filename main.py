@@ -18,7 +18,6 @@ import json
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
-email = Mail(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
 app.config["SECRET_KEY"] = "gityihkgoerp"
@@ -26,9 +25,11 @@ app.config["MAIL_SERVER"] = "smtp.googlemail.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_USERNAME"] = "dima.a.ivlev@gmail.com"
-app.config["MAIL_DEFAULT_SENDER"] = "dima.a.ivlev@gmail.com"
+app.config["MAIL_USERNAME"] = "diary.el.notifications@gmail.com"
+app.config["MAIL_DEFAULT_SENDER"] = "diary.el.notifications@gmail.com"
 app.config["MAIL_PASSWORD"] = APP_PASSWORD
+
+email = Mail(app)
 
 def teacher_only(f):
     @wraps(f)
@@ -38,18 +39,6 @@ def teacher_only(f):
             return render_template(
                 "error.html",
                 error="Эта страница доступна только учителям!"
-            )
-        return f(*args, **kwargs)
-    return decorated_function
-
-def pupil_only(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        user = get_user()
-        if user.user_type != "pupil":
-            return render_template(
-                "error.html",
-                error="Эта страница доступна только ученикам!"
             )
         return f(*args, **kwargs)
     return decorated_function
@@ -123,10 +112,10 @@ def authenticate():
                       user.mail
                       ])
         msg.body = f"""
-            Здравствуйте, {user.first_name} {user.middle_name}
+            Здравствуйте, {user.last_name} {user.first_name} {user.middle_name}
             Вы успешно создали аккаунт на нашем сайте.
         """
-        # email.send(msg)
+        email.send(msg)
         return redirect("/auth")
     return render_template("register.html")
 
@@ -255,7 +244,8 @@ def pupils():
             pupils[pupil.grade] = {}
             pupils[pupil.grade][pupil] = average
 
-    return render_template("pupils.html", pupils=pupils)
+    return render_template("pupils.html", pupils=pupils,
+    subject=get_user().subject)
 
 # перенаправить на расписание
 @app.route("/schedule")
@@ -515,6 +505,21 @@ def add_mark(pupil_id):
         return redirect(f"/pupils/marks/{pupil.user_id}")
     return render_template("add_mark.html", pupil=pupil)
 
+@app.route("/edit_mark/<int:mark_id>", methods=["GET", "POST"])
+@login_required
+@teacher_only
+def edit_mark(mark_id : int):
+    mark = Marks.query.get(mark_id)
+    pupil = Users.query.get(mark.user_id)
+    if request.method == "POST":
+        mark.mark = request.form["mark"]
+        mark.subject = get_user().subject
+        mark.topic = request.form["topic"]
+        mark.task_type = request.form["task_type"]
+        db.session.commit()
+        return redirect(f"/pupils/marks/{pupil.user_id}")
+    return render_template("edit_mark.html", mark=mark)
+
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
     return redirect("/auth")
@@ -528,4 +533,4 @@ def server_error_handler(error):
     return render_template("error.html", error="Кажется, у нас проблемы на сервере")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

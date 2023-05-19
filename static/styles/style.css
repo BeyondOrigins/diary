@@ -322,7 +322,7 @@ a {
     text-align: center;
 }
 
-.add-lesson-container, .mark-info-container {
+.add-lesson-container, .mark-info-container, .mark-properties-container {
     border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
     width: 50%;
@@ -332,13 +332,14 @@ a {
     display: inline-grid;
     text-align: left;
     font-family: "Roboto";
+    margin-top: 30px;
 }
 
 .marks-block {
     width: 50%;
     border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
-    margin: 2% auto;
+    margin: 70px auto;
     margin-bottom: 20px;
     padding: 20px;
     min-width: 600px;
