@@ -14,7 +14,6 @@ from flask_mail import Message, Mail
 from functools import wraps
 from statistics import mean
 from flask import abort
-import json
 
 app = Flask(__name__)
 login_manager = LoginManager(app)

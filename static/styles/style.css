@@ -198,6 +198,7 @@ a {
     width: 70%;
     text-align: center;
     margin: 50px auto;
+    min-width: 500px;
 }
 
 .subject-container {
@@ -205,9 +206,10 @@ a {
     background-color: var(--color-container-background);
     text-align: left;
     display: flex;
-    margin: 2% auto;
+    margin: 40px auto;
     min-height: 100px;
     overflow: hidden;
+    min-width: 500px;
 }
 
 .subject-container::before {
@@ -244,7 +246,7 @@ a {
     padding: 15px;
     background-color: var(--color-container-background);
     border-radius: var(--border-radius-basic-container);
-    margin: 30px auto;
+    margin: 50px auto;
     overflow: auto;
 }
 
@@ -322,7 +324,7 @@ a {
     text-align: center;
 }
 
-.add-lesson-container, .mark-info-container, .mark-properties-container {
+.add-lesson-container, .mark-properties-container {
     border-radius: var(--border-radius-basic-container);
     background-color: var(--color-container-background);
     width: 50%;
@@ -333,6 +335,19 @@ a {
     text-align: left;
     font-family: "Roboto";
     margin-top: 30px;
+}
+
+.mark-info-container {
+    border-radius: var(--border-radius-basic-container);
+    background-color: var(--color-container-background);
+    width: 50%;
+    min-width: 650px;
+    overflow: auto;
+    padding: 30px;
+    display: inline-grid;
+    text-align: left;
+    font-family: "Roboto";
+    margin-top: 40px;
 }
 
 .marks-block {
