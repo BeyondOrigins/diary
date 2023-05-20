@@ -171,7 +171,8 @@ def edit_profile():
             filename = secure_filename(pic.filename)
             mimetype = pic.mimetype
             if not filename or not mimetype:
-                return render_template("self_profile.html", user=user, path=path, error="Фотография не соответствует требованиям")
+                return render_template("self_profile.html", user=user, path=path,
+                    error="Файл небезопасен")
             
             img = Img(img=pic.read(), name=filename, mimetype=mimetype, user_id=user.user_id)
             try:
@@ -181,7 +182,6 @@ def edit_profile():
             except:
                 pass
             db.session.add(img)
-            db.session.commit()
             user.img_id = Img.query.filter_by(user_id=user.user_id).all()[0].img_id
             db.session.commit()
         
