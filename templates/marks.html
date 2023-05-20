@@ -6,7 +6,7 @@
             <div id="empty" class="animated">Оценок пока что нет :(</div>
         {% else %}
             {% for subject, marks_list in marks.items() %}
-                <div class="marks-block animated">
+                <div class="basic-container marks-block animated">
                     <div class="marks-container__title">{{subject}}</div>
                     <div class="marks-container">
                         {% for mark in marks_list %}

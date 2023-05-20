@@ -17,35 +17,37 @@
             <div class="day-container">Вс</div>
             <div class="switch-day" id="to-next-day"> > </div>
         </div>
-        <div class="day-title animated">{{weekday}}</div>
-        {% if session["user_type"] == "teacher" %}
-            <div style="text-align: left; width: 68%; margin: auto;">
-                <a href="/add_lesson/{{week}}/{{day}}">
-                    <button class="button1 animated">Добавить урок</button>
-                </a>
-            </div>
-        {% endif %}
+        <div class="weekday-info-container">
+            <div class="day-title animated">{{weekday}}</div>
+            {% if session["user_type"] == "teacher" %}
+                <div style="text-align: left; width: 68%; margin: auto;">
+                    <a href="/add_lesson/{{week}}/{{day}}">
+                        <button class="button1 animated">Добавить урок</button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
         <div class="subjects-container animated">
             {% if lessons|length != 0 %}
                 {% for lesson in lessons %}
-                    <a href="/lesson/{{lesson['id']}}">
+                    <a href="/lesson/{{lesson.lesson_id}}">
                         <div class="subject-container animated">
                             <div class="subject-info">
-                                <div>{{lesson["subject"]}}</div>
-                                {% if lesson["homework"] != "" %}
-                                    <div class="homework">{{lesson["homework"]}}</div>
+                                <div>{{lesson.subject}}</div>
+                                {% if lesson.homework != "" %}
+                                    <div class="homework">{{lesson.homework}}</div>
                                 {% else %}
                                     <div class="homework">Не задано</div>
                                 {% endif %}
-                                {% if lesson["is_replaced"] %}
+                                {% if lesson.is_replaced %}
                                     <div class="is_replaced">Замена</div>
                                 {% endif %}
                                 {% if session["user_type"] == "teacher" %}
                                     <div style="margin-top: 20px;">
-                                        <a href="/delete_lesson/{{lesson['id']}}">
+                                        <a href="/delete_lesson/{{lesson.lesson_id}}">
                                             <button class="button2">Удалить урок</button>
                                         </a>
-                                        <a href="/edit_lesson/{{lesson['id']}}">
+                                        <a href="/edit_lesson/{{lesson.lesson_id}}">
                                             <button class="button1">Изменить</button>
                                         </a>
                                     </div>
@@ -55,7 +57,9 @@
                     </a>
                 {% endfor %}
             {% else %}
-                <div id="empty" class="animated">Сегодня уроков нет!</div>
+                <div id="empty" class="animated">
+                    <span>Сегодня уроков нет!</span>
+                </div>
             {% endif %}
         </div>
     </div>

@@ -1,9 +1,9 @@
 {% extends "index.html" %}
 {% block body %}
     <div class="container">
-        <div class="mark-info-container animated">
+        <div class="basic-container mark-info-container animated">
             <a onclick="window.history.go(-1); return false;">
-                <div id="prev-container">
+                <div id="prev-container" title="Назад">
                     <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
                     alt="Назад" id="prev">
                 </div>

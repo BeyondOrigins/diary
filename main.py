@@ -150,8 +150,11 @@ def auth():
 def profile():
     user = get_user()
     path = f"/get_img/{user.img_id}"
-    if user.img_id == 0:
+    if user.img_id == 0 or Img.query.get(user.img_id) is None:
         path = DEFAULT_AVATAR_PATH
+        if Img.query.get(user.img_id) is None:
+            user.img_id = 0
+            db.session.commit()
     return render_template("profile.html", user=user, path=path)
 
 # изменить параметры своего профиля
@@ -199,7 +202,7 @@ def get_img(img_id : int):
     try:
         img = Img.query.get(img_id)
     except:
-        return "Фото не найдено"
+        return None
     return Response(img.img, mimetype=img.mimetype)
 
 # посмотреть оценки
@@ -256,20 +259,10 @@ def redirect_to_schedule():
 @app.route("/schedule/<int:week>/<int:day>")
 @login_required
 def schedule(week : int, day : int):
-    lessons_query = Lessons.query.filter_by(week_id=week,
+    lessons = Lessons.query.filter_by(week_id=week,
         weekday=day,
         grade=get_user().grade
     ).all()
-
-    lessons = [[] for i in range(len(lessons_query))]
-
-    for lesson in lessons_query:
-        lessons[lesson.order_number] = {
-            "id" : lesson.lesson_id,
-            "subject" : lesson.subject,
-            "homework" : lesson.homework,
-            "is_replaced" : lesson.is_replaced
-        }
 
     return render_template("schedule.html", lessons=lessons,
     weekday=WEEKDAYS[day], week=week, day=day)

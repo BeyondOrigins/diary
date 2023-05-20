@@ -73,6 +73,10 @@ function onProfileChange(form) {
         fail = "Все поля должны быть полными";
     }
 
+    if (first_name.length >= 40 || middle_name.length >= 40 || last_name.length >= 40) {
+        fail = "Имя, Фамилия или Отчество слишком длинные";
+    }
+
     if (fail != "") {
         document.getElementById("error").innerHTML = fail;
         return false;
