@@ -1,8 +1,7 @@
 {% extends "index.html" %}
 {% block body %}
     <div class="container">
-        <div class="main-title animated">Удалить урок?</div>
-        <div class="additional-info animated">{{lesson.subject}}, {{day}}</div>
+        <div class="main-title animated">Удалить фото?</div>
         <div class="buttons-container animated">
             <form method="POST">
                 <div class="element">
@@ -10,13 +9,10 @@
                 </div>
             </form>
             <div class="element">
-                <a href="/schedule/{{lesson.week_id}}/{{lesson.weekday}}">
+                <a href="/profile">
                     <button class="button1">Отмена</button>
                 </a>
             </div>
         </div>
     </div>
-{% endblock %}
-{% block header %}
-
 {% endblock %}

@@ -21,7 +21,7 @@
 {% endblock %}
 {% block body %}
     <style>
-        .form__element {
+        .element {
             display: inline-grid;
         }
     </style>
@@ -42,23 +42,23 @@
                 </div>
                 <div id="data-div">
                     <div style="display: inline-grid">
-                        <div class="form__element">
+                        <div class="element">
                             <label>Фамилия</label>
                             <input type="text" class="form__input" value="{{user.last_name}}" name="last_name" placeholder="Фамилия">
                         </div>
-                        <div class="form__element">
+                        <div class="element">
                             <label>Имя</label>
                             <input type="text" class="form__input" value="{{user.first_name}}" name="first_name" placeholder="Имя">
                         </div>
-                        <div class="form__element">
+                        <div class="element">
                             <label>Отчество</label>
                             <input type="text" class="form__input" value="{{user.middle_name}}" name="middle_name" placeholder="Отчество">
                         </div>
-                        <div class="form__element">
+                        <div class="element">
                             <label>Логин (почта)</label>
                             <input type="text" class="form__input" value="{{user.mail}}" name="mail" placeholder="mail@example.com">
                         </div>
-                        <div class="form__element">
+                        <div class="element">
                             <input type="submit" class="button1" value="Сохранить изменения">
                         </div>
                         <div id="error">{{error}}</div>

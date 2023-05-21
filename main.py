@@ -512,6 +512,19 @@ def edit_mark(mark_id : int):
         return redirect(f"/pupils/marks/{pupil.user_id}")
     return render_template("edit_mark.html", mark=mark)
 
+# удалить фото профиля
+@app.route("/delete_img/<img_id>", methods=["GET", "POST"])
+@login_required
+def delete_img(img_id : int):
+    if request.method == "POST":
+        user = get_user()
+        img = Img.query.get(img_id)
+        db.session.delete(img)
+        user.img_id = 0
+        db.session.commit()
+        return redirect("/profile")
+    return render_template("delete_img.html")
+
 @app.errorhandler(401)
 def unauthorized_error_handler(error):
     return redirect("/auth")

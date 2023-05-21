@@ -4,7 +4,7 @@
         <div class="main-title animated">Добавить урок</div>
         <div class="basic-container add-lesson-container animated">
             <form method="POST">
-                <div class="form__element">
+                <div class="element">
                     <label>Предмет</label>
                     <select name="subject" id="subject-select" class="select">
                         <option value="Алгебра">Алгебра</option>
@@ -23,7 +23,7 @@
                         <option value="Химия">Химия</option>
                     </select>
                 </div>
-                <div class="form__element">
+                <div class="element">
                     <label>Учитель</label>
                     <select name="teacher" id="teacher-select" class="select">
                         {% for teacher in teachers %}
@@ -31,15 +31,15 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="form__element">
+                <div class="element">
                     <label>Домашнее задание</label>
                     <textarea name="homework" cols="80" rows="10" class="homework-area"></textarea>
                 </div>
-                <div class="form__element">
+                <div class="element">
                     <input type="submit" class="button1" value="Добавить">
                 </div>
             </form>
-            <div class="form__element">
+            <div class="element">
                 <a href="/schedule/{{week}}/{{day}}">
                     <button class="button2">Отмена</button>
                 </a>

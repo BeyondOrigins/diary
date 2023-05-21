@@ -21,11 +21,7 @@
 {% endblock %}
 {% block body %}
     <style>
-        body {
-            overflow-y: hidden;
-        }
-
-        .form__element {
+        .element {
             display: inline-grid;
         }
     </style>
@@ -36,31 +32,38 @@
                 <div id="avatar-container">
                     <img src="{{path}}" class="avatar" alt="Не удалось загрузить фото профиля">
                 </div>
+                {% if user.img_id != 0 %}
+                    <div class="form_element">
+                        <a href="/delete_img/{{user.img_id}}">
+                            <button class="button2">Удалить фото</button>
+                        </a>
+                    </div>
+                {% endif %}
             </div>
             <div id="data-div">
                 <div style="display: inline-grid">
-                    <div class="form__element">
+                    <div class="element">
                         <label>Фамилия</label>
                         <label class="label">{{user.last_name}}</label>
                     </div>
-                    <div class="form__element">
+                    <div class="element">
                         <label>Имя</label>
                         <label class="label">{{user.first_name}}</label>
                     </div>
-                    <div class="form__element">
+                    <div class="element">
                         <label>Отчество</label>
                         <label class="label">{{user.middle_name}}</label>
                     </div>
-                    <div class="form__element">
+                    <div class="element">
                         <label>Почта</label>
                         <label class="label">{{user.mail}}</label>
                     </div>
-                    <div class="form__element">
+                    <div class="element">
                         <label>Класс</label>
                         <label class="label">{{user.grade}}</label>
                     </div>
                     {% if session["user_type"] == "teacher" %}
-                        <div class="form__element">
+                        <div class="element">
                             <label>Предмет преподавания</label>
                             <label class="label">{{user.subject}}</label>
                         </div>

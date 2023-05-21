@@ -4,7 +4,7 @@
         <div class="main-title animated">Поставить оценку</div>
         <div class="mark-properties-container animated">
             <form method="POST">
-                <div class="form__element">
+                <div class="element">
                     <label>Оценка</label>
                     <select name="mark" id="mark-select" class="select">
                         <option value="5">5</option>
@@ -13,7 +13,7 @@
                         <option value="2">2</option>
                     </select>
                 </div>
-                <div class="form__element">
+                <div class="element">
                     <label>Тип задания</label>
                     <select name="task_type" id="task-type-select" class="select">
                         <option value="Опрос">Опрос</option>
@@ -25,20 +25,20 @@
                         <option value="Учебное задание">Учебное задание</option>
                     </select>
                 </div>
-                <div class="form__element">
+                <div class="element">
                     <label>Тема</label>
                     <input type="text" class="form__input" name="topic">
                 </div>
-                <div class="form__element">
+                <div class="element">
                     <input type="submit" class="button1" value="Добавить">
                 </div>
             </form>
-            <div class="form__element">
+            <div class="element">
                 <a href="/pupils/marks/{{pupil.user_id}}">
                     <button class="button2">Отмена</button>
                 </a>
             </div>
-            <div class="form__element">
+            <div class="element">
                 <div id="error"></div>
             </div>
         </div>
