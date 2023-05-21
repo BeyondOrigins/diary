@@ -21,6 +21,13 @@
             </div>
         {% endif %}
     </header>
+    <div class="theme-switch-container">
+        <label>Использовать тёмную тему</label>
+        <label class="switch">
+            <input type="checkbox" id="theme-switch">
+            <span class="slider round"></span>
+        </label>
+    </div>
     {% block body %}
     {% endblock %}
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>

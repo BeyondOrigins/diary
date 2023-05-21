@@ -94,8 +94,10 @@ window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
         document.getElementsByClassName("header")[0].style.top = "0";
+        document.getElementsByClassName("theme-switch-container")[0].style.top = "70px";
     } else {
         document.getElementsByClassName("header")[0].style.top = "-70px";
+        document.getElementsByClassName("theme-switch-container")[0].style.top = "10px";
     }
     prevScrollpos = currentScrollPos;
 }
@@ -106,3 +108,64 @@ try {
     }
 }
 catch { }
+
+function detectColorScheme() {
+    var theme = "light";    //default to light
+    var scheme = "purple";
+
+    //local storage is used to override OS theme settings
+    if(localStorage.getItem("theme")){
+        if(localStorage.getItem("theme") == "dark"){
+            var theme = "dark";
+        }
+    }
+
+    if (localStorage.getItem("scheme")) {
+        if (localStorage.getItem("scheme" == "turquoise")) {
+            var scheme = "turquoise";
+        }
+    }
+
+    //dark theme preferred, set document with a `data-theme` attribute
+    if (theme=="dark") {
+         document.documentElement.setAttribute("data-theme", "dark");
+    }
+    if (scheme == "turquoise") {
+        document.documentElement.setAttribute("color-scheme", "turqouise");
+    }
+}
+
+detectColorScheme();
+
+//identify the toggle switch HTML element
+const themeSwitch = document.querySelector('#theme-switch');
+const schemeSwithc = document.querySelector("#scheme-switch");
+
+//function that changes the theme, and sets a localStorage variable to track the theme between page loads
+function switchTheme(e) {
+    if (e.target.checked) {
+        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+        document.documentElement.setAttribute('data-theme', 'light');
+    }    
+}
+
+function switchScheme(e) {
+    if (e.target.checked) {
+        localStorage.setItem("scheme", "turquoise");
+        document.documentElement.setAttribute("scheme", "turqouise");
+    } else {
+        localStorage.setItem("scheme", "purple");
+        document.documentElement.setAttribute("scheme", "purple");
+    }
+}
+
+//listener for changing themes
+themeSwitch.addEventListener('change', switchTheme, false);
+
+//pre-check the dark-theme checkbox if dark-theme is set
+if (document.documentElement.getAttribute("data-theme") == "dark"){
+    themeSwitch.checked = true;
+}

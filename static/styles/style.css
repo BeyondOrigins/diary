@@ -32,6 +32,11 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "OpenSans";
+    src: url("fonts/OpenSans-VariableFont.ttf");
+}
+
 @keyframes appearence {
     0% {
         margin-top: 10%;
@@ -66,6 +71,7 @@
     --color-header-background: var(--color-purple);
     --color-button1-background: var(--color-bluerple);
     --color-file-input-background: var(--color-bluerple);
+    --color-loader: var(--color-bluerple);
     --color-light-purple: #ac7fdf;
     --color-selected: #2686f5;
     --color-input-focus: rgba(85, 215, 247, 0.205);
@@ -76,6 +82,38 @@
     --border-radius-basic-container: 15px;
     --color-container-background: #ffffff;
     --color-body-background: #f3f3f3;
+    --color-title: #2e2d2d;
+    --color-label: #7e7b7b;
+    --color-text-color: #7e7d7d;
+    --color-button-text: #ffffff;
+    --color-select-background: var(--color-container-background);
+    --color-switch-background: #ccc;
+    --image-filter: invert(0);
+}
+
+[data-theme="dark"] {
+    --color-body-background: #292828;
+    --color-container-background: #343333;
+    --color-title: #ffffff;
+    --color-label: #ebebeb;
+    --color-dark-gray: #c1bebe;
+    --color-text-color: #ffffff;
+    --color-select-backgorund: var(--color-container-background);
+    --color-switch-background: #484747;
+    --image-filter: invert(1);
+}
+
+[color-scheme="purple"] {
+    --color-header-background: var(--color-purple);
+    --color-button1-background: var(--color-bluerple);
+    --color-file-input-background: var(--color-bluerple);
+    --color-loader: var(--color-bluerple);
+}
+
+[color-scheme="turquoise"] {
+    --color-header-background: var(--color-turquoise);
+    --color-button1-background: var(--color-dark-turquoise);
+    --color-file-input-background: var(--color-dark-turquoise);
 }
 
 /* TAGS */
@@ -93,7 +131,12 @@ body {
 label {
     font-family: "Roboto";
     font-size: 16px;
-    color: var(--color-gray);
+    color: var(--color-label);
+}
+
+select {
+    background-color: var(--color-select-backgorund);
+    color: var(--color-text-color);
 }
 
 img {
@@ -131,7 +174,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--color-switch-background);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -185,6 +228,14 @@ input:checked + .slider:before {
     margin-top: 30px;
 }
 
+.theme-switch-container {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    transition: .5s;
+    animation-delay: .2s;
+}
+
 .form-container {
     border-radius: var(--border-radius-basic-container);
     width: 300px;
@@ -206,6 +257,7 @@ input:checked + .slider:before {
 .mark-container {
     border: 1px solid var(--color-mark-container-border);
     background-color: var(--color-container-background);
+    color: var(--color-title);
     height: 61px;
     width: 61px;
     border-radius: 10px;
@@ -246,6 +298,7 @@ input:checked + .slider:before {
     font-size: 20px;
     width: 14%;
     padding: 10px;
+    color: var(--color-text-color);
 }
 
 .day-container-selected {
@@ -318,6 +371,7 @@ input:checked + .slider:before {
     padding: 15px;
     background-color: var(--color-container-background);
     border: 1px solid var(--color-container-border);
+    color: var(--color-title);
     display: inline-grid;
 }
 
@@ -369,6 +423,7 @@ input:checked + .slider:before {
     overflow: auto;
     padding: 25px;
     width: 100%;
+    color: var(--color-title);
 }
 
 .homework-container {
@@ -420,6 +475,7 @@ input:checked + .slider:before {
     margin: 20px;
     font-size: 20px;
     overflow: hidden;
+    color: var(--color-title);
 }
 
 .homework {
@@ -441,23 +497,26 @@ input:checked + .slider:before {
 }
 
 .main-title {
-    font-family: "Raleway";
+    font-family: "OpenSans";
     font-size: 50px;
     text-align: center;
     min-width: 500px;
     margin: 30px;
+    color: var(--color-title);
 }
 
 .marks-container__title {
     font-size: 21px;
     font-family: "Roboto";
+    color: var(--color-title);
     text-align: left;
     margin-bottom: 20px;
 }
 
 .form-title {
     font-size: 27px;
-    font-family: "Raleway", sans-serif;
+    font-family: "OpenSans", sans-serif;
+    color: var(--color-title);
 }
 
 .pupil-name {
@@ -477,7 +536,7 @@ input:checked + .slider:before {
 
 .day-title {
     font-family: "Roboto";
-    color: #5a5959;
+    color: var(--color-title);
     font-size: 24px;
     text-align: left;
     margin: 30px auto;
@@ -504,6 +563,7 @@ input:checked + .slider:before {
     background: var(--color-button1-background);
     border-radius: 5px;
     color: var(--color-container-background);
+    color: var(--color-button-text);
     transition: 0.5s;
     animation-delay: 0.8s;
     text-align: center;
@@ -530,7 +590,7 @@ input:checked + .slider:before {
     font-size: 16px;
     background: var(--color-button2-background);
     border-radius: 5px;
-    color: var(--color-container-background);
+    color: var(--color-button-text);
     transition: 0.5s;
     animation-delay: 0.8s;
     text-align: center;
@@ -559,6 +619,7 @@ input:checked + .slider:before {
     padding: 10px;
     background-color: var(--color-container-background);
     transition: 0.5s;
+    color: var(--color-text-color);
 }
 
 .form__input:focus {
@@ -616,7 +677,7 @@ input:checked + .slider:before {
 .file-input {
     background-color: var(--color-file-input-background);
     border-radius: 4px;
-    color: var(--color-container-background);
+    color: var(--color-button-text);
     transition: 0.5s;
     width: 300px;
     padding: 10px 20px;
@@ -660,7 +721,7 @@ input:checked + .slider:before {
 
 .additional-info {
     font-size: 20px;
-    color: #c7c7c7;
+    color: var(--color-text-color);
     margin-top: 10px;
     font-family: "Roboto";
 }
@@ -680,6 +741,7 @@ input:checked + .slider:before {
     font-size: 22px;
     margin: auto 2%;
     cursor: pointer;
+    color: var(--color-text-color);
 }
 
 .switch-day-unavailbale {
@@ -690,6 +752,7 @@ input:checked + .slider:before {
     cursor: pointer;
     opacity: 0.3;
     cursor: not-allowed;
+    color: var(--color-text-color);
 }
 
 .no-homework {
@@ -714,7 +777,6 @@ input:checked + .slider:before {
 
 #avatar-container {
     width: 300px;
-    height: 300px;
     text-align: center;
     margin: 0 auto;
 }
@@ -752,7 +814,7 @@ input:checked + .slider:before {
 #loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid var(--color-bluerple);
+    border-top: 16px solid var(--color-loader);
     width: 120px;
     height: 120px;
     margin: 25% auto;
@@ -807,6 +869,7 @@ input:checked + .slider:before {
     height: 30px;
     width: 30px;
     margin: auto;
+    filter: var(--image-filter);
 }
 
 #prev-container {

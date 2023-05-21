@@ -194,6 +194,7 @@ def edit_profile():
         user.middle_name = middle_name
         user.last_name = last_name
         db.session.commit()
+        session["name"] = f"{user.first_name} {user.middle_name}"
         return redirect("/profile")
     return render_template("edit_profile.html", user=user, path=path)
 
