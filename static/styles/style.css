@@ -87,6 +87,7 @@
     --color-element-before: #e4e1e1;
     --color-day-container-selected: #ffffff;
     --image-filter: invert(0);
+    --color-scheme-select-border: #929292;
 
     --color-header-background: var(--color-purple);
     --color-button1-background: var(--color-bluerple);
@@ -107,6 +108,7 @@
     --image-filter: invert(1);
     --color-element-before: #444343;
     --color-day-container-selected: #474747;
+    --color-scheme-select-border: #c2c2c2;
 }
 
 [color-scheme="purple"] {
@@ -248,7 +250,7 @@ input:checked + .slider:before {
 .theme-switch-container {
     position: fixed;
     top: 70px;
-    right: 20px;
+    right: 10px;
     transition: .6s;
 }
 
@@ -481,8 +483,9 @@ input:checked + .slider:before {
 .scheme-select-container {
     position: fixed;
     top: 100px;
-    right: 30px;
+    right: 10px;
     transition: .6s;
+    display: flex;
 }
 
 .marks-block {
@@ -792,6 +795,25 @@ input:checked + .slider:before {
     margin-top: 10px;
 }
 
+.scheme-select {
+    border-radius: 10px;
+    position: fixed;
+    right: -54px;
+    transition: .5s;
+    background-color: var(--color-container-background);
+}
+
+.scheme-color {
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.show-select {
+    display: flex;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
@@ -935,4 +957,5 @@ input:checked + .slider:before {
     animation-iteration-count: infinite;
     filter: var(--image-filter);
     cursor: pointer;
+    right: 10px;
 }

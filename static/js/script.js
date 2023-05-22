@@ -137,3 +137,19 @@ function switchTheme(e) {
 }
 
 themeSwitch.addEventListener("change", switchTheme, false);
+
+// выезжание окна выбора тем
+var showSchemeSettings = false;
+const settingsSign = document.querySelector("#color-scheme-setting");
+settingsSign.addEventListener("click", function(e) {
+    if (!showSchemeSettings) {
+        document.querySelector(".scheme-select").style.right = "20px";
+        document.querySelector(".scheme-select-container").style.right = "90px";
+        showSchemeSettings = true;
+    }
+    else {
+        document.querySelector(".scheme-select").style.right = "-54px";
+        document.querySelector(".scheme-select-container").style.right = "10px";
+        showSchemeSettings = false;
+    }
+}, false);
