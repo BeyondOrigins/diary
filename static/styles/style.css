@@ -76,24 +76,7 @@
     --color-container-border: #a8a3a3;
     --color-button2-background: #e24040;
     --border-radius-basic-container: 15px;
-    --color-container-background: #ffffff;
-    --color-body-background: #f3f3f3;
-    --color-title: #2e2d2d;
-    --color-label: #7e7b7b;
-    --color-text-color: #7e7d7d;
     --color-button-text: #ffffff;
-    --color-select-background: var(--color-container-background);
-    --color-switch-background: #ccc;
-    --color-element-before: #e4e1e1;
-    --color-day-container-selected: #ffffff;
-    --image-filter: invert(0);
-    --color-scheme-select-border: #929292;
-
-    --color-header-background: var(--color-purple);
-    --color-button1-background: var(--color-bluerple);
-    --color-file-input-background: var(--color-bluerple);
-    --color-loader: var(--color-bluerple);
-    --color-switch-checked: var(--color-bluerple);
 }
 
 [data-theme="dark"] {
@@ -109,6 +92,24 @@
     --color-element-before: #444343;
     --color-day-container-selected: #474747;
     --color-scheme-select-border: #c2c2c2;
+    --color-scheme-selected: #464545;
+    --color-loading-background: #535353;
+}
+
+[data-theme="light"] {
+    --color-container-background: #ffffff;
+    --color-body-background: #f3f3f3;
+    --color-title: #2e2d2d;
+    --color-label: #7e7b7b;
+    --color-text-color: #7e7d7d;
+    --color-select-background: var(--color-container-background);
+    --color-switch-background: #ccc;
+    --color-element-before: #e4e1e1;
+    --color-day-container-selected: #ffffff;
+    --image-filter: invert(0);
+    --color-scheme-select-border: #929292;
+    --color-scheme-selected: #adaaaa;
+    --color-loading-background: #e2e0e0;
 }
 
 [color-scheme="purple"] {
@@ -133,6 +134,15 @@
     --color-file-input-background: var(--color-blue);
     --color-loader: var(--color-blue);
     --color-switch-checked: var(--color-blue);
+    --color-selected: #52d4dde1;
+}
+
+[color-scheme="green"] {
+    --color-header-background: var(--color-green);
+    --color-button1-background: var(--color-dark-green);
+    --color-file-input-background: var(--color-dark-green);
+    --color-loader: var(--color-dark-green);
+    --color-switch-checked: var(--color-dark-green);
 }
 
 /* TAGS */
@@ -249,8 +259,8 @@ input:checked + .slider:before {
 
 .theme-switch-container {
     position: fixed;
-    top: 70px;
-    right: 10px;
+    top: 100px;
+    right: 15px;
     transition: .6s;
 }
 
@@ -406,7 +416,6 @@ input:checked + .slider:before {
     overflow: auto;
 }
 
-
 .header-elements-container {
     display: flex;
 }
@@ -482,10 +491,15 @@ input:checked + .slider:before {
 
 .scheme-select-container {
     position: fixed;
-    top: 100px;
-    right: 10px;
+    top: 135px;
+    right: 15px;
     transition: .6s;
     display: flex;
+}
+
+.scheme-colors-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .marks-block {
@@ -581,6 +595,7 @@ input:checked + .slider:before {
     padding: 9px;
     border: 1px solid var(--color-gray);
     background-color: var(--color-container-background);
+    color: var(--color-text-color);  
 }
 
 .element {
@@ -591,7 +606,6 @@ input:checked + .slider:before {
     font-size: 16px;
     background: var(--color-button1-background);
     border-radius: 5px;
-    color: var(--color-container-background);
     color: var(--color-button-text);
     transition: 0.5s;
     animation-delay: 0.8s;
@@ -798,14 +812,28 @@ input:checked + .slider:before {
 .scheme-select {
     border-radius: 10px;
     position: fixed;
-    right: -54px;
-    transition: .5s;
+    right: -240px;
+    transition: .6s;
     background-color: var(--color-container-background);
+    display: inline-grid;
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
 }
 
 .scheme-color {
     height: 30px;
     width: 30px;
+    margin: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.scheme-color-selected {
+    height: 24px;
+    width: 24px;
+    border: 3px solid var(--color-scheme-selected);
     margin: 10px;
     border-radius: 50%;
 }
@@ -855,8 +883,8 @@ input:checked + .slider:before {
     left: 0;
     text-align: center;
     opacity: 0.7;
-    background-color: #ffffff;
-    z-index: 1000;
+    background-color: var(--color-loading-background);
+    z-index: 10000;
 }
 
 #loader {
@@ -955,6 +983,7 @@ input:checked + .slider:before {
     animation-name: spin;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-direction: normal;
     filter: var(--image-filter);
     cursor: pointer;
     right: 10px;

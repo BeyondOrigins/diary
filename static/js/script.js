@@ -95,12 +95,12 @@ window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
         document.getElementsByClassName("header")[0].style.top = "0";
-        document.getElementsByClassName("theme-switch-container")[0].style.top = "70px";
-        document.getElementsByClassName("scheme-select-container")[0].style.top = "100px";
+        document.getElementsByClassName("theme-switch-container")[0].style.top = "100px";
+        document.getElementsByClassName("scheme-select-container")[0].style.top = "135px";
     } else {
         document.getElementsByClassName("header")[0].style.top = "-70px";
         document.getElementsByClassName("theme-switch-container")[0].style.top = "10px";
-        document.getElementsByClassName("scheme-select-container")[0].style.top = "40px";
+        document.getElementsByClassName("scheme-select-container")[0].style.top = "45px";
     }
     prevScrollpos = currentScrollPos;
 }
@@ -112,20 +112,20 @@ try {
 }
 catch { }
 
-// определить цветовую схему
-function detectColorScheme() {
-    document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
-    document.documentElement.setAttribute("color-scheme", localStorage.getItem("scheme"));
+// определить тему
+function detectScheme() {
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "light");
+    document.documentElement.setAttribute("color-scheme", localStorage.getItem("scheme") || "purple");
 }
 
-detectColorScheme();
+detectScheme();
 const themeSwitch = document.querySelector('#theme-switch');
 
 if (document.documentElement.getAttribute("data-theme") == "dark"){
     themeSwitch.checked = true;
 }
 
-// установить цветовую тему
+// установить тему
 function switchTheme(e) {
     if (e.target.checked) {
         localStorage.setItem('theme', 'dark');
@@ -143,13 +143,32 @@ var showSchemeSettings = false;
 const settingsSign = document.querySelector("#color-scheme-setting");
 settingsSign.addEventListener("click", function(e) {
     if (!showSchemeSettings) {
-        document.querySelector(".scheme-select").style.right = "20px";
-        document.querySelector(".scheme-select-container").style.right = "90px";
+        document.querySelector(".scheme-select").style.right = "10px";
+        document.querySelector(".scheme-select-container").style.right = "240px";
+        document.querySelector("#color-scheme-setting").style = "animation-direction: reverse;";
         showSchemeSettings = true;
     }
     else {
-        document.querySelector(".scheme-select").style.right = "-54px";
+        document.querySelector(".scheme-select").style.right = "-240px";
         document.querySelector(".scheme-select-container").style.right = "10px";
+        document.querySelector("#color-scheme-setting").style = "animation-direction: normal;";
         showSchemeSettings = false;
     }
 }, false);
+
+// сменить цветовую схему
+function switchScheme(e) {
+    let scheme_color = e.target.getAttribute("data-color");
+    localStorage.setItem("scheme", scheme_color);
+    document.documentElement.setAttribute('color-scheme', scheme_color);
+    document.querySelector(".scheme-color-selected").classList.toggle("scheme-color");
+    e.target.classList.toggle("scheme-color-selected");
+}
+
+var color_buttons = Array.from(document.getElementsByClassName("scheme-color"))
+.concat(Array.from(document.getElementsByClassName("scheme-color-selected")));
+
+// назначить диспетчер событий для всех элементов с классом scheme-color или scheme-color-selected
+color_buttons.forEach(function(element) {
+    element.addEventListener("click", switchScheme, false);
+});

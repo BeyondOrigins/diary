@@ -29,11 +29,17 @@
         </label>
     </div>
     <div class="scheme-select-container">
-        <div class="show-select">
+        <div class="show-select" title="Выбрать цветовую схему">
             <img src="{{url_for('static', filename='styles/img/settings.png')}}" alt="Настройки" id="color-scheme-setting">
         </div>
         <div class="scheme-select">
-            <div class="scheme-color" data-color="purple" style="background-color: var(--color-bluerple);"></div>
+            <label style="font-family: 'OpenSans';">Выберите цветовую тему</label>
+            <div class="scheme-colors-container">
+                <div class="scheme-color" data-color="purple" style="background-color: var(--color-bluerple);"></div>
+                <div class="scheme-color" data-color="turquoise" style="background-color: var(--color-turquoise);"></div>
+                <div class="scheme-color" data-color="blue" style="background-color: var(--color-blue);"></div>
+                <div class="scheme-color" data-color="green" style="background-color: var(--color-dark-green);"></div>
+            </div>
         </div>
     </div>
     {% block body %}
