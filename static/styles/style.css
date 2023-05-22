@@ -68,10 +68,6 @@
     --color-green: #389938;
     --color-blue: #1490f5;
     --color-transparent-blue: #1490f562;
-    --color-header-background: var(--color-purple);
-    --color-button1-background: var(--color-bluerple);
-    --color-file-input-background: var(--color-bluerple);
-    --color-loader: var(--color-bluerple);
     --color-light-purple: #ac7fdf;
     --color-selected: #2686f5;
     --color-input-focus: rgba(85, 215, 247, 0.205);
@@ -88,7 +84,15 @@
     --color-button-text: #ffffff;
     --color-select-background: var(--color-container-background);
     --color-switch-background: #ccc;
+    --color-element-before: #e4e1e1;
+    --color-day-container-selected: #ffffff;
     --image-filter: invert(0);
+
+    --color-header-background: var(--color-purple);
+    --color-button1-background: var(--color-bluerple);
+    --color-file-input-background: var(--color-bluerple);
+    --color-loader: var(--color-bluerple);
+    --color-switch-checked: var(--color-bluerple);
 }
 
 [data-theme="dark"] {
@@ -101,6 +105,8 @@
     --color-select-backgorund: var(--color-container-background);
     --color-switch-background: #484747;
     --image-filter: invert(1);
+    --color-element-before: #444343;
+    --color-day-container-selected: #474747;
 }
 
 [color-scheme="purple"] {
@@ -108,12 +114,23 @@
     --color-button1-background: var(--color-bluerple);
     --color-file-input-background: var(--color-bluerple);
     --color-loader: var(--color-bluerple);
+    --color-switch-checked: var(--color-bluerple);
 }
 
 [color-scheme="turquoise"] {
     --color-header-background: var(--color-turquoise);
     --color-button1-background: var(--color-dark-turquoise);
     --color-file-input-background: var(--color-dark-turquoise);
+    --color-loader: var(--color-dark-turquoise);
+    --color-switch-checked: var(--color-dark-turquoise);
+}
+
+[color-scheme="blue"] {
+    --color-header-background: var(--color-blue);
+    --color-button1-background: var(--color-blue);
+    --color-file-input-background: var(--color-blue);
+    --color-loader: var(--color-blue);
+    --color-switch-checked: var(--color-blue);
 }
 
 /* TAGS */
@@ -200,7 +217,7 @@ a {
 }
 
 input:checked + .slider {
-    background-color: var(--color-purple);
+    background-color: var(--color-switch-checked);
 }
   
 input:checked + .slider:before {
@@ -232,8 +249,7 @@ input:checked + .slider:before {
     position: fixed;
     top: 70px;
     right: 20px;
-    transition: .5s;
-    animation-delay: .2s;
+    transition: .6s;
 }
 
 .form-container {
@@ -303,6 +319,7 @@ input:checked + .slider:before {
 
 .day-container-selected {
     border-radius: 20px;
+    background-color: var(--color-day-container-selected);
     box-shadow: 2px 2px 7px var(--color-shadow),
     -2px 2px 7px var(--color-shadow);
     color: var(--color-selected);
@@ -333,7 +350,7 @@ input:checked + .slider:before {
     content: "";
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-    background-color: rgb(232, 232, 239);
+    background-color: var(--color-element-before);
     margin-right: 20px;
     margin-top: 20px;
 }
@@ -461,6 +478,13 @@ input:checked + .slider:before {
     min-width: 500px;
 }
 
+.scheme-select-container {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    transition: .6s;
+}
+
 .marks-block {
     width: 50%;
     border-radius: var(--border-radius-basic-container);
@@ -490,6 +514,7 @@ input:checked + .slider:before {
     margin-left: 40px;
     font-family: "Roboto";
     font-size: 20px;
+    color: var(--color-title);
 }
 
 .mark {
@@ -552,6 +577,7 @@ input:checked + .slider:before {
     font-size: 15px;
     padding: 9px;
     border: 1px solid var(--color-gray);
+    background-color: var(--color-container-background);
 }
 
 .element {
@@ -654,7 +680,7 @@ input:checked + .slider:before {
 
 .header__element {
     color: var(--color-header-element);
-    font-family: "Raleway";
+    font-family: "OpenSans";
     text-align: center;
     font-size: 17px;
     padding: 5px;
@@ -896,6 +922,17 @@ input:checked + .slider:before {
     width: 100%;
 }
 
-.form-container#reg-form {
+#reg-form {
     margin-top: 5%;
+}
+
+#color-scheme-setting {
+    height: 30px;
+    width: 30px;
+    animation-duration: 3s;
+    animation-name: spin;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    filter: var(--image-filter);
+    cursor: pointer;
 }

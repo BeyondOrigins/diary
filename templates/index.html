@@ -28,6 +28,14 @@
             <span class="slider round"></span>
         </label>
     </div>
+    <div class="scheme-select-container">
+        <div class="show-select">
+            <img src="{{url_for('static', filename='styles/img/settings.png')}}" alt="Настройки" id="color-scheme-setting">
+        </div>
+        <div class="scheme-select">
+            <span class="scheme-color"></span>
+        </div>
+    </div>
     {% block body %}
     {% endblock %}
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>

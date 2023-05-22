@@ -89,15 +89,18 @@ function onLoad() {
     document.getElementById("loading").style.display = "none";
 }
 
+// убирать заголовок при промотке вниз
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
         document.getElementsByClassName("header")[0].style.top = "0";
         document.getElementsByClassName("theme-switch-container")[0].style.top = "70px";
+        document.getElementsByClassName("scheme-select-container")[0].style.top = "100px";
     } else {
         document.getElementsByClassName("header")[0].style.top = "-70px";
         document.getElementsByClassName("theme-switch-container")[0].style.top = "10px";
+        document.getElementsByClassName("scheme-select-container")[0].style.top = "40px";
     }
     prevScrollpos = currentScrollPos;
 }
@@ -109,39 +112,20 @@ try {
 }
 catch { }
 
+// определить цветовую схему
 function detectColorScheme() {
-    var theme = "light";    //default to light
-    var scheme = "purple";
-
-    //local storage is used to override OS theme settings
-    if(localStorage.getItem("theme")){
-        if(localStorage.getItem("theme") == "dark"){
-            var theme = "dark";
-        }
-    }
-
-    if (localStorage.getItem("scheme")) {
-        if (localStorage.getItem("scheme" == "turquoise")) {
-            var scheme = "turquoise";
-        }
-    }
-
-    //dark theme preferred, set document with a `data-theme` attribute
-    if (theme=="dark") {
-         document.documentElement.setAttribute("data-theme", "dark");
-    }
-    if (scheme == "turquoise") {
-        document.documentElement.setAttribute("color-scheme", "turqouise");
-    }
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+    document.documentElement.setAttribute("color-scheme", localStorage.getItem("scheme"));
 }
 
 detectColorScheme();
-
-//identify the toggle switch HTML element
 const themeSwitch = document.querySelector('#theme-switch');
-const schemeSwithc = document.querySelector("#scheme-switch");
 
-//function that changes the theme, and sets a localStorage variable to track the theme between page loads
+if (document.documentElement.getAttribute("data-theme") == "dark"){
+    themeSwitch.checked = true;
+}
+
+// установить цветовую тему
 function switchTheme(e) {
     if (e.target.checked) {
         localStorage.setItem('theme', 'dark');
@@ -152,20 +136,4 @@ function switchTheme(e) {
     }    
 }
 
-function switchScheme(e) {
-    if (e.target.checked) {
-        localStorage.setItem("scheme", "turquoise");
-        document.documentElement.setAttribute("scheme", "turqouise");
-    } else {
-        localStorage.setItem("scheme", "purple");
-        document.documentElement.setAttribute("scheme", "purple");
-    }
-}
-
-//listener for changing themes
-themeSwitch.addEventListener('change', switchTheme, false);
-
-//pre-check the dark-theme checkbox if dark-theme is set
-if (document.documentElement.getAttribute("data-theme") == "dark"){
-    themeSwitch.checked = true;
-}
+themeSwitch.addEventListener("change", switchTheme, false);

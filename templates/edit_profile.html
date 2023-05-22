@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-container img-form-container" style="opacity: 1;">
                         <label class="button1 file-input">
-                            <input type="file" name="pic">
+                            <input type="file" name="pic" id="photo-change">
                             Загрузить фото
                         </label>
                     </div>
@@ -67,4 +67,12 @@
             </div>
         </form>
     </div>
+    <script>
+        document.getElementById("photo-change").addEventListener("change", changePhoto, false);
+        function changePhoto(e) {
+            var avatar = document.querySelector(".avatar");
+            var newPhotoUrl = window.URL.createObjectURL(e.target.files[0]);
+            document.querySelector(".avatar").src = newPhotoUrl;
+        }
+    </script>
 {% endblock %}
