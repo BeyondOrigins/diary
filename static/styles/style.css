@@ -57,7 +57,7 @@
 
 :root {
     --color-white: #fffefe;
-    --color-purple: #9f5aee;
+    --color-purple: #943ef7;
     --color-bluerple: #8643d2;
     --color-turquoise: #2dc0ac;
     --color-dark-turquoise: #24ca96;
@@ -74,7 +74,7 @@
     --color-header-element: #f3f3f3;
     --color-mark-container-border: #75c1ff;
     --color-container-border: #a8a3a3;
-    --color-button2-background: #e24040;
+    --color-button2-background: #c54646;
     --border-radius-basic-container: 15px;
     --color-button-text: #ffffff;
 }
@@ -842,6 +842,12 @@ input:checked + .slider:before {
     display: flex;
 }
 
+.scheme-select__title {
+    font-family: 'OpenSans';
+    font-weight: bold;
+    font-size: 18px;
+}
+
 /* IDs */
 #error {
     color: rgb(241, 76, 76);
@@ -979,12 +985,12 @@ input:checked + .slider:before {
 #color-scheme-setting {
     height: 30px;
     width: 30px;
-    animation-duration: 3s;
-    animation-name: spin;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: normal;
     filter: var(--image-filter);
     cursor: pointer;
     right: 10px;
+    transition: 1.5s;
 }
+
+/* #color-scheme-setting:hover {
+    transform: rotateZ(360deg);
+} */

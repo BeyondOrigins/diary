@@ -133,7 +133,7 @@ function switchTheme(e) {
     } else {
         localStorage.setItem('theme', 'light');
         document.documentElement.setAttribute('data-theme', 'light');
-    }    
+    }
 }
 
 themeSwitch.addEventListener("change", switchTheme, false);
@@ -145,13 +145,13 @@ settingsSign.addEventListener("click", function(e) {
     if (!showSchemeSettings) {
         document.querySelector(".scheme-select").style.right = "10px";
         document.querySelector(".scheme-select-container").style.right = "240px";
-        document.querySelector("#color-scheme-setting").style = "animation-direction: reverse;";
+        document.querySelector("#color-scheme-setting").style = "transform: rotateZ(-360deg);";
         showSchemeSettings = true;
     }
     else {
         document.querySelector(".scheme-select").style.right = "-240px";
         document.querySelector(".scheme-select-container").style.right = "10px";
-        document.querySelector("#color-scheme-setting").style = "animation-direction: normal;";
+        document.querySelector("#color-scheme-setting").style = "transform: rotateZ(0deg);";
         showSchemeSettings = false;
     }
 }, false);

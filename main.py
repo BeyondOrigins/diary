@@ -189,10 +189,12 @@ def edit_profile():
         first_name = request.form["first_name"]
         middle_name = request.form["middle_name"]
         last_name = request.form["last_name"]
+        
         user.mail = mail
         user.first_name = first_name
         user.middle_name = middle_name
         user.last_name = last_name
+
         db.session.commit()
         session["name"] = f"{user.first_name} {user.middle_name}"
         return redirect("/profile")
@@ -539,4 +541,4 @@ def server_error_handler(error):
     return render_template("error.html", error="Кажется, у нас проблемы на сервере")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=3000)
