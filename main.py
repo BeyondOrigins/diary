@@ -258,8 +258,8 @@ def schedule():
     week = 0
     day = 0
     if "week" in dict(request.args).keys():
-        week = request.args["week"]
-        day = request.args["day"]
+        week = int(request.args["week"])
+        day = int(request.args["day"])
     elif "user-type-info" in dict(request.args).keys():
         user_type = get_user().user_type
         return [user_type]
