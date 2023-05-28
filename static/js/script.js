@@ -172,3 +172,101 @@ var color_buttons = Array.from(document.getElementsByClassName("scheme-color"))
 color_buttons.forEach(function(element) {
     element.addEventListener("click", switchScheme, false);
 });
+
+// функция смены дня
+function onDayChange(el) {
+    var xhr = new XMLHttpRequest();
+    let week = document.querySelector('#day-info').getAttribute('week');
+    let day = el.getAttribute('day');
+
+    xhr.open("GET", "?week=" + week + "&day=" + day); // инициализация запроса
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) { // если все прошло удачно
+            lessons = JSON.parse(xhr.responseText);
+            let subjects_container_deleted = document.querySelector(".subjects-container");
+            document.querySelector(".container").removeChild(subjects_container_deleted);
+            var subjects_container = document.createElement("div");
+            subjects_container.classList.add("subjects-container", "animated");
+            lessons.forEach(function(lesson) { // создание блока урока
+                let a = document.createElement("a");
+                a.href = "/lesson/" + lesson["id"];
+                let subject_container = document.createElement("div");
+                subject_container.classList.add("subject-container", "animated-lesson");
+                var subject_info = document.createElement("div");
+                subject_info.classList.add("subject-info");
+                
+                let subject = document.createElement("div");
+                subject.innerHTML = lesson["subject"];
+                subject_info.appendChild(subject);
+
+                let homework = document.createElement("div");
+                homework.classList.add("homework");
+                homework.innerHTML = (lesson["homework"] == "") ? "Не задано" : lesson["homework"];
+                subject_info.appendChild(homework);
+
+                if (lesson["is_replaced"]) {
+                    is_replaced = document.createElement("div");
+                    is_replaced.classList.add("is_replaced");
+                    is_replaced.innerHTML = "Замена";
+                    subject_info.appendChild(is_replaced);
+                }
+
+                var userTypeRequest = new XMLHttpRequest(); // инициализация запроса на тип пользователя
+                userTypeRequest.open("GET", "?user-type-info");
+                userTypeRequest.onreadystatechange = function() {
+                    if (userTypeRequest.readyState === 4 && userTypeRequest.status === 200) {
+                        user_type = JSON.parse(userTypeRequest.responseText)[0];
+                        if (user_type == "teacher") {
+                            let button_container = document.createElement("div");
+                            button_container.style = "margin-top: 20px;";
+
+                            let delete_lesson = document.createElement("button");
+                            delete_lesson.classList.toggle("button2");
+                            delete_lesson.innerHTML = "Удалить";
+                            delete_lesson.onclick = function() {
+                                location.href = "/delete_lesson/" + lesson["id"];
+                            };
+
+                            let create_lesson = document.createElement("button");
+                            create_lesson.classList.toggle("button1");
+                            create_lesson.innerHTML = "Изменить";
+                            create_lesson.onclick = function() {
+                                location.href = "/edit_lesson/" + lesson["id"];
+                            };
+
+                            button_container.appendChild(delete_lesson);
+                            button_container.appendChild(create_lesson);
+                            subject_info.appendChild(button_container);
+                        }
+                    }
+                };
+                userTypeRequest.send(); // отправка запроса
+
+                subject_container.appendChild(subject_info);
+                a.appendChild(subject_container);
+
+                subjects_container.appendChild(a);
+            });
+
+            if (lessons.length == 0) {
+                let no_lessons = document.createElement("div");
+                no_lessons.classList.add("animated");
+                no_lessons.id = "empty";
+                no_lessons.innerHTML = "Сегодня уроков нет";
+                subjects_container.appendChild(no_lessons);
+            }
+
+            document.querySelector(".container").appendChild(subjects_container);
+            try {
+                document.querySelector(".day-container-selected").classList.remove("day-container-selected");
+            } 
+            catch {}
+            el.classList.add("day-container-selected");
+        }
+    };
+    xhr.send(); // отправка запроса
+}
+
+function chooseToggleDay() {
+    var xhr = new XMLHttpRequest();
+}

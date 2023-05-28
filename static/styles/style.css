@@ -50,6 +50,19 @@
     }
 }
 
+@keyframes lesson-appearence {
+    0% {
+        margin-top: 30%;
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(100);
+        opacity: 1;
+    }
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -327,6 +340,7 @@ input:checked + .slider:before {
     width: 14%;
     padding: 10px;
     color: var(--color-text-color);
+    cursor: pointer;
 }
 
 .day-container-selected {
@@ -740,6 +754,14 @@ input:checked + .slider:before {
     opacity: 0;
 }
 
+.animated-lesson {
+    animation: 0.6s lesson-appearence;
+    transition-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
 .footer {
     width: 50%;
     text-align: center;
@@ -990,7 +1012,3 @@ input:checked + .slider:before {
     right: 10px;
     transition: 1.5s;
 }
-
-/* #color-scheme-setting:hover {
-    transform: rotateZ(360deg);
-} */

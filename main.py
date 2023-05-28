@@ -252,20 +252,34 @@ def pupils():
     return render_template("pupils.html", pupils=pupils,
     subject=get_user().subject)
 
-# перенаправить на расписание
-@app.route("/schedule")
+@app.route("/schedule", methods=["GET"])
 @login_required
-def redirect_to_schedule():
-    return redirect("/schedule/0/0")
-
-# расписание
-@app.route("/schedule/<int:week>/<int:day>")
-@login_required
-def schedule(week : int, day : int):
-    lessons = Lessons.query.filter_by(week_id=week,
-        weekday=day,
-        grade=get_user().grade
+def schedule():
+    week = 0
+    day = 0
+    if "week" in dict(request.args).keys():
+        week = request.args["week"]
+        day = request.args["day"]
+    elif "user-type-info" in dict(request.args).keys():
+        user_type = get_user().user_type
+        return [user_type]
+    
+    lessons_query = Lessons.query.filter_by(
+            week_id=week,
+            weekday=day,
+            grade=get_user().grade
     ).all()
+        
+    lessons = [[] for i in range(len(lessons_query))]
+    for lesson in lessons_query:
+        lessons[lesson.order_number] = {
+            "id" : lesson.lesson_id,
+            "subject" : lesson.subject,
+            "homework" : lesson.homework,
+            "is_replaced" : lesson.is_replaced
+        }
+    if len(request.args) != 0:
+        return lessons
 
     return render_template("schedule.html", lessons=lessons,
     weekday=WEEKDAYS[day], week=week, day=day)

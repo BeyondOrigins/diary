@@ -8,12 +8,10 @@
     <div class="container">
         <div class="lesson-container animated">
             <div>
-                <a href="/schedule/{{lesson.week_id}}/{{lesson.weekday}}">
-                    <div id="prev-container">
-                        <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
-                        alt="Назад" id="prev">
-                    </div>
-                </a>
+                <div id="prev-container" onclick="window.history.go(-1);">
+                    <img src="{{url_for('static', filename='styles/img/left-arrow.png')}}"
+                    alt="Назад" id="prev">
+                </div>
             </div>
             <div class="lesson-info-container">
                 <div>{{lesson.subject}}</div>
